@@ -2,24 +2,29 @@ from __future__ import annotations
 
 import asyncio
 from dataclasses import dataclass
-from typing import List
+from typing import Dict, List
 
 from ... import schemas
 from ..orchestrator import PublishResult
-
-
-@dataclass
-class PublicationTask:
-    platform: schemas.PlatformEnum
-    status: str
-    reference_id: str
+from .marketplaces.base import MarketplacePublisher, PublicationResult
+from .marketplaces.craigslist import CraigslistPublisher
+from .marketplaces.mercari import MercariPublisher
 
 
 class ChannelPublisher:
     """
-    Stubbed marketplace publisher.
-    Replace with real adapters (Craigslist headless automation, Mercari API, etc.).
+    Coordinates marketplace-specific adapters.
+    Defaults to pending/manual state when an adapter doesn't exist yet.
     """
+
+    def __init__(self, adapters: List[MarketplacePublisher] | None = None) -> None:
+        adapters = adapters or [
+            CraigslistPublisher(),
+            MercariPublisher(),
+        ]
+        self._registry: Dict[schemas.PlatformEnum, MarketplacePublisher] = {
+            adapter.platform: adapter for adapter in adapters
+        }
 
     async def schedule_publication(
         self,
@@ -29,25 +34,43 @@ class ChannelPublisher:
         description: str,
         recommended_price: float,
     ) -> PublishResult:
-        await asyncio.sleep(0.1)
         confirmed: List[schemas.PlatformEnum] = []
+        failed: List[schemas.PlatformEnum] = []
         pending = False
+        notes_parts: List[str] = []
 
         for platform in request.target_platforms:
-            if platform in (schemas.PlatformEnum.craigslist, schemas.PlatformEnum.nextdoor):
-                # emulate asynchronous approval queues for certain platforms
+            adapter = self._registry.get(platform)
+            if not adapter:
                 pending = True
-            else:
-                confirmed.append(platform)
+                notes_parts.append(f"{platform.value}: adapter not implemented yet.")
+                continue
 
-        notes = (
-            "Some platforms require manual review before going live."
-            if pending
-            else "All requested platforms confirmed."
-        )
+            result = await adapter.publish(
+                listing_id=listing_id,
+                request=request,
+                description=description,
+                recommended_price=recommended_price,
+                enhanced_assets=enhanced_assets,
+            )
+
+            if result.status == "live":
+                confirmed.append(platform)
+            elif result.status == "failed":
+                failed.append(platform)
+                notes_parts.append(f"{platform.value}: {result.message}")
+            else:
+                pending = True
+                notes_parts.append(
+                    f"{platform.value}: awaiting confirmation ({result.message})"
+                )
+
+        if not notes_parts:
+            notes_parts.append("All requested platforms confirmed.")
 
         return PublishResult(
             pending=pending,
             confirmed_platforms=confirmed,
-            notes=notes,
+            failed_platforms=failed,
+            notes=" ".join(notes_parts),
         )

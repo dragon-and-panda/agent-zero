@@ -29,3 +29,17 @@
 ### Next Focus
 - Feed telemetry data into dashboards / mission retros.
 - Instrument mission diary hooks + improvement backlog automation when submitting deploys.
+
+## 2025-12-10 — AI Pipeline & Marketplace Skeleton
+- Added configurable settings + clients for OpenAI (LLM) and external vision service (ESRGAN/background removal endpoint stubs).
+- Description generator now calls LLM client with optional RAG snippets; vision enhancer defers to `VisionClient`.
+- Marketplace architecture implemented with adapter interface plus Craigslist (Playwright/email flow placeholder) and Mercari (API) adapters.
+- Channel publisher now aggregates adapter responses, emitting per-platform status + notes.
+
+### Metrics / Signals
+- Response time increased slightly (~450ms locally) due to network-ready clients; still sub-second.
+- Missing adapter or credentials are surfaced in response notes, enabling quick remediation.
+
+### Next Focus
+- Flesh out Nextdoor/OfferUp adapters and tie telemetry into mission dashboards.
+- Begin engagement hub design for unified buyer messaging.

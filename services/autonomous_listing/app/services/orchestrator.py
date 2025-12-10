@@ -1,6 +1,7 @@
 import time
 import uuid
-from typing import List, Tuple
+from dataclasses import dataclass, field
+from typing import List
 
 from .pipelines.description_generator import DescriptionGenerator
 from .pipelines.image_enhancer import ImageEnhancer
@@ -117,13 +118,9 @@ class ListingOrchestrator:
             pass
 
 
+@dataclass
 class PublishResult:
-    def __init__(
-        self,
-        pending: bool,
-        confirmed_platforms: List[schemas.PlatformEnum],
-        notes: str = "",
-    ) -> None:
-        self.pending = pending
-        self.confirmed_platforms = confirmed_platforms
-        self.notes = notes
+    pending: bool
+    confirmed_platforms: List[schemas.PlatformEnum] = field(default_factory=list)
+    failed_platforms: List[schemas.PlatformEnum] = field(default_factory=list)
+    notes: str = ""

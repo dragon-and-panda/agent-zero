@@ -3,8 +3,8 @@
 This folder contains a FastAPI-based microservice that simulates the AI pipeline defined in `docs/autonomous_listing_service.md`. It is not production-ready yet, but it provides a runnable skeleton that:
 
 1. Accepts listing requests with seller notes, assets, preferences, and target platforms.
-2. Runs through placeholder pipelines for image enhancement, marketing copy, and multi-platform publishing.
-3. Returns a structured preview containing the listing status, suggested price, generated description, and enhanced asset URIs.
+2. Runs through pluggable pipelines for image enhancement (vision API stub), marketing copy (OpenAI + RAG hook), and multi-platform publishing.
+3. Returns a structured preview containing the listing status, suggested price, generated description, enhanced asset URIs, and per-platform states.
 
 ## Quick Start
 
@@ -31,7 +31,12 @@ curl -X POST http://localhost:8000/listings \
 ```
 
 ## Next Steps
-- Replace the stubbed pipelines (`image_enhancer`, `description_generator`, `publisher`) with real AI agents and marketplace adapters.
+- Provide production credentials:
+  - `ALS_OPENAI_API_KEY` / `ALS_OPENAI_MODEL`
+  - `ALS_MARKETING_RAG_ENDPOINT`
+  - `ALS_VISION_API_BASE` / `ALS_VISION_API_KEY`
+  - `ALS_CRAIGSLIST_EMAIL`, `ALS_MERCARI_API_KEY`
+- Replace placeholder adapters (Craigslist Playwright flow, Mercari API stub) with full automation and add more marketplaces.
 - Connect to object storage for asset handling and to the knowledge/memory layers described in the main blueprint.
 - Built-in telemetry writes JSON lines to `/workspace/logs/listings/events.log` (override with `LISTING_TELEMETRY_PATH`). Extend or pipe these events into your observability stack.
 - Embed mission-diary hooks so the service feeds the agency’s iterative improvement loop.

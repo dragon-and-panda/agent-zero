@@ -184,3 +184,13 @@ CI/CD builds a single container image (FastAPI + worker binaries) pushed to ECR/
 - **Release Ritual:** Every deployment of the service includes a short “What changed / Metrics impacted / Next bet” record appended to the mission diary, ensuring synchronous evolution of the agency and this product line.
 
 This blueprint provides a detailed path to a serverless, AI-native listing concierge that delights sellers and scales across marketplaces with minimal manual effort.
+
+---
+
+## 12. Engagement Hub Blueprint
+
+- **Messaging Broker:** FastAPI sub-app using WebSockets (or Socket.IO) with Redis pub/sub for horizontal scaling. Endpoint: `/ws/listings/{listing_id}` authenticates sellers + agents, streams buyer inquiries, AI suggestions, and manual replies.
+- **AI Reply Assist:** Buyer Liaison agent listens to inbound messages, runs intent classification + guardrail checks, drafts replies via LLM client, and queues them for human approval or auto-send when confidence > threshold.
+- **UI Stub:** React panel with three columns: contact list (buyers per platform), conversation thread (with AI-suggested replies chips), and negotiation guardrail meter showing remaining discount budget.
+- **Escalation Hooks:** When offers breach guardrails or sentiment turns toxic, hub emits `engagement.escalation` telemetry events and pings Apex Orchestrator per Section 15 of the super-agency doc.
+- **Next Steps:** Implement `/ws` endpoint + minimal frontend widget, log all interactions to `logs/engagement/<listing>.json`, and integrate transcripts into mission diary/RAG corpus for future negotiation improvements.
