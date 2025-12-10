@@ -5,6 +5,7 @@ from .services.orchestrator import ListingOrchestrator
 from .services.pipelines.description_generator import DescriptionGenerator
 from .services.pipelines.image_enhancer import ImageEnhancer
 from .services.pipelines.publisher import ChannelPublisher
+from .services.telemetry import TelemetryClient
 
 app = FastAPI(
     title="Autonomous Listing Service",
@@ -16,6 +17,7 @@ orchestrator = ListingOrchestrator(
     enhancer=ImageEnhancer(),
     copywriter=DescriptionGenerator(),
     publisher=ChannelPublisher(),
+    telemetry=TelemetryClient(),
 )
 
 

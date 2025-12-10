@@ -33,4 +33,5 @@ curl -X POST http://localhost:8000/listings \
 ## Next Steps
 - Replace the stubbed pipelines (`image_enhancer`, `description_generator`, `publisher`) with real AI agents and marketplace adapters.
 - Connect to object storage for asset handling and to the knowledge/memory layers described in the main blueprint.
-- Embed telemetry + mission diary hooks so the service feeds the agency’s iterative improvement loop.
+- Built-in telemetry writes JSON lines to `/workspace/logs/listings/events.log` (override with `LISTING_TELEMETRY_PATH`). Extend or pipe these events into your observability stack.
+- Embed mission-diary hooks so the service feeds the agency’s iterative improvement loop.

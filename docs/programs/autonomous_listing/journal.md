@@ -16,3 +16,16 @@
 - Replace stub pipelines with actual AI services (vision enhancer, LLM copywriter, marketplace adapters).
 - Instrument telemetry + logging hooks to feed Agency-wide reports.
 - Stand up sandbox deployment and run first end-to-end seller simulations.
+
+## 2025-12-10 — Telemetry Hook-up
+- Implemented JSONL telemetry sink (`app/services/telemetry.py`) with configurable path.
+- Wired orchestrator events: request receipt, image enhancement, copy generation, publication trigger, and response ready (duration + platform metrics).
+- README now documents telemetry output and env override.
+
+### Metrics / Signals
+- Average stubbed flow duration still sub-second; telemetry introduces negligible overhead.
+- Log location: `/workspace/logs/listings/events.log` (dev env default).
+
+### Next Focus
+- Feed telemetry data into dashboards / mission retros.
+- Instrument mission diary hooks + improvement backlog automation when submitting deploys.

@@ -1,9 +1,11 @@
+import time
 import uuid
 from typing import List, Tuple
 
 from .pipelines.description_generator import DescriptionGenerator
 from .pipelines.image_enhancer import ImageEnhancer
 from .pipelines.publisher import ChannelPublisher
+from .telemetry import TelemetryClient
 from .. import schemas
 
 
@@ -15,29 +17,71 @@ class ListingOrchestrator:
         enhancer: ImageEnhancer,
         copywriter: DescriptionGenerator,
         publisher: ChannelPublisher,
+        telemetry: TelemetryClient | None = None,
     ) -> None:
         self._enhancer = enhancer
         self._copywriter = copywriter
         self._publisher = publisher
+        self._telemetry = telemetry or TelemetryClient()
 
     async def create_listing(
         self, payload: schemas.ListingRequest
     ) -> schemas.ListingResponse:
         listing_id = str(uuid.uuid4())
-        enhanced_assets = await self._enhancer.process(listing_id, payload.assets)
+        overall_start = time.perf_counter()
 
+        self._record(
+            "listing.request_received",
+            listing_id,
+            {
+                "category": payload.category,
+                "platforms_requested": [p.value for p in payload.target_platforms],
+                "asset_count": len(payload.assets),
+            },
+        )
+
+        stage_start = time.perf_counter()
+        enhanced_assets = await self._enhancer.process(listing_id, payload.assets)
+        self._record(
+            "listing.images_enhanced",
+            listing_id,
+            {
+                "asset_count": len(enhanced_assets),
+                "duration_ms": round((time.perf_counter() - stage_start) * 1000, 2),
+            },
+        )
+
+        stage_start = time.perf_counter()
         preview_description, suggested_price = await self._copywriter.generate(
             listing_id=listing_id,
             request=payload,
             enhanced_assets=enhanced_assets,
         )
+        self._record(
+            "listing.copy_generated",
+            listing_id,
+            {
+                "duration_ms": round((time.perf_counter() - stage_start) * 1000, 2),
+                "suggested_price": suggested_price,
+            },
+        )
 
+        stage_start = time.perf_counter()
         publish_results = await self._publisher.schedule_publication(
             listing_id=listing_id,
             request=payload,
             enhanced_assets=enhanced_assets,
             description=preview_description,
             recommended_price=suggested_price,
+        )
+        self._record(
+            "listing.publication_triggered",
+            listing_id,
+            {
+                "duration_ms": round((time.perf_counter() - stage_start) * 1000, 2),
+                "pending": publish_results.pending,
+                "confirmed_platforms": [p.value for p in publish_results.confirmed_platforms],
+            },
         )
 
         status = schemas.ListingStatus(
@@ -47,12 +91,30 @@ class ListingOrchestrator:
             notes=publish_results.notes,
         )
 
-        return schemas.ListingResponse(
+        response = schemas.ListingResponse(
             status=status,
             recommended_price=suggested_price,
             preview_description=preview_description,
             enhanced_assets=enhanced_assets,
         )
+
+        self._record(
+            "listing.response_ready",
+            listing_id,
+            {
+                "state": status.state,
+                "duration_ms": round((time.perf_counter() - overall_start) * 1000, 2),
+            },
+        )
+
+        return response
+
+    def _record(self, event: str, listing_id: str, payload: dict | None = None) -> None:
+        try:
+            self._telemetry.record_event(event, listing_id, payload)
+        except Exception:
+            # Telemetry should never block main workflow; swallow errors silently for now.
+            pass
 
 
 class PublishResult:
