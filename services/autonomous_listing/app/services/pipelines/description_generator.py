@@ -8,6 +8,7 @@ import httpx
 
 from ... import schemas
 from ..config import get_settings
+from ..knowledge_base import KnowledgeBase, get_knowledge_base
 from ..llm_client import LLMClient
 
 
@@ -16,10 +17,15 @@ class DescriptionGenerator:
     Generates marketing copy using an LLM + optional RAG endpoint for contextual snippets.
     """
 
-    def __init__(self, llm_client: LLMClient | None = None) -> None:
+    def __init__(
+        self,
+        llm_client: LLMClient | None = None,
+        knowledge_base: KnowledgeBase | None = None,
+    ) -> None:
         self._llm = llm_client or LLMClient()
         self._rag_endpoint = get_settings().marketing_rag_endpoint
         self._rag_client = httpx.AsyncClient(timeout=10) if self._rag_endpoint else None
+        self._knowledge = knowledge_base or get_knowledge_base()
 
     async def generate(
         self,
@@ -28,6 +34,8 @@ class DescriptionGenerator:
         enhanced_assets: List[str],
     ) -> Tuple[str, float]:
         references = await self._retrieve_references(request)
+        knowledge_refs = self._knowledge.get_listing_references()
+        references.extend(knowledge_refs)
         prompt = self._build_prompt(request, enhanced_assets)
         narrative = await self._llm.generate_marketing_copy(prompt, references)
 

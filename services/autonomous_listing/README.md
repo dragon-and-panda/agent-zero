@@ -37,6 +37,6 @@ curl -X POST http://localhost:8000/listings \
   - `ALS_VISION_API_BASE` / `ALS_VISION_API_KEY`
   - `ALS_CRAIGSLIST_EMAIL`, `ALS_MERCARI_API_KEY`
 - Replace placeholder adapters (Craigslist Playwright flow, Mercari API stub) with full automation and add more marketplaces.
-- Connect to object storage for asset handling and to the knowledge/memory layers described in the main blueprint.
+- Connect to object storage for asset handling and to the knowledge/memory layers described in the main blueprint. The service now loads policy + tone guidance from `knowledge/custom/main/*` via `KnowledgeBase`; keep those packs updated to steer copy + compliance behavior.
 - Built-in telemetry writes JSON lines to `/workspace/logs/listings/events.log` (override with `LISTING_TELEMETRY_PATH`). Extend or pipe these events into your observability stack.
 - Embed mission-diary hooks so the service feeds the agency’s iterative improvement loop.

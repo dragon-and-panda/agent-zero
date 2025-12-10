@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from pydantic import BaseModel, Field, HttpUrl
 
@@ -91,3 +91,22 @@ class ListingResponse(BaseModel):
         default_factory=list,
         description="URIs for enhanced images stored in object storage.",
     )
+    compliance: Optional["ComplianceReport"] = Field(
+        None, description="Automated policy findings for the generated listing."
+    )
+
+
+class ComplianceFinding(BaseModel):
+    rule: str
+    severity: Literal["info", "warning", "error"]
+    message: str
+
+
+class ComplianceReport(BaseModel):
+    passed: bool = Field(..., description="True when no blocking errors detected.")
+    findings: List[ComplianceFinding] = Field(
+        default_factory=list, description="Detailed rule-level notes."
+    )
+
+
+ListingResponse.update_forward_refs()

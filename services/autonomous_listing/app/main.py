@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 
 from . import schemas
+from .services.compliance import ComplianceChecker
+from .services.knowledge_base import get_knowledge_base
 from .services.orchestrator import ListingOrchestrator
 from .services.pipelines.description_generator import DescriptionGenerator
 from .services.pipelines.image_enhancer import ImageEnhancer
@@ -13,11 +15,13 @@ app = FastAPI(
     version="0.1.0",
 )
 
+knowledge_base = get_knowledge_base()
 orchestrator = ListingOrchestrator(
     enhancer=ImageEnhancer(),
-    copywriter=DescriptionGenerator(),
+    copywriter=DescriptionGenerator(knowledge_base=knowledge_base),
     publisher=ChannelPublisher(),
     telemetry=TelemetryClient(),
+    compliance=ComplianceChecker(knowledge_base=knowledge_base),
 )
 
 
