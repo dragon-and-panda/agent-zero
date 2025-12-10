@@ -132,3 +132,95 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Validation Spot-Checks:** Optional human audits sample 5–10% of major releases for assurance.
 
 By codifying the above structure inside Agent Zero’s prompt, memory, and instrument layers, the organization operates as a cohesive, autonomous innovation powerhouse with humans positioned purely as goal setters and safety reviewers.
+
+---
+
+## 8. Prompt Persona Template Library
+
+### 8.1 Repository Layout
+```
+prompts/
+  super-agency/
+    agent.system.main.md
+    agent.system.main.role.md
+    agent.system.role.apex_orchestrator.md
+    agent.system.role.portfolio_navigator.md
+    agent.system.role.risk_governor.md
+    agent.system.role.research_fellow.md
+    ...
+```
+- Duplicate `prompts/default/*` into `prompts/super-agency/*` as a baseline.
+- Update `settings.yml` (or Web UI Agent Config) to point at the new subdirectory.
+
+### 8.2 Persona Snippet Template
+Store each persona file as a reusable fragment referenced from `agent.system.main.role.md`.
+
+```
+### Persona: Apex Orchestrator
+- Mission: translate sponsor intent into prioritized, budgeted missions for the entire agency.
+- Delegation Rules: spawn Domain Studio Director when task spans >1 discipline; delegate to Support Mesh when budget/compliance implications arise.
+- Mandatory Tools: knowledge_tool (for market context), behavior_adjustment (for OKR updates), call_subordinate.
+- Required Outputs: OKR table, dependency map, escalation log.
+- Guardrails: never commit resources without citing telemetry or research artifacts; always log plan revisions to memory.
+```
+
+### 8.3 Prompt Injection Hooks
+- `agent.system.main.md`: reference each persona file using `{{file:prompts/super-agency/agent.system.role.<persona>.md}}`.
+- `agent.system.tools.md`: include only tools relevant to the persona set to minimize token load.
+- `behaviour.merge.msg.md`: keep persona-specific behavior overrides short; complex procedures should live in instruments.
+
+---
+
+## 9. Cross-Domain Workflow Protocols
+
+### 9.1 Mission Orchestration Handshake
+1. Apex Orchestrator receives new intent and runs the Scoring Instrument.
+2. Portfolio Navigator compares active capacity vs. forecast and either:
+   - Reprioritizes current missions, or
+   - Spins up a new Domain Studio agent with a scoped charter.
+3. Risk & Ethics Governor is pinged asynchronously with the proposed plan to attach mandatory compliance packets before work begins.
+
+### 9.2 Research-to-Build Relay
+1. Research Studio Director finalizes experiment bundle and pushes it to `docs/research_exports/<mission>/`.
+2. Product Synthesist consumes bundle, drafts PRP, and logs it to memory with tag `prp:<mission>`.
+3. Platform Engineering Director auto-generates work packages, ensuring each includes:
+   - Linked artifacts (code, datasets)
+   - Tool requirements
+   - Acceptance tests and telemetry hooks
+4. Execution Pod Agents pull work packages FIFO and report progress via subordinate agents or memory updates.
+
+### 9.3 Feedback & Continuous Learning Loop
+1. Telemetry Sentinel aggregates KPIs per mission and saves dashboards into `logs/dashboards/<mission>.html`.
+2. Adoption Analysts and Venture Analysts subscribe to the same telemetry feed to derive user/market insights.
+3. Portfolio Navigator evaluates KPI deltas weekly; if metrics fall below thresholds, it automatically issues a `behaviour_adjustment` request that tightens resource use or revises OKRs.
+4. Librarian Agents promote new learnings into the knowledge base, tagging them with mission IDs and taxonomy labels for rapid retrieval.
+
+### 9.4 Safety Net Protocol
+- Guardrail extensions monitor:
+  - Tool output sentiment / toxicity
+  - Resource spikes
+  - Compliance keyword hits
+- On anomaly detection, `call_superior` is triggered with a structured report, pausing subordinate agents until Apex Orchestrator clears the incident or escalates to a human sponsor.
+
+---
+
+## 10. Instrument & Extension Scaffold Checklist
+
+| Component | Location | Purpose |
+| --- | --- | --- |
+| `score.sh` | `instruments/strategy/` | Multi-factor opportunity scoring (impact, effort, risk). |
+| `budget_guard.py` | `python/extensions/` (e.g., `_35_budget_guard.py`) | Monitors token/compute usage; triggers behavior adjustments on overruns. |
+| `watchdog.py` | `python/extensions/` (e.g., `_40_watchdog.py`) | Validates outputs, halts workflows on anomalies. |
+| `telemetry_push.sh` | `instruments/ops/` | Publishes mission KPIs to shared dashboards. |
+| `knowledge_ingest.py` | `instruments/research/` | Normalizes scouting outputs and stores them in `knowledge/custom/main`. |
+| `compliance_pack.md` | `docs/policies/` | Canonical policy bundle referenced by Compliance Guardian. |
+
+### Build Steps
+1. **Prompts:** Generate persona files using the template in Section 8 and register them in `agent.system.main.md`.
+2. **Extensions:** Implement budget guard + watchdog extensions; ensure alphabetical ordering prefixes reflect execution order.
+3. **Instruments:** For each department, add at least one instrument that encapsulates its repetitive workflows (scoring, experimentation, deployment, telemetry).
+4. **Scheduling:** Use cron or an orchestration agent to run scouting, budgeting, and telemetry instruments on fixed cadences.
+5. **Testing:** Dry-run each instrument via `run_cli.py instruments <name>` (or equivalent) before enabling full autonomy.
+6. **Observability:** Link telemetry outputs to dashboards accessible from the Web UI for optional human monitoring.
+
+These scaffolds ensure every persona has a dedicated toolkit, observability path, and safety net, reinforcing the low-touch operation goal.
