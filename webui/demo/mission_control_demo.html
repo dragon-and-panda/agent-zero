@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mission Control Demo</title>
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="hero">
+        <span class="badge">Live Agent Command Center</span>
+        <h1>Your listing, orchestrated in real time.</h1>
+        <div class="status-bar">
+          <div class="status-step active"></div>
+          <div class="status-step active"></div>
+          <div class="status-step active"></div>
+          <div class="status-step"></div>
+          <div class="status-step"></div>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="badge">Agent ticker</div>
+        <div class="agent-ticker">
+          <div class="agent-chip active">
+            <strong>Vision Stylist</strong>
+            <span>Enhancing photos…</span>
+          </div>
+          <div class="agent-chip">
+            <strong>Copywriter</strong>
+            <span>Draft ready in 4.2s</span>
+          </div>
+          <div class="agent-chip">
+            <strong>Pricing Analyst</strong>
+            <span>Margin floor: $280</span>
+          </div>
+          <div class="agent-chip">
+            <strong>Buyer Liaison</strong>
+            <span>2 inquiries queued</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid-3">
+        <div class="panel kpi-card">
+          <span class="badge">Views</span>
+          <span class="kpi-value">4,120</span>
+          <span class="kpi-trend">+18% vs. last listing</span>
+        </div>
+        <div class="panel kpi-card">
+          <span class="badge">Offers</span>
+          <span class="kpi-value">7</span>
+          <span class="kpi-trend">Guardrail meter: 68%</span>
+        </div>
+        <div class="panel kpi-card">
+          <span class="badge">Platforms live</span>
+          <span class="kpi-value">3</span>
+          <span class="kpi-trend">Craigslist pending verification</span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="badge">Asset gallery</div>
+        <div class="asset-preview">
+          <div class="asset-card"></div>
+          <div class="asset-card"></div>
+          <div class="asset-card"></div>
+        </div>
+      </section>
+
+      <section class="composer">
+        <div class="panel">
+          <div class="badge">Copy & pricing</div>
+          <div class="tone-toggle">
+            <button class="tone-btn active">Premium</button>
+            <button class="tone-btn">Playful</button>
+            <button class="tone-btn">Minimal</button>
+          </div>
+          <p class="description-text">
+            Sculpted mid-century walnut coffee table with floating glass top. Restored
+            edges and hand-oiled finish keep the piece true to its 1964 origin, while new
+            felt glides let it move effortlessly across any room. Includes original maker
+            mark and certification card.
+          </p>
+          <div class="cta-row">
+            <button class="cta">Accept Copy</button>
+            <button class="cta secondary">Ask Copywriter</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="badge">Marketplace status</div>
+          <div class="market-grid">
+            <div class="market-pill live">
+              <span>Mercari</span>
+              <span>ID #MRC-7284</span>
+            </div>
+            <div class="market-pill live">
+              <span>Nextdoor</span>
+              <span>Live</span>
+            </div>
+            <div class="market-pill pending">
+              <span>Craigslist</span>
+              <span>Awaiting email</span>
+            </div>
+            <div class="market-pill">
+              <span>OfferUp</span>
+              <span>Queued</span>
+            </div>
+          </div>
+          <div class="cta-row" style="margin-top: 1rem">
+            <button class="cta">Launch Collaboration Room</button>
+            <button class="cta secondary">Summon Buyer Liaison</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="toast-stack">
+      <div class="toast">Vision Stylist finished background cleanup.</div>
+      <div class="toast">Copywriter: Premium tone generated.</div>
+    </div>
+  </body>
+</html>

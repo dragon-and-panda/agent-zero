@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Collaboration Room Demo</title>
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="hero">
+        <span class="badge">Autonomous Collaboration Room</span>
+        <h1>Humans and agents thinking together.</h1>
+        <p style="color: var(--text-muted); max-width: 720px">
+          Demo view of the multi-agent meeting feature designed for campaigns and live
+          walkthroughs. Tiles, whiteboard, tool dock, and timeline are all synchronized to
+          telemetry + mission diaries.
+        </p>
+      </div>
+
+      <section class="meeting-grid">
+        <div class="tile">
+          <div class="badge">Human</div>
+          <div class="name">Avery (Seller)</div>
+          <div class="waveform"></div>
+          <p style="margin-top: 0.75rem">
+            “Need confirmation on pricing before Mercari promo slot.”
+          </p>
+        </div>
+        <div class="tile">
+          <div class="badge">Apex Orchestrator</div>
+          <div class="name">Portfolio Navigator</div>
+          <div class="waveform"></div>
+          <p style="margin-top: 0.75rem">
+            “Roadmap impact: +2.4% GMV. Recommending go/no-go vote.”
+          </p>
+        </div>
+        <div class="tile">
+          <div class="badge">Vision</div>
+          <div class="name">Vision Stylist</div>
+          <div class="waveform"></div>
+          <p style="margin-top: 0.75rem">“Enhanced hero image v3 ready on board.”</p>
+        </div>
+        <div class="tile">
+          <div class="badge">Negotiation</div>
+          <div class="name">Buyer Liaison</div>
+          <div class="waveform"></div>
+          <p style="margin-top: 0.75rem">
+            “Mercari buyer countered at $315. Guardrail allows auto-accept.”
+          </p>
+        </div>
+      </section>
+
+      <section class="panel" style="margin-top: 2rem">
+        <div class="badge">Shared canvas</div>
+        <div class="whiteboard">
+          <div class="sticky" style="top: 20px; left: 20px">
+            Q1 Goal<br />Sell in 36 hrs
+          </div>
+          <div class="sticky purple" style="top: 130px; left: 40%">
+            Offer Ladder<br />$350 list<br />$325 fast sale<br />$300 floor
+          </div>
+          <div class="sticky" style="bottom: 30px; right: 30px">
+            Next action:<br />Launch promo<br />slot 3pm
+          </div>
+        </div>
+        <div class="tool-dock">
+          <button class="tool-btn primary">Run Pricing Simulation</button>
+          <button class="tool-btn">Summarize Transcript</button>
+          <button class="tool-btn">Inject Telemetry</button>
+          <button class="tool-btn">Push to Mission Diary</button>
+        </div>
+      </section>
+
+      <section class="panel timeline">
+        <div class="badge">Meeting timeline</div>
+        <div class="timeline-item">
+          12:02 — Vision Stylist dropped enhanced assets onto canvas.
+        </div>
+        <div class="timeline-item">
+          12:04 — Pricing simulation run; recommended floor $305.
+        </div>
+        <div class="timeline-item">
+          12:06 — Apex Orchestrator approved promo deployment.
+        </div>
+        <div class="timeline-item">
+          12:08 — Buyer Liaison auto-sent Mercari counter acceptance.
+        </div>
+      </section>
+
+      <div class="cta-row" style="margin-top: 2rem">
+        <button class="cta">Download Demo Pack</button>
+        <button class="cta secondary">Play 60s Ad Storyboard</button>
+      </div>
+    </main>
+  </body>
+</html>
