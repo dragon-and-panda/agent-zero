@@ -130,12 +130,14 @@ CI/CD builds a single container image (FastAPI + worker binaries) pushed to ECR/
 ## 8. Data & Knowledge Fabric
 - **Knowledge Packs:** 
   - Marketing best practices,
-  - Platform policy summaries,
-  - Visual staging tips per category.
+  - Platform policy summaries (`knowledge/custom/main/policies/*.md`),
+  - Visual staging tips per category,
+  - Voice/tone guide + SOP excerpt automatically ingested by `KnowledgeBase` and injected into prompts/compliance checks.
 - **RAG Pipeline:** 
-  1. Seller intent + item metadata → embed → retrieve from vector DB,
-  2. Feed retrieved snippets into Copywriter prompts,
+  1. Seller intent + item metadata → embed → retrieve from vector DB + local knowledge pack,
+  2. Feed retrieved snippets into Copywriter prompts (`DescriptionGenerator` now consumes `KnowledgeBase` excerpts),
   3. Store resulting listing in `memory/solutions` for future reuse.
+- **Compliance Guard:** `ComplianceChecker` references the same policy pack to flag banned phrases, missing pickup disclosures, or marketplace-specific gaps before publishing.
 - **Personalization:** Seller preferences (tone, negotiation style) saved to memory and loaded automatically when they return.
 
 ---

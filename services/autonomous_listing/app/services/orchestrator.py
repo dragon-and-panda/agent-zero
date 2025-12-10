@@ -3,6 +3,7 @@ import uuid
 from dataclasses import dataclass, field
 from typing import List
 
+from .compliance import ComplianceChecker
 from .pipelines.description_generator import DescriptionGenerator
 from .pipelines.image_enhancer import ImageEnhancer
 from .pipelines.publisher import ChannelPublisher
@@ -19,11 +20,13 @@ class ListingOrchestrator:
         copywriter: DescriptionGenerator,
         publisher: ChannelPublisher,
         telemetry: TelemetryClient | None = None,
+        compliance: ComplianceChecker | None = None,
     ) -> None:
         self._enhancer = enhancer
         self._copywriter = copywriter
         self._publisher = publisher
         self._telemetry = telemetry or TelemetryClient()
+        self._compliance = compliance or ComplianceChecker()
 
     async def create_listing(
         self, payload: schemas.ListingRequest
@@ -67,6 +70,17 @@ class ListingOrchestrator:
             },
         )
 
+        compliance_findings = self._compliance.evaluate(payload, preview_description)
+        compliance_report = self._build_compliance_report(compliance_findings)
+        self._record(
+            "listing.compliance_checked",
+            listing_id,
+            {
+                "issues": len(compliance_findings),
+                "blocking": not compliance_report.passed,
+            },
+        )
+
         stage_start = time.perf_counter()
         publish_results = await self._publisher.schedule_publication(
             listing_id=listing_id,
@@ -89,7 +103,9 @@ class ListingOrchestrator:
             listing_id=listing_id,
             state="publishing" if publish_results.pending else "live",
             platforms_live=publish_results.confirmed_platforms,
-            notes=publish_results.notes,
+            notes=self._compose_notes(
+                publish_results.notes, compliance_report.passed
+            ),
         )
 
         response = schemas.ListingResponse(
@@ -97,6 +113,7 @@ class ListingOrchestrator:
             recommended_price=suggested_price,
             preview_description=preview_description,
             enhanced_assets=enhanced_assets,
+            compliance=compliance_report,
         )
 
         self._record(
@@ -116,6 +133,20 @@ class ListingOrchestrator:
         except Exception:
             # Telemetry should never block main workflow; swallow errors silently for now.
             pass
+
+    @staticmethod
+    def _build_compliance_report(
+        findings: List[schemas.ComplianceFinding],
+    ) -> schemas.ComplianceReport:
+        passed = all(f.severity != "error" for f in findings)
+        return schemas.ComplianceReport(passed=passed, findings=findings)
+
+    @staticmethod
+    def _compose_notes(base_notes: str, compliance_passed: bool) -> str:
+        if compliance_passed:
+            return base_notes
+        suffix = " Compliance review flagged issues; see report for details."
+        return f"{base_notes}{suffix}"
 
 
 @dataclass
