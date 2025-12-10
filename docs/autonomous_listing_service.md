@@ -172,4 +172,15 @@ CI/CD builds a single container image (FastAPI + worker binaries) pushed to ECR/
 - **Reputation Engine:** Aggregate feedback across platforms to build seller trust profiles.
 - **Predictive Demand:** Recommend best posting windows and price adjustments based on market trends.
 
+---
+
+## 11. Co-Development with the Super Agency
+
+- **Mission Diary:** Maintain `docs/programs/autonomous_listing/journal.md` logging every experiment, release, and KPI shift so agents can learn from prior iterations.
+- **Improvement Backlog:** Share a prioritized list (`docs/programs/autonomous_listing/improvements.md`) that feeds into the agency-wide iterative protocol (see Section 15 of `autonomous_super_agency.md`).
+- **Telemetry Handoff:** Telemetry Sentinel publishes listing-service-specific health reports (conversion uplift, response latency, negotiation success rate) for Portfolio Navigator to review weekly.
+- **Prompt Sync:** Copywriter, Buyer Liaison, and Publisher persona prompts live under `prompts/super-agency/roles/listing_*` and reference the same change log as the broader agency to keep behavior updates auditable.
+- **Feedback Routing:** Any seller or buyer feedback entering the Engagement Hub is tagged and stored in `knowledge/custom/main/listings/` so the RAG corpus continuously reflects real-world voice-of-customer insights.
+- **Release Ritual:** Every deployment of the service includes a short “What changed / Metrics impacted / Next bet” record appended to the mission diary, ensuring synchronous evolution of the agency and this product line.
+
 This blueprint provides a detailed path to a serverless, AI-native listing concierge that delights sellers and scales across marketplaces with minimal manual effort.

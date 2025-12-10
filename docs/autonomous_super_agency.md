@@ -321,3 +321,35 @@ These scaffolds ensure every persona has a dedicated toolkit, observability path
 6. **Rollout:** Sandbox → staging missions → production; enable customer-facing invites only after telemetry + compliance sign-off.
 
 The UI, multi-LLM routing, and sandbox strategy together enable a testable, graphical collaboration layer where agents and humans coordinate like a virtual R&D control room before expanding to real customer interactions.
+
+---
+
+## 15. Living Documentation & Iterative Improvement Protocol
+
+### 15.1 Continuous Documentation Streams
+- **Mission Diaries:** Every active program (e.g., the Autonomous Listing Service) maintains a rolling log in `docs/programs/<mission>/journal.md` capturing decisions, blockers, and outcomes per sprint.
+- **Agent Telemetry Snapshots:** Telemetry Sentinel exports weekly health summaries (latency, cost, delegation frequency) into `logs/reports/<week>.md`, feeding performance discussions.
+- **Prompt Changelog:** Persona prompt updates are versioned under `prompts/super-agency/CHANGELOG.md`, ensuring traceability between behavioral tweaks and observed results.
+
+### 15.2 Iterative Improvement Loop
+1. **Observe:** Collect metrics from mission diaries, telemetry, and customer interactions.
+2. **Diagnose:** Portfolio Navigator + relevant Domain Studio review anomalies or opportunities inside the Collaboration Theater.
+3. **Design Experiments:** Create improvement hypotheses (e.g., new negotiation playbook for listings) and encode them as:
+   - Behavior rule adjustments,
+   - Instrument updates,
+   - Prompt/Pipeline revisions.
+4. **Deploy:** Ship changes through sandbox → staging → production pipeline with automated validation hooks.
+5. **Reflect:** Capture outcomes in mission diaries; if successful, promote learnings to `knowledge/custom/main` for reuse.
+
+### 15.3 Cross-Mission Feedback Sharing
+- Quarterly **Agency Retrospectives** aggregate insights from all missions, highlighting reusable playbooks (image enhancement steps, pricing heuristics).
+- **Improvement Backlog** stored in `docs/agency_improvements.md` ranks cross-cutting enhancements (e.g., better RAG embeddings, refined UI micro-interactions) with designated owner agents.
+- **Auto-Watchdogs** detect regressions (e.g., rising unanswered inquiries) and open improvement tasks automatically via behavior adjustment instructions, ensuring the agency self-tunes without waiting for human prompts.
+
+### 15.4 Co-Development with New Services
+When launching new services (like the Autonomous Listing Service):
+- Embed the mission diary + improvement backlog from day one.
+- Reuse the iterative loop above so the service and the core agency evolve together.
+- Require each release to document: decision rationale, metrics impacted, and next hypothesis, guaranteeing a living blueprint as the system scales.
+
+This protocol keeps the agency’s documentation synchronized with real operations while institutionalizing an experiment-driven mindset for every new service it incubates.
