@@ -6,10 +6,11 @@ This brief describes the visual layout, component inventory, and interaction flo
 
 ## 1. Screen Map
 
-1. **Mission Control Dashboard**
-   - Status strip (Processing → Drafting → Live) with animated progress bar.
+1. **Mission Control Dashboard (Live Agent Command Center)**
+   - Status strip (Processing → Drafting → Live) with animated progress bar tied to orchestrator telemetry.
+   - Agent ticker showing which persona is active (“Vision Stylist enhancing photos…”) with avatar + model badge.
    - KPI cards: views, inquiries, conversion probability, negotiation guardrail meter.
-   - “Launch Collaboration Room” button linking to the Zoom-like multi-agent space.
+   - “Launch Collaboration Room” button linking to the Zoom-like multi-agent space, with unread indicator if agents are already meeting.
 2. **Listing Composer**
    - Left rail: asset gallery with before/after toggle, enhancement presets.
    - Center canvas: AI-generated description + pricing suggestions with inline edit controls.
@@ -54,7 +55,17 @@ This brief describes the visual layout, component inventory, and interaction flo
 
 ---
 
-## 4. Asset & Tool Requirements
+## 4. Live Agent Command Center Notes
+
+- **Agent Presence Strip:** Horizontal ticker with looping avatars; highlight the active agent, fade completed steps, and allow hover to reveal quick summaries (“Copywriter drafted premium copy in 4.2s”).
+- **Telemetry Sparklines:** Each agent chip shows latency + cost sparklines pulled from telemetry logs to reinforce transparency.
+- **Narrative Toasts:** Floating toasts narrate actions (“Portfolio Navigator approved price ladder”).
+- **Marketplace Radar:** Polar chart visualizing readiness per platform (assets, copy, compliance) so sellers can spot blockers instantly.
+- **Quick Actions:** “Ask Agent” opens inline chat with selected persona; “Summon All” jumps into the collaboration room.
+
+---
+
+## 5. Asset & Tool Requirements
 
 - **Design System:** Extend existing mission control palette; include dark + light variants.
 - **Iconography:** Platform logos, AI agent avatars, guardrail meter, telemetry bell.

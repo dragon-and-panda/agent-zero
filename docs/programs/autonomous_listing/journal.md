@@ -43,3 +43,15 @@
 ### Next Focus
 - Flesh out Nextdoor/OfferUp adapters and tie telemetry into mission dashboards.
 - Begin engagement hub design for unified buyer messaging.
+
+## 2025-12-10 — Experience & Meeting Demos
+- Authored `docs/autonomous_listing_ui_demo.md` updates to highlight Live Agent Command Center components (agent ticker, telemetry sparklines, quick actions).
+- Created `docs/live_meeting_demo_storyboard.md`, a full ad storyboard for the multi-agent collaboration room showcasing grid tiles, shared canvas, instrument triggers, and engagement handoff.
+- Added dropshipping plan + meeting room blueprint in core docs so creative + engineering teams stay aligned.
+
+### Metrics / Signals
+- Design team now has detailed component inventory + storyboard; ready for Figma motion prototypes.
+
+### Next Focus
+- Produce interactive prototypes based on the brief.
+- Start backend work for collaboration room (session orchestrator + WebRTC signaling).
