@@ -8,3 +8,4 @@
 | P1 | Add telemetry + mission diary hooks directly in orchestrator to log latency, cost, and platform outcomes | Telemetry Sentinel | JSONL sink in place; next wire into dashboards + mission retros |
 | P2 | Build Engagement Hub stub (WebSocket + AI suggested replies) | Buyer Liaison | Required for unified messaging experience |
 | P2 | Containerize sandbox deployment with IaC + scheduled smoke tests | Lifecycle Steward | Ensures reliable rollout path |
+| P2 | Integrate dropshipping catalog + fulfillment agent | Logistics Orchestrator | See Section 13 for supplier APIs + telemetry |

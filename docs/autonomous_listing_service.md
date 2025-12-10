@@ -188,6 +188,29 @@ This blueprint provides a detailed path to a serverless, AI-native listing conci
 ---
 
 ## 12. Engagement Hub Blueprint
+- **Escalation Hooks:** When offers breach guardrails or sentiment turns toxic, hub emits `engagement.escalation` telemetry events and pings Apex Orchestrator per Section 15 of the super-agency doc.
+- **Next Steps:** Implement `/ws` endpoint + minimal frontend widget, log all interactions to `logs/engagement/<listing>.json`, and integrate transcripts into mission diary/RAG corpus for future negotiation improvements.
+
+---
+
+## 13. Dropshipping Integration Path
+
+1. **Inventory & Supplier Data**
+   - Add a dropship catalog store (e.g., Postgres + supplier APIs) with SKU metadata, realtime stock, shipping SLAs, and wholesale costs.
+   - Extend `ListingRequest` schema to accept SKU references, supplier priorities, and fulfillment rules.
+2. **Fulfillment Agent**
+   - New “Logistics Orchestrator” agent monitors orders/reservations, selects best supplier based on stock, shipping region, margin, and reliability.
+   - Integrate with fulfillment APIs (ShipBob, Printful, custom warehouses) to create shipments, retrieve tracking, and feed status back into lifecycle controller.
+3. **Pricing & Margin Controls**
+   - Pricing Analyst references wholesale cost + shipping to compute margin ladder; guardrails ensure negotiation agent never dips below margin floor.
+4. **Customer-Facing Updates**
+   - Engagement Hub displays fulfillment timeline, estimated delivery, and tracking actions.
+   - Listings automatically include shipping methods/timeframes derived from supplier metadata.
+5. **Telemetry & Compliance**
+   - Add telemetry events (`dropship.order_created`, `dropship.fulfilled`, `dropship.delay_alert`) for Operations team.
+   - Ensure policy packs cover supplier SLAs, returns workflow, and marketplace compliance (e.g., clearly tagging dropshipped items when required).
+
+This roadmap lets the autonomous agency operate first-party listings and a dropshipping catalog within the same pipelines, leveraging existing negotiation, marketplace, and lifecycle components.
 
 - **Messaging Broker:** FastAPI sub-app using WebSockets (or Socket.IO) with Redis pub/sub for horizontal scaling. Endpoint: `/ws/listings/{listing_id}` authenticates sellers + agents, streams buyer inquiries, AI suggestions, and manual replies.
 - **AI Reply Assist:** Buyer Liaison agent listens to inbound messages, runs intent classification + guardrail checks, drafts replies via LLM client, and queues them for human approval or auto-send when confidence > threshold.

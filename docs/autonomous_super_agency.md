@@ -345,6 +345,7 @@ The UI, multi-LLM routing, and sandbox strategy together enable a testable, grap
 - Quarterly **Agency Retrospectives** aggregate insights from all missions, highlighting reusable playbooks (image enhancement steps, pricing heuristics).
 - **Improvement Backlog** stored in `docs/agency_improvements.md` ranks cross-cutting enhancements (e.g., better RAG embeddings, refined UI micro-interactions) with designated owner agents.
 - **Auto-Watchdogs** detect regressions (e.g., rising unanswered inquiries) and open improvement tasks automatically via behavior adjustment instructions, ensuring the agency self-tunes without waiting for human prompts.
+- **Refinement Review Cadence:** Every sprint closes with a “Refine + Re-aim” micro-session where Portfolio Navigator, Telemetry Sentinel, and domain leads review telemetry, update mission diaries, and authorize behavior prompt tweaks before the next loop starts.
 
 ### 15.4 Co-Development with New Services
 When launching new services (like the Autonomous Listing Service):
@@ -353,3 +354,44 @@ When launching new services (like the Autonomous Listing Service):
 - Require each release to document: decision rationale, metrics impacted, and next hypothesis, guaranteeing a living blueprint as the system scales.
 
 This protocol keeps the agency’s documentation synchronized with real operations while institutionalizing an experiment-driven mindset for every new service it incubates.
+
+---
+
+## 16. Multi-Agent Meeting Room (Zoom-like Experience)
+
+### 16.1 Objectives
+- Provide a synchronous canvas for humans and multiple agents to brainstorm, negotiate, and review telemetry in real time.
+- Maintain full auditability: every utterance, whiteboard change, and decision is logged to mission diaries and telemetry.
+
+### 16.2 Architecture
+- **Session Orchestrator:** FastAPI/Node service managing room state, participant roster, and meeting permissions.
+- **Realtime Transport:** WebRTC for optional audio/video streams, WebSockets for structured data (chat, tool calls, whiteboard ops).
+- **Agent Attendance:** Agents join via `call_subordinate` + meeting token; they render as avatars with role + model badges.
+- **Shared Canvas:** Collaborative whiteboard (e.g., yjs-based) with sticky notes, timelines, and embedded artifacts (docs, code snippets).
+- **Tool Dock:** Buttons to trigger instruments (score opportunity, run simulation) with results injected back into the transcript.
+
+### 16.3 Interaction Protocol
+1. Apex Orchestrator or human sponsor schedules a session, defining agenda + expected outputs.
+2. Upon join, each agent briefly states its perspective (auto-generated summary from current mission context).
+3. Meeting transcript captures:
+   - Audio-to-text or text-only contributions.
+   - Tool invocations (with metadata).
+   - Decisions/next steps, which auto-sync to mission diary + improvement backlog.
+4. Post-meeting, Transcript Summarizer agent generates:
+   - Action checklist,
+   - Updated OKR alignment notes,
+   - Behavior adjustments if new rules were agreed upon.
+
+### 16.4 UI Highlights
+- Grid of participant cards (agents + humans) with live speaking indicators.
+- Timeline view of agenda items with real-time progress.
+- Side panel for telemetry overlays (budget, risk, engagement metrics).
+- Quick reactions/emojis for lightweight feedback.
+
+### 16.5 Roadmap
+1. Implement session orchestrator + WebSocket signaling service.
+2. Add minimal React/Svelte UI embedding WebRTC tiles, chat, and whiteboard.
+3. Integrate with engagement hub so buyer conversations can be pulled into meetings when needed.
+4. Hook transcripts into mission diary automation (Section 15) and knowledge base for future retrieval.
+
+This meeting layer turns the agency’s collaborative rituals into a tangible, auditable experience akin to a purpose-built Zoom for AI-human hybrid teams.
