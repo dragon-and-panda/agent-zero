@@ -224,3 +224,100 @@ Store each persona file as a reusable fragment referenced from `agent.system.mai
 6. **Observability:** Link telemetry outputs to dashboards accessible from the Web UI for optional human monitoring.
 
 These scaffolds ensure every persona has a dedicated toolkit, observability path, and safety net, reinforcing the low-touch operation goal.
+
+---
+
+## 11. Immersive Collaboration & Visualization UI
+
+### 11.1 Experience Goals
+- **Situational Awareness:** Shared, real-time map of active missions, responsible agents, and workflow state.
+- **Low-friction Dialogue:** Zoom-like canvas where agents can “speak,” exchange artifacts, and request clarification without leaving the UI.
+- **Replayability:** Session snapshots captured for auditing how decisions were reached.
+
+### 11.2 Interface Zones
+1. **Mission Map (left pane):** Node-link graph (missions → departments → agents) with status colors and tooltips containing KPIs + current LLM.
+2. **Collaboration Theater (center):** Spatial meeting room:
+   - Seats/avatars for participating agents and humans.
+   - Avatars display role iconography, provider badge, and live transcript bubble.
+   - Shared whiteboard synced to `logs/board_sessions/<timestamp>.json`.
+3. **Command Console (right pane):** Action queue (spawn subordinate, run instrument, adjust behavior) and telemetry gauges (budget, risk, throughput).
+
+### 11.3 Interaction Mechanics
+- **Agent Speech:** Agents stream updates (text + optional TTS) into bubbles; transcripts saved to `logs/ui_sessions/`.
+- **Artifact Docking:** Drag artifacts from the `webui` file browser into the whiteboard; objects reference canonical files to avoid duplication.
+- **Planning Templates:** Load pre-built canvases (OKR planner, experiment matrix) via instruments for structured workshops.
+- **Moderation Controls:** Apex Orchestrator or sponsor can spotlight speakers, freeze the room, or enforce speaking order.
+
+### 11.4 Implementation Hooks
+- Frontend modules (extend `webui/js/`):
+  - `agentsGraph.js`: d3-force rendering fed by `/api/missions/graph`.
+  - `collabRoom.js`: WebRTC/WebSocket session manager for avatars, chat, and whiteboard diffing.
+  - `llmBadges.css`: Visual mapping of model/provider combos.
+- Backend additions:
+  - Streaming endpoint emitting agent lifecycle events (join, speak, artifact shared).
+  - Session controller persisting meeting metadata + board states into `logs/`.
+
+---
+
+## 12. Multi-LLM Strategy Per Role
+
+### 12.1 Assignment Matrix
+| Persona | Primary Model | Secondary / Fallback | Notes |
+| --- | --- | --- | --- |
+| Apex Orchestrator | GPT-4.1 / Claude Opus | GPT-4o mini | Needs long context + governance rigor. |
+| Portfolio Navigator | Gemini 1.5 Pro | Claude Sonnet | Balanced analysis vs. cost. |
+| Research Fellows | Mixtral 8x22B (API) | Local Llama-3.1-70B | High-parallel experimentation. |
+| Product Synthesists | GPT-4o mini | Llama-3.1-70B | UX narratives + storytelling. |
+| Compliance Guardian | GPT-4o | Claude Opus | Policy/law precision. |
+| Telemetry Sentinel | DeepSeek Coder V2 | Local function-calling model | Data summarization + anomaly detection. |
+
+### 12.2 Routing Logic
+- Extension `_15_model_router.py`:
+  - Reads persona metadata (stored in persona prompt files or `settings.yml`) to pick `preferred_model`.
+  - Checks provider quotas; if usage >80% or latency spikes, switches to fallback.
+  - Emits routing decisions to telemetry for monitoring.
+- Behavior adjustments can override the router when special handling is needed (e.g., red-team exercises).
+
+### 12.3 Quality & Cost Monitoring
+- Every tool call logs: provider, model, input/output tokens, latency, perceived quality score.
+- Telemetry Sentinel aggregates per-persona stats and recommends rebalancing (e.g., shift Research Fellows to local models when load is high).
+- Budget Guard extension enforces per-department token ceilings; on breach, router downgrades non-critical personas automatically.
+
+---
+
+## 13. Sandbox Collaboration Environment (MVP)
+
+### 13.1 Objectives
+1. Validate the immersive UI and multi-LLM routing in isolation.
+2. Provide a safe arena for agent-agent-human workshops with synthetic missions.
+3. Gather UX + performance telemetry before touching production data.
+
+### 13.2 Sandbox Stack
+- **Docker profile `sandbox`:** Launches minimal services + mock integrations.
+- **Data:** Synthetic missions, faux knowledge base, isolated memory store at `/sandbox_memory`.
+- **Models:** Prefer staged API keys or local open-source models; cap spend via environment variables.
+- **Telemetry:** Writes to `logs/sandbox/*` for easy cleanup.
+
+### 13.3 Core Test Scenarios
+| Scenario | Description | Success Criteria |
+| --- | --- | --- |
+| Planning Summit | 5 personas prioritize synthetic roadmap in collab room. | OKR board saved, transcripts archived, no dropped connections. |
+| Research Relay | Research Fellow → Product Synthesist → Engineer handoff using whiteboard artifacts. | Artifacts linked, multi-LLM routing recorded. |
+| Customer Preview | Simulated client persona joins, receives demo, leaves feedback captured to memory. | Compliance Guardian verifies messaging vs. policy pack. |
+
+### 13.4 Exit Criteria
+- Stable WebSocket sessions with ≥6 concurrent avatars.
+- Cost telemetry within sandbox budget envelope.
+- Guardrail extensions successfully flag injected issues.
+
+---
+
+## 14. Roadmap for Productionizing the UI
+1. **Design System:** Extend `webui/css` with a “mission control” palette; ensure WCAG AA contrast.
+2. **Graph API:** Implement `/api/missions/graph` with caching + permission checks.
+3. **Realtime Backbone:** WebSocket gateway + optional WebRTC audio pipeline for live voice “agent briefings.”
+4. **Session Recording:** Serialize transcripts, whiteboard diffs, mission decisions into `logs/ui_sessions/<id>.json` and HTML viewer.
+5. **Security Model:** JWT-based roles (sponsor, agent, observer) + per-session PIN for external participants.
+6. **Rollout:** Sandbox → staging missions → production; enable customer-facing invites only after telemetry + compliance sign-off.
+
+The UI, multi-LLM routing, and sandbox strategy together enable a testable, graphical collaboration layer where agents and humans coordinate like a virtual R&D control room before expanding to real customer interactions.
