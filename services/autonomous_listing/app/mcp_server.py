@@ -17,6 +17,7 @@ from .services.pipelines.image_enhancer import ImageEnhancer
 from .services.pipelines.publisher import ChannelPublisher
 from .services.perception import PerceptionEngine
 from .services.telemetry import TelemetryClient
+from .services.intake_template import listing_intake_template
 
 mcp = FastMCP("autonomous-listing")
 
@@ -56,6 +57,16 @@ def validate_listing_request(payload: Dict[str, Any]) -> Dict[str, Any]:
     """
     req = schemas.ListingRequest.model_validate(payload)
     return req.model_dump(mode="json")
+
+
+@mcp.tool()
+def get_listing_intake_template(
+    platforms: List[str] | None = None, listing_type: str = "item"
+) -> Dict[str, Any]:
+    """
+    Returns a fill-in template for the user (including photo slots) and a mock preview for the primary platform.
+    """
+    return listing_intake_template(platforms=platforms, listing_type=listing_type)
 
 
 @mcp.tool()
