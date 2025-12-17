@@ -1,0 +1,79 @@
+"""
+Autonomous Listing MCP Server
+
+Exposes the existing listing orchestrator as MCP tools over stdio by default.
+"""
+
+from __future__ import annotations
+
+from typing import Any, Dict, List
+
+from mcp.server.fastmcp import FastMCP
+
+from . import schemas
+from .services.orchestrator import ListingOrchestrator
+from .services.pipelines.description_generator import DescriptionGenerator
+from .services.pipelines.image_enhancer import ImageEnhancer
+from .services.pipelines.publisher import ChannelPublisher
+from .services.telemetry import TelemetryClient
+
+mcp = FastMCP("autonomous-listing")
+
+_orchestrator = ListingOrchestrator(
+    enhancer=ImageEnhancer(),
+    copywriter=DescriptionGenerator(),
+    publisher=ChannelPublisher(),
+    telemetry=TelemetryClient(),
+)
+
+
+@mcp.tool()
+def list_supported_platforms() -> List[str]:
+    """Return the set of known marketplace platform identifiers."""
+    return [p.value for p in schemas.PlatformEnum]
+
+
+@mcp.tool()
+def listing_request_schema() -> Dict[str, Any]:
+    """JSON schema for the listing request payload."""
+    return schemas.ListingRequest.model_json_schema()
+
+
+@mcp.tool()
+def listing_response_schema() -> Dict[str, Any]:
+    """JSON schema for the listing response payload."""
+    return schemas.ListingResponse.model_json_schema()
+
+
+@mcp.tool()
+def validate_listing_request(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Validate/normalize a listing request.
+
+    Returns the validated payload (with defaults applied) as a plain dict.
+    """
+    req = schemas.ListingRequest.model_validate(payload)
+    return req.model_dump(mode="json")
+
+
+@mcp.tool()
+async def create_listing(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Create a listing via the existing orchestrator pipeline.
+
+    Input: ListingRequest-compatible JSON object.
+    Output: ListingResponse as JSON.
+    """
+    req = schemas.ListingRequest.model_validate(payload)
+    res = await _orchestrator.create_listing(req)
+    return res.model_dump(mode="json")
+
+
+def main() -> None:
+    # Default transport is stdio, which is what most MCP clients expect.
+    mcp.run()
+
+
+if __name__ == "__main__":
+    main()
+

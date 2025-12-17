@@ -15,6 +15,22 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
+## Run as an MCP Server (stdio)
+
+This exposes the existing orchestrator pipeline as MCP tools (intended for Claude Desktop / Cursor / any MCP client).
+
+```bash
+cd services/autonomous_listing
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python -m app.mcp_server
+```
+
+Available tools include:
+- `create_listing(payload)` → returns `ListingResponse`
+- `validate_listing_request(payload)` → returns normalized payload
+- `list_supported_platforms()` → returns platform ids
+
 POST a sample request:
 
 ```bash
