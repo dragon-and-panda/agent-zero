@@ -121,3 +121,62 @@ class LLMClient:
         except Exception:
             pass
         return {"score": 0, "strengths": [], "risks": [], "rewrite_notes": [content]}
+
+    async def extract_attributes_from_images(
+        self,
+        *,
+        notes: str,
+        image_urls: List[str],
+        schema_hint: Optional[Dict[str, Any]] = None,
+    ) -> dict:
+        """
+        Vision-based attribute extraction.
+
+        If no LLM is configured, returns a minimal heuristic payload.
+        """
+        if not self._client:
+            lower = (notes or "").lower()
+            brand = "Hot Wheels" if "hot wheels" in lower else None
+            return {
+                "brand": brand,
+                "product_name": None,
+                "series": None,
+                "scale": "1:64" if "1:64" in lower else None,
+                "condition": None,
+                "packaging": "carded" if "card" in lower or "blister" in lower else None,
+                "confidence": 0.3,
+                "notes": ["LLM not configured; heuristic extraction used."],
+            }
+
+        # Prefer a model that supports image inputs; caller controls ALS_OPENAI_MODEL.
+        system = (
+            "You extract factual product attributes from photos.\n"
+            "Return ONLY valid JSON with keys:\n"
+            "brand, product_name, series, scale, year, condition, packaging, features (string[]),\n"
+            "and per_field_confidence (object mapping field->0..1).\n"
+            "Rules:\n"
+            "- Do NOT guess. Use null for unknown.\n"
+            "- Be conservative; prefer fewer claims with higher confidence.\n"
+        )
+        if schema_hint:
+            system += "\nSchema hint:\n" + str(schema_hint)
+
+        content: List[Dict[str, Any]] = [{"type": "text", "text": f"Seller notes:\n{notes}"}]
+        for url in image_urls[:8]:
+            content.append({"type": "image_url", "image_url": {"url": url}})
+
+        response = await self._client.chat.completions.create(
+            model=self._model,
+            messages=[{"role": "system", "content": system}, {"role": "user", "content": content}],
+            temperature=0.1,
+        )
+        raw = response.choices[0].message.content or "{}"
+        try:
+            import json
+
+            data = json.loads(raw)
+            if isinstance(data, dict):
+                return data
+        except Exception:
+            pass
+        return {"raw": raw, "notes": ["Failed to parse JSON from vision extraction."]}

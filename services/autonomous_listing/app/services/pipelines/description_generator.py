@@ -38,9 +38,10 @@ class DescriptionGenerator:
         listing_id: str,
         request: schemas.ListingRequest,
         enhanced_assets: List[str],
+        verified_attributes: Dict[str, str] | None = None,
     ) -> CopyPackage:
         references = await self._retrieve_references(request)
-        master_prompt = self._build_master_prompt(request, enhanced_assets)
+        master_prompt = self._build_master_prompt(request, enhanced_assets, verified_attributes or {})
         master = await self._llm.generate_marketing_copy(master_prompt, references)
 
         suggested_price = request.preferences.target_price or round(
@@ -108,7 +109,10 @@ class DescriptionGenerator:
         return data.get("snippets", [])
 
     def _build_master_prompt(
-        self, request: schemas.ListingRequest, enhanced_assets: List[str]
+        self,
+        request: schemas.ListingRequest,
+        enhanced_assets: List[str],
+        verified_attributes: Dict[str, str],
     ) -> str:
         hero_line = request.title_hint or "Craft a standout listing title"
         bullet = (
@@ -140,6 +144,14 @@ class DescriptionGenerator:
             "6) A friendly call-to-action\n"
             "Keep it highly professional and conversion-focused."
         )
+        verified_block = ""
+        if verified_attributes:
+            items = "\n".join([f"- {k}: {v}" for k, v in verified_attributes.items()])
+            verified_block = (
+                "\n\nVerified attributes (treat as highest-trust facts):\n"
+                f"{items}\n"
+                "Do NOT contradict these. If other fields are unknown, say so or omit.\n"
+            )
 
         return (
             f"{structure}\n\n"
@@ -152,6 +164,7 @@ class DescriptionGenerator:
             f"{brand}{condition}{dims}{delivery}{event_bits}"
             f"Seller notes: {request.raw_description}\n"
             f"{bullet}"
+            f"{verified_block}"
         )
 
     def _rubric_checklist(self, request: schemas.ListingRequest) -> List[str]:

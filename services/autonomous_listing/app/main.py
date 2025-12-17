@@ -17,6 +17,7 @@ orchestrator = ListingOrchestrator(
     enhancer=ImageEnhancer(),
     copywriter=DescriptionGenerator(),
     publisher=ChannelPublisher(),
+    # perception defaults to PerceptionEngine() (vision+search redundancy)
     telemetry=TelemetryClient(),
 )
 

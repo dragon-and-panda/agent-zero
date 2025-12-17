@@ -128,6 +128,14 @@ class ListingResponse(BaseModel):
         default_factory=dict,
         description="Per-platform publication status and posting packages (if available).",
     )
+    verified_attributes: dict[str, str] = Field(
+        default_factory=dict,
+        description="High-confidence attributes inferred from images/notes via redundant verification.",
+    )
+    perception_report: dict = Field(
+        default_factory=dict,
+        description="Raw perception evidence, consensus scoring, and uncertainties.",
+    )
     quality_report: dict = Field(
         default_factory=dict,
         description="Automated rubric scoring + critique notes for iterative improvement.",

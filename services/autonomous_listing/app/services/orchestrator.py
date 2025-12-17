@@ -6,6 +6,7 @@ from typing import Dict, List
 from .pipelines.description_generator import DescriptionGenerator
 from .pipelines.image_enhancer import ImageEnhancer
 from .pipelines.publisher import ChannelPublisher
+from .perception import PerceptionEngine
 from .telemetry import TelemetryClient
 from .. import schemas
 
@@ -18,11 +19,13 @@ class ListingOrchestrator:
         enhancer: ImageEnhancer,
         copywriter: DescriptionGenerator,
         publisher: ChannelPublisher,
+        perception: PerceptionEngine | None = None,
         telemetry: TelemetryClient | None = None,
     ) -> None:
         self._enhancer = enhancer
         self._copywriter = copywriter
         self._publisher = publisher
+        self._perception = perception or PerceptionEngine()
         self._telemetry = telemetry or TelemetryClient()
 
     async def create_listing(
@@ -53,10 +56,24 @@ class ListingOrchestrator:
         )
 
         stage_start = time.perf_counter()
+        verified_attributes, perception_report = await self._perception.infer_verified_attributes(
+            request=payload
+        )
+        self._record(
+            "listing.perception_complete",
+            listing_id,
+            {
+                "duration_ms": round((time.perf_counter() - stage_start) * 1000, 2),
+                "verified_keys": list(verified_attributes.keys()),
+            },
+        )
+
+        stage_start = time.perf_counter()
         copy_pkg = await self._copywriter.generate(
             listing_id=listing_id,
             request=payload,
             enhanced_assets=enhanced_assets,
+            verified_attributes=verified_attributes,
         )
         preview_description = copy_pkg.master_description
         suggested_price = copy_pkg.suggested_price
@@ -106,6 +123,8 @@ class ListingOrchestrator:
             preview_description=preview_description,
             platform_variants=copy_pkg.platform_variants,
             platform_publication=publish_results.platform_results,
+            verified_attributes=verified_attributes,
+            perception_report=perception_report,
             quality_report=copy_pkg.quality_report,
             enhanced_assets=enhanced_assets,
         )

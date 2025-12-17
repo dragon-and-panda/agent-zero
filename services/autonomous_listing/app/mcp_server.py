@@ -15,6 +15,7 @@ from .services.orchestrator import ListingOrchestrator
 from .services.pipelines.description_generator import DescriptionGenerator
 from .services.pipelines.image_enhancer import ImageEnhancer
 from .services.pipelines.publisher import ChannelPublisher
+from .services.perception import PerceptionEngine
 from .services.telemetry import TelemetryClient
 
 mcp = FastMCP("autonomous-listing")
@@ -23,6 +24,7 @@ _orchestrator = ListingOrchestrator(
     enhancer=ImageEnhancer(),
     copywriter=DescriptionGenerator(),
     publisher=ChannelPublisher(),
+    perception=PerceptionEngine(),
     telemetry=TelemetryClient(),
 )
 
@@ -94,10 +96,22 @@ async def create_craigslist_posting_package(payload: Dict[str, Any]) -> Dict[str
         "listing_id": res.status.listing_id,
         "selected_title": res.selected_title,
         "recommended_price": res.recommended_price,
+        "verified_attributes": res.verified_attributes,
         "craigslist": pub.get("data", {}),
         "status": pub.get("status"),
         "message": pub.get("message"),
     }
+
+
+@mcp.tool()
+async def extract_verified_attributes(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Run multi-source perception + redundant verification and return verified attributes.
+    """
+    req = schemas.ListingRequest.model_validate(payload)
+    engine = PerceptionEngine()
+    verified, report = await engine.infer_verified_attributes(request=req)
+    return {"verified_attributes": verified, "perception_report": report}
 
 
 def main() -> None:
