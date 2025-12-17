@@ -53,17 +53,22 @@ class ListingOrchestrator:
         )
 
         stage_start = time.perf_counter()
-        preview_description, suggested_price = await self._copywriter.generate(
+        copy_pkg = await self._copywriter.generate(
             listing_id=listing_id,
             request=payload,
             enhanced_assets=enhanced_assets,
         )
+        preview_description = copy_pkg.master_description
+        suggested_price = copy_pkg.suggested_price
         self._record(
             "listing.copy_generated",
             listing_id,
             {
                 "duration_ms": round((time.perf_counter() - stage_start) * 1000, 2),
                 "suggested_price": suggested_price,
+                "quality_score": copy_pkg.quality_report.get("score")
+                if isinstance(copy_pkg.quality_report, dict)
+                else None,
             },
         )
 
@@ -96,6 +101,8 @@ class ListingOrchestrator:
             status=status,
             recommended_price=suggested_price,
             preview_description=preview_description,
+            platform_variants=copy_pkg.platform_variants,
+            quality_report=copy_pkg.quality_report,
             enhanced_assets=enhanced_assets,
         )
 

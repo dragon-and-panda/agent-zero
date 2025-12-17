@@ -69,6 +69,18 @@ async def create_listing(payload: Dict[str, Any]) -> Dict[str, Any]:
     return res.model_dump(mode="json")
 
 
+@mcp.tool()
+async def create_listing_draft(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Draft-only: generates enhanced assets + master copy + platform variants + quality scoring,
+    and skips marketplace publication.
+    """
+    req = schemas.ListingRequest.model_validate(payload)
+    draft_req = req.model_copy(update={"target_platforms": []})
+    res = await _orchestrator.create_listing(draft_req)
+    return res.model_dump(mode="json")
+
+
 def main() -> None:
     # Default transport is stdio, which is what most MCP clients expect.
     mcp.run()

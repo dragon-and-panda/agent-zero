@@ -34,3 +34,14 @@ async def create_listing(payload: schemas.ListingRequest) -> schemas.ListingResp
     """
 
     return await orchestrator.create_listing(payload)
+
+
+@app.post("/listings/draft", response_model=schemas.ListingResponse)
+async def create_listing_draft(payload: schemas.ListingRequest) -> schemas.ListingResponse:
+    """
+    Draft-only entry point: generates enhanced assets + best-in-class copy + variants + scoring,
+    but does not publish to marketplaces.
+    """
+    # Minimal approach for now: reuse the full orchestrator but set target_platforms empty to skip publication.
+    draft_payload = payload.model_copy(update={"target_platforms": []})
+    return await orchestrator.create_listing(draft_payload)

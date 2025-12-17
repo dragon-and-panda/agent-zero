@@ -28,6 +28,7 @@ python -m app.mcp_server
 
 Available tools include:
 - `create_listing(payload)` → returns `ListingResponse`
+- `create_listing_draft(payload)` → generates best-in-class copy/variants without publishing
 - `validate_listing_request(payload)` → returns normalized payload
 - `list_supported_platforms()` → returns platform ids
 

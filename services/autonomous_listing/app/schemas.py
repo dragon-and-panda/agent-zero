@@ -9,6 +9,9 @@ class PlatformEnum(str, Enum):
     mercari = "mercari"
     nextdoor = "nextdoor"
     offerup = "offerup"
+    etsy = "etsy"
+    poshmark = "poshmark"
+    shopify = "shopify"
     custom = "custom"
 
 
@@ -42,11 +45,33 @@ class ListingAsset(BaseModel):
 
 
 class ListingRequest(BaseModel):
+    listing_type: Optional[str] = Field(
+        "item",
+        description="High-level listing type: item | event | service (used for copy structure).",
+    )
     title_hint: Optional[str] = Field(
         None, description="Optional working title supplied by the seller."
     )
     raw_description: str = Field(
         ..., description="Free-form notes describing the item, condition, and story."
+    )
+    brand: Optional[str] = Field(None, description="Optional brand/designer/organizer name.")
+    condition: Optional[str] = Field(
+        None, description="Condition summary (e.g., new, like new, good, fair)."
+    )
+    dimensions: Optional[str] = Field(
+        None,
+        description="Optional dimensions (e.g., 48x24x18 in) for items; keep human-readable.",
+    )
+    delivery: Optional[str] = Field(
+        None,
+        description="Fulfillment hint: local pickup | shipping | delivery | digital.",
+    )
+    event_datetime: Optional[str] = Field(
+        None, description="For events: ISO-ish datetime string (e.g., 2025-12-20 19:00)."
+    )
+    event_duration: Optional[str] = Field(
+        None, description="For events: human duration (e.g., 2 hours)."
     )
     category: Optional[str] = Field(
         None, description="High-level category to help routing (e.g., furniture)."
@@ -86,6 +111,14 @@ class ListingResponse(BaseModel):
     )
     preview_description: Optional[str] = Field(
         None, description="First-pass marketing copy preview."
+    )
+    platform_variants: dict[str, str] = Field(
+        default_factory=dict,
+        description="Per-platform description variants keyed by platform id.",
+    )
+    quality_report: dict = Field(
+        default_factory=dict,
+        description="Automated rubric scoring + critique notes for iterative improvement.",
     )
     enhanced_assets: List[str] = Field(
         default_factory=list,
