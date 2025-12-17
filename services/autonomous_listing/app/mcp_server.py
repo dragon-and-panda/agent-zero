@@ -81,6 +81,25 @@ async def create_listing_draft(payload: Dict[str, Any]) -> Dict[str, Any]:
     return res.model_dump(mode="json")
 
 
+@mcp.tool()
+async def create_craigslist_posting_package(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Convenience tool: generate a draft and return only the Craigslist posting package
+    (title/price/body/images + assisted steps).
+    """
+    req = schemas.ListingRequest.model_validate(payload)
+    res = await _orchestrator.create_listing(req)
+    pub = res.platform_publication.get("craigslist", {})
+    return {
+        "listing_id": res.status.listing_id,
+        "selected_title": res.selected_title,
+        "recommended_price": res.recommended_price,
+        "craigslist": pub.get("data", {}),
+        "status": pub.get("status"),
+        "message": pub.get("message"),
+    }
+
+
 def main() -> None:
     # Default transport is stdio, which is what most MCP clients expect.
     mcp.run()

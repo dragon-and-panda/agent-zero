@@ -31,21 +31,31 @@ class ChannelPublisher:
         listing_id: str,
         request: schemas.ListingRequest,
         enhanced_assets: List[str],
-        description: str,
+        master_description: str,
+        platform_variants: Dict[str, str] | None,
         recommended_price: float,
     ) -> PublishResult:
         confirmed: List[schemas.PlatformEnum] = []
         failed: List[schemas.PlatformEnum] = []
         pending = False
         notes_parts: List[str] = []
+        platform_results: Dict[str, dict] = {}
 
         for platform in request.target_platforms:
             adapter = self._registry.get(platform)
             if not adapter:
                 pending = True
                 notes_parts.append(f"{platform.value}: adapter not implemented yet.")
+                platform_results[platform.value] = {
+                    "status": "pending",
+                    "reference_id": None,
+                    "message": "Adapter not implemented yet.",
+                }
                 continue
 
+            description = (
+                (platform_variants or {}).get(platform.value) or master_description
+            )
             result = await adapter.publish(
                 listing_id=listing_id,
                 request=request,
@@ -53,6 +63,12 @@ class ChannelPublisher:
                 recommended_price=recommended_price,
                 enhanced_assets=enhanced_assets,
             )
+            platform_results[platform.value] = {
+                "status": result.status,
+                "reference_id": result.reference_id,
+                "message": result.message,
+                "data": result.data or {},
+            }
 
             if result.status == "live":
                 confirmed.append(platform)
@@ -73,4 +89,5 @@ class ChannelPublisher:
             confirmed_platforms=confirmed,
             failed_platforms=failed,
             notes=" ".join(notes_parts),
+            platform_results=platform_results,
         )

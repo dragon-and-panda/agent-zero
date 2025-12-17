@@ -13,6 +13,7 @@ class PublicationResult:
     status: str  # "pending" | "live" | "failed"
     reference_id: Optional[str] = None
     message: Optional[str] = None
+    data: dict | None = None
 
 
 class MarketplacePublisher(abc.ABC):

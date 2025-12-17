@@ -18,6 +18,8 @@ class CopyPackage:
     suggested_price: float
     platform_variants: Dict[str, str]
     quality_report: dict
+    title_options: List[str]
+    selected_title: str
 
 
 class DescriptionGenerator:
@@ -72,11 +74,21 @@ class DescriptionGenerator:
             references=references,
         )
 
+        titles = await self._generate_title_options(
+            request=request,
+            master=master.strip(),
+            suggested_price=suggested_price,
+            references=references,
+        )
+        selected = titles[0] if titles else (request.title_hint or f"{request.category or 'Listing'}")
+
         return CopyPackage(
             master_description=master.strip(),
             suggested_price=suggested_price,
             platform_variants=variants,
             quality_report=quality if isinstance(quality, dict) else {"raw": quality},
+            title_options=titles,
+            selected_title=selected,
         )
 
     async def _retrieve_references(
@@ -223,6 +235,59 @@ class DescriptionGenerator:
             text = await self._llm.generate_marketing_copy(prompt, references)
             variants[platform.value] = text.strip()
         return variants
+
+    async def _generate_title_options(
+        self,
+        request: schemas.ListingRequest,
+        master: str,
+        suggested_price: float,
+        references: List[str],
+    ) -> List[str]:
+        prompt = (
+            "Generate 6 high-converting listing titles.\n"
+            "Rules:\n"
+            "- Be truthful and specific.\n"
+            "- Avoid ALL CAPS and excessive punctuation.\n"
+            "- Include key modifiers buyers search (brand/model/size/condition) when available.\n"
+            "- Return ONLY a JSON array of strings.\n\n"
+            f"Type: {request.listing_type}\n"
+            f"Category: {request.category}\n"
+            f"Brand: {request.brand}\n"
+            f"Condition: {request.condition}\n"
+            f"Dimensions: {request.dimensions}\n"
+            f"Location: {request.location}\n"
+            f"Price hint: {suggested_price}\n"
+            f"Seller notes: {request.raw_description}\n\n"
+            f"Master:\n{master}\n"
+        )
+        text = await self._llm.generate_marketing_copy(prompt, references)
+        try:
+            import json
+
+            data = json.loads(text)
+            if isinstance(data, list):
+                out: List[str] = []
+                for x in data:
+                    if isinstance(x, str) and x.strip():
+                        out.append(x.strip())
+                # de-dup while preserving order
+                dedup: List[str] = []
+                seen = set()
+                for t in out:
+                    k = t.lower()
+                    if k not in seen:
+                        seen.add(k)
+                        dedup.append(t)
+                return dedup[:10]
+        except Exception:
+            pass
+        # Fallback
+        base = request.title_hint or request.category or "Listing"
+        if request.brand:
+            base = f"{request.brand} {base}"
+        if request.condition:
+            base = f"{base} - {request.condition}"
+        return [base]
 
     def _platform_style(self, platform: str) -> str:
         # Tight, opinionated style guides.
