@@ -18,6 +18,7 @@ from .services.pipelines.publisher import ChannelPublisher
 from .services.perception import PerceptionEngine
 from .services.telemetry import TelemetryClient
 from .services.intake_template import listing_intake_template
+from .services.product_research import ProductResearcher
 
 mcp = FastMCP("autonomous-listing")
 
@@ -67,6 +68,17 @@ def get_listing_intake_template(
     Returns a fill-in template for the user (including photo slots) and a mock preview for the primary platform.
     """
     return listing_intake_template(platforms=platforms, listing_type=listing_type)
+
+
+@mcp.tool()
+def research_products(payload: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Minimal product discovery tool for dropshipping/sourcing.
+    Input: ProductResearchRequest-compatible JSON.
+    """
+    req = schemas.ProductResearchRequest.model_validate(payload)
+    res = ProductResearcher().research(req)
+    return res.model_dump(mode="json")
 
 
 @mcp.tool()

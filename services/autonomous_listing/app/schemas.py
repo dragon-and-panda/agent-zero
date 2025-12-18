@@ -144,3 +144,34 @@ class ListingResponse(BaseModel):
         default_factory=list,
         description="URIs for enhanced images stored in object storage.",
     )
+
+
+class ProductResearchRequest(BaseModel):
+    niche: str = Field(..., description="What market/niche to search (e.g., 'diecast cars', 'vintage tees').")
+    location: Optional[str] = Field(None, description="Optional location for local arbitrage ideas.")
+    budget_max: Optional[float] = Field(None, description="Max buy cost per unit (if sourcing).")
+    goals: List[str] = Field(
+        default_factory=lambda: ["fast_sell", "high_margin"],
+        description="Goal tags like fast_sell, high_margin, low_returns, easy_ship.",
+    )
+    constraints: List[str] = Field(
+        default_factory=list,
+        description="Constraints like avoid fragile, avoid counterfeit risk, avoid hazmat.",
+    )
+    max_results: int = Field(10, ge=1, le=50, description="Number of candidates to return.")
+
+
+class ProductCandidate(BaseModel):
+    title: str
+    why: str = Field(..., description="Reason this product is promising.")
+    keywords: List[str] = Field(default_factory=list)
+    evidence_links: List[str] = Field(default_factory=list)
+    score: float = Field(..., ge=0, le=100)
+    risks: List[str] = Field(default_factory=list)
+    suggested_next_step: str = Field(..., description="Concrete next step to validate or source.")
+
+
+class ProductResearchResponse(BaseModel):
+    niche: str
+    candidates: List[ProductCandidate] = Field(default_factory=list)
+    notes: List[str] = Field(default_factory=list)

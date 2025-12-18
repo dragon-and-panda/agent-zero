@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from . import schemas
 from .services.intake_template import listing_intake_template
+from .services.product_research import ProductResearcher
 from .services.orchestrator import ListingOrchestrator
 from .services.pipelines.description_generator import DescriptionGenerator
 from .services.pipelines.image_enhancer import ImageEnhancer
@@ -41,6 +42,14 @@ async def get_listing_template(
     """
     platform_list = [p.strip() for p in (platforms or "").split(",") if p.strip()] or None
     return listing_intake_template(platforms=platform_list, listing_type=listing_type)
+
+
+@app.post("/research/products", response_model=schemas.ProductResearchResponse)
+async def research_products(payload: schemas.ProductResearchRequest) -> schemas.ProductResearchResponse:
+    """
+    Minimal product discovery endpoint for sourcing/dropshipping.
+    """
+    return ProductResearcher().research(payload)
 
 
 @app.post("/listings", response_model=schemas.ListingResponse)
