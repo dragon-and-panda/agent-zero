@@ -19,6 +19,7 @@ from .services.perception import PerceptionEngine
 from .services.telemetry import TelemetryClient
 from .services.intake_template import listing_intake_template
 from .services.product_research import ProductResearcher
+from .services.storage import ListingStore
 
 mcp = FastMCP("autonomous-listing")
 
@@ -90,7 +91,7 @@ async def create_listing(payload: Dict[str, Any]) -> Dict[str, Any]:
     Output: ListingResponse as JSON.
     """
     req = schemas.ListingRequest.model_validate(payload)
-    res = await _orchestrator.create_listing(req)
+    res = await _orchestrator.create_listing(req, publish=True)
     return res.model_dump(mode="json")
 
 
@@ -101,8 +102,7 @@ async def create_listing_draft(payload: Dict[str, Any]) -> Dict[str, Any]:
     and skips marketplace publication.
     """
     req = schemas.ListingRequest.model_validate(payload)
-    draft_req = req.model_copy(update={"target_platforms": []})
-    res = await _orchestrator.create_listing(draft_req)
+    res = await _orchestrator.create_listing(req, publish=False)
     return res.model_dump(mode="json")
 
 
@@ -113,7 +113,7 @@ async def create_craigslist_posting_package(payload: Dict[str, Any]) -> Dict[str
     (title/price/body/images + assisted steps).
     """
     req = schemas.ListingRequest.model_validate(payload)
-    res = await _orchestrator.create_listing(req)
+    res = await _orchestrator.create_listing(req, publish=True)
     pub = res.platform_publication.get("craigslist", {})
     return {
         "listing_id": res.status.listing_id,
@@ -135,6 +135,78 @@ async def extract_verified_attributes(payload: Dict[str, Any]) -> Dict[str, Any]
     engine = PerceptionEngine()
     verified, report = await engine.infer_verified_attributes(request=req)
     return {"verified_attributes": verified, "perception_report": report}
+
+
+@mcp.tool()
+def get_listing(listing_id: str) -> Dict[str, Any]:
+    store = ListingStore()
+    row = store.get_listing(listing_id)
+    if not row:
+        return {"error": "Listing not found", "listing_id": listing_id}
+    return {
+        "listing_id": row.listing_id,
+        "owner_id": row.owner_id,
+        "created_at": row.created_at,
+        "updated_at": row.updated_at,
+        "request": row.request,
+        "response": row.response,
+    }
+
+
+@mcp.tool()
+def list_listings(owner_id: str | None = None, limit: int = 50) -> List[Dict[str, Any]]:
+    store = ListingStore()
+    rows = store.list_listings(owner_id=owner_id, limit=limit)
+    return [
+        {
+            "listing_id": r.listing_id,
+            "owner_id": r.owner_id,
+            "created_at": r.created_at,
+            "updated_at": r.updated_at,
+            "request": r.request,
+            "response": r.response,
+        }
+        for r in rows
+    ]
+
+
+@mcp.tool()
+def list_publish_jobs(status: str | None = "needs_human", platform: str | None = None, limit: int = 50) -> List[Dict[str, Any]]:
+    store = ListingStore()
+    jobs = store.list_publish_jobs(status=status, platform=platform, limit=limit)
+    return [
+        {
+            "job_id": j.job_id,
+            "listing_id": j.listing_id,
+            "platform": j.platform,
+            "mode": j.mode,
+            "status": j.status,
+            "created_at": j.created_at,
+            "updated_at": j.updated_at,
+            "payload": j.payload,
+            "result": j.result,
+        }
+        for j in jobs
+    ]
+
+
+@mcp.tool()
+def mark_publish_job_posted(job_id: str, posted_url: str | None = None, reference_id: str | None = None, notes: str | None = None) -> Dict[str, Any]:
+    store = ListingStore()
+    job = store.mark_job_posted(job_id=job_id, posted_url=posted_url, reference_id=reference_id, notes=notes)
+    if not job:
+        return {"error": "Publish job not found", "job_id": job_id}
+    return {
+        "job_id": job.job_id,
+        "listing_id": job.listing_id,
+        "platform": job.platform,
+        "mode": job.mode,
+        "status": job.status,
+        "created_at": job.created_at,
+        "updated_at": job.updated_at,
+        "payload": job.payload,
+        "result": job.result,
+    }
 
 
 def main() -> None:

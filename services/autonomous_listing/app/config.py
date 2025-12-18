@@ -16,6 +16,9 @@ class Settings(BaseSettings):
     craigslist_email: str | None = None
     mercari_api_key: str | None = None
 
+    # --- Persistence ---
+    db_path: str = "/workspace/tmp/autonomous_listing.db"
+
     # --- Autopublish (opt-in; use with caution) ---
     autopublish_enabled: bool = False
     autopublish_acknowledge_risk: bool = False

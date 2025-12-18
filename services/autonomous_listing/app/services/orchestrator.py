@@ -7,6 +7,7 @@ from .pipelines.description_generator import DescriptionGenerator
 from .pipelines.image_enhancer import ImageEnhancer
 from .pipelines.publisher import ChannelPublisher
 from .perception import PerceptionEngine
+from .storage import ListingStore
 from .telemetry import TelemetryClient
 from .. import schemas
 
@@ -20,16 +21,18 @@ class ListingOrchestrator:
         copywriter: DescriptionGenerator,
         publisher: ChannelPublisher,
         perception: PerceptionEngine | None = None,
+        storage: ListingStore | None = None,
         telemetry: TelemetryClient | None = None,
     ) -> None:
         self._enhancer = enhancer
         self._copywriter = copywriter
         self._publisher = publisher
         self._perception = perception or PerceptionEngine()
+        self._storage = storage or ListingStore()
         self._telemetry = telemetry or TelemetryClient()
 
     async def create_listing(
-        self, payload: schemas.ListingRequest
+        self, payload: schemas.ListingRequest, publish: bool = True
     ) -> schemas.ListingResponse:
         listing_id = str(uuid.uuid4())
         overall_start = time.perf_counter()
@@ -89,31 +92,45 @@ class ListingOrchestrator:
             },
         )
 
-        stage_start = time.perf_counter()
-        publish_results = await self._publisher.schedule_publication(
-            listing_id=listing_id,
-            request=payload,
-            enhanced_assets=enhanced_assets,
-            master_description=preview_description,
-            platform_variants=copy_pkg.platform_variants,
-            recommended_price=suggested_price,
-        )
-        self._record(
-            "listing.publication_triggered",
-            listing_id,
-            {
-                "duration_ms": round((time.perf_counter() - stage_start) * 1000, 2),
-                "pending": publish_results.pending,
-                "confirmed_platforms": [p.value for p in publish_results.confirmed_platforms],
-            },
-        )
+        publish_results = None
+        if publish and payload.target_platforms:
+            stage_start = time.perf_counter()
+            publish_results = await self._publisher.schedule_publication(
+                listing_id=listing_id,
+                request=payload,
+                enhanced_assets=enhanced_assets,
+                master_description=preview_description,
+                platform_variants=copy_pkg.platform_variants,
+                recommended_price=suggested_price,
+            )
+            self._record(
+                "listing.publication_triggered",
+                listing_id,
+                {
+                    "duration_ms": round((time.perf_counter() - stage_start) * 1000, 2),
+                    "pending": publish_results.pending,
+                    "confirmed_platforms": [
+                        p.value for p in publish_results.confirmed_platforms
+                    ],
+                },
+            )
 
-        status = schemas.ListingStatus(
-            listing_id=listing_id,
-            state="publishing" if publish_results.pending else "live",
-            platforms_live=publish_results.confirmed_platforms,
-            notes=publish_results.notes,
-        )
+        if publish_results:
+            status = schemas.ListingStatus(
+                listing_id=listing_id,
+                state="publishing" if publish_results.pending else "live",
+                platforms_live=publish_results.confirmed_platforms,
+                notes=publish_results.notes,
+            )
+            platform_publication = publish_results.platform_results
+        else:
+            status = schemas.ListingStatus(
+                listing_id=listing_id,
+                state="drafted",
+                platforms_live=[],
+                notes="Draft generated; not published.",
+            )
+            platform_publication = {}
 
         response = schemas.ListingResponse(
             status=status,
@@ -122,7 +139,7 @@ class ListingOrchestrator:
             selected_title=copy_pkg.selected_title,
             preview_description=preview_description,
             platform_variants=copy_pkg.platform_variants,
-            platform_publication=publish_results.platform_results,
+            platform_publication=platform_publication,
             verified_attributes=verified_attributes,
             perception_report=perception_report,
             quality_report=copy_pkg.quality_report,
@@ -137,6 +154,27 @@ class ListingOrchestrator:
                 "duration_ms": round((time.perf_counter() - overall_start) * 1000, 2),
             },
         )
+
+        # Persist listing + create publish jobs (assisted by default).
+        try:
+            req_dump = payload.model_dump(mode="json")
+            res_dump = response.model_dump(mode="json")
+            owner_id = payload.owner_id
+            self._storage.upsert_listing(
+                listing_id=listing_id,
+                owner_id=owner_id,
+                request=req_dump,
+                response=res_dump,
+            )
+            if platform_publication:
+                self._storage.create_publish_jobs(
+                    listing_id=listing_id,
+                    platform_publication=platform_publication,
+                    mode_by_platform={k: "assisted" for k in platform_publication.keys()},
+                )
+        except Exception:
+            # Persistence should not block listing creation.
+            pass
 
         return response
 

@@ -45,6 +45,10 @@ class ListingAsset(BaseModel):
 
 
 class ListingRequest(BaseModel):
+    owner_id: Optional[str] = Field(
+        None,
+        description="Optional owner identifier for persistence/ownership views.",
+    )
     listing_type: Optional[str] = Field(
         "item",
         description="High-level listing type: item | event | service (used for copy structure).",
@@ -175,3 +179,30 @@ class ProductResearchResponse(BaseModel):
     niche: str
     candidates: List[ProductCandidate] = Field(default_factory=list)
     notes: List[str] = Field(default_factory=list)
+
+
+class StoredListing(BaseModel):
+    listing_id: str
+    owner_id: Optional[str] = None
+    created_at: float
+    updated_at: float
+    request: dict
+    response: dict
+
+
+class PublishJob(BaseModel):
+    job_id: str
+    listing_id: str
+    platform: str
+    mode: str
+    status: str
+    created_at: float
+    updated_at: float
+    payload: dict = Field(default_factory=dict)
+    result: dict = Field(default_factory=dict)
+
+
+class MarkPostedRequest(BaseModel):
+    posted_url: Optional[str] = None
+    reference_id: Optional[str] = None
+    notes: Optional[str] = None
