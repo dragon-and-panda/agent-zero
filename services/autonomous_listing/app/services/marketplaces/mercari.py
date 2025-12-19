@@ -3,8 +3,6 @@ from __future__ import annotations
 import asyncio
 from typing import List
 
-import httpx
-
 from ... import schemas
 from ..config import get_settings
 from .base import MarketplacePublisher, PublicationResult
@@ -16,7 +14,6 @@ class MercariPublisher(MarketplacePublisher):
     def __init__(self) -> None:
         settings = get_settings()
         self._api_key = settings.mercari_api_key
-        self._client = httpx.AsyncClient(timeout=20) if self._api_key else None
 
     async def publish(
         self,
@@ -26,37 +23,44 @@ class MercariPublisher(MarketplacePublisher):
         recommended_price: float,
         enhanced_assets: List[str],
     ) -> PublicationResult:
-        if not self._client:
-            await asyncio.sleep(0.1)
-            return PublicationResult(
-                platform=self.platform,
-                status="pending",
-                message="Mercari API key missing; queued for manual posting.",
-            )
+        # Assisted publish: return a ready-to-post package + instructions.
+        # (Mercari automation is intentionally not enabled by default; stable official APIs vary by region/account.)
+        await asyncio.sleep(0.1)
 
-        payload = {
-            "title": request.title_hint or f"{request.category} listing",
-            "description": description,
+        title = (request.title_hint or request.brand or request.category or "Listing").strip()
+        if len(title) > 80:
+            title = title[:77].rstrip() + "..."
+
+        package = {
+            "platform": "mercari",
+            "title": title,
             "price": recommended_price,
-            "category": request.category,
-            "location": request.location,
+            "category_hint": request.category,
+            "description": description,
             "photos": enhanced_assets,
+            "condition_hint": request.condition,
+            "shipping_hint": "shipping" if not request.preferences.pickup_only else "local pickup",
+            "assisted_posting_steps": [
+                "Open Mercari and tap Sell.",
+                "Upload photos (hero first), then confirm crop/rotation.",
+                "Paste the title and description; verify facts and condition are accurate.",
+                "Choose the closest category and condition.",
+                "Set price; decide on offers/negotiation preferences.",
+                "Configure shipping vs local pickup as appropriate.",
+                "List the item and verify it appears correctly.",
+            ],
+            "api_key_configured": bool(self._api_key),
         }
-        resp = await self._client.post(
-            "https://api.mercari.com/listings",
-            json=payload,
-            headers={"Authorization": f"Bearer {self._api_key}"},
+
+        msg = (
+            "Mercari posting package generated; manual posting recommended."
+            if not self._api_key
+            else "Mercari posting package generated (API key present, but still using assisted mode)."
         )
-        if resp.status_code >= 400:
-            return PublicationResult(
-                platform=self.platform,
-                status="failed",
-                message=f"Mercari API error: {resp.text}",
-            )
-        data = resp.json()
         return PublicationResult(
             platform=self.platform,
-            status="live",
-            reference_id=data.get("id"),
-            message="Listing live on Mercari.",
+            status="pending",
+            reference_id=f"ME-{listing_id[:8]}",
+            message=msg,
+            data=package,
         )
