@@ -10,6 +10,7 @@ from python.helpers.cloudflare_tunnel import CloudflareTunnel
 from python.helpers.extract_tools import load_classes_from_folder
 from python.helpers.api import ApiHandler
 from python.helpers.print_style import PrintStyle
+from python.collaboration import init_collaboration
 
 
 # initialize the internal Flask server
@@ -125,6 +126,9 @@ def run():
     handlers = load_classes_from_folder("python/api", "*.py", ApiHandler)
     for handler in handlers:
         register_api_handler(app, handler)
+
+    # Initialize collaboration (SocketIO)
+    socketio = init_collaboration(app)
 
     try:
         server = make_server(
