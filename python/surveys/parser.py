@@ -111,6 +111,11 @@ def parse_survey_page(clean_dom: str, url: str = "") -> SurveyPage:
         label = _norm(el.get("label")) or None
         if kind == FieldKind.BUTTON:
             label = label or _norm(el.get("value")) or _norm(el.get_text(" ", strip=True)) or None
+        if kind in {FieldKind.RADIO, FieldKind.CHECKBOX} and not label:
+            parent = el.parent if isinstance(el.parent, Tag) else None
+            if parent:
+                # For choice inputs, the immediate container text is often the option label.
+                label = _norm(parent.get_text(" ", strip=True)) or None
         label = label or _el_text_near(el) or None
         placeholder = _norm(el.get("placeholder")) or None
         name = _norm(el.get("name")) or None
