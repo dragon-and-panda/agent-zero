@@ -6,6 +6,7 @@ import re
 from typing import Any
 
 from agent import Agent
+from python.helpers import dotenv
 
 from .schemas import AnswerAction, FieldKind, Persona, SurveyField, SurveyPage, UserProfile
 
@@ -60,7 +61,12 @@ def _infer_value(field: SurveyField, profile: UserProfile | None) -> str | None:
 
     # Common mappings
     if any(k in hay for k in ("email", "e-mail")):
-        return _profile_get(profile, "contact", "email") or _profile_get(profile, "email")
+        return (
+            _profile_get(profile, "contact", "email")
+            or _profile_get(profile, "email")
+            or str(dotenv.get_dotenv_value("A0_PROFILE_EMAIL", "") or "").strip()
+            or None
+        )
     if any(k in hay for k in ("first name", "firstname", "given name")):
         return _profile_get(profile, "name", "first") or _profile_get(profile, "first_name")
     if any(k in hay for k in ("last name", "lastname", "surname", "family name")):
