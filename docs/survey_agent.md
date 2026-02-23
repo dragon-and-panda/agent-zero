@@ -72,6 +72,37 @@ The tool supports multiple URL sources:
 
 ## Example tool calls
 
+## Run from a plain Python terminal
+
+You can invoke the survey workflow without opening the UI by running:
+
+```bash
+python3 run_survey_agent.py --action status
+```
+
+If dependencies are missing, the launcher can auto-install them:
+
+```bash
+python3 run_survey_agent.py --action status --auto-install true
+```
+
+Common commands:
+
+```bash
+# Queue Freecash surveys page
+python3 run_survey_agent.py --action enqueue --survey-url "https://freecash.com/surveys" --source freecash
+
+# Run one queued survey
+python3 run_survey_agent.py --action run_next --user-id default
+
+# Run a specific survey URL with a persona
+python3 run_survey_agent.py --action run --survey-url "https://freecash.com/surveys" --persona "budget-conscious gamer" --objective "Complete available survey pages consistently"
+```
+
+The script is located at the repo root:
+
+- `run_survey_agent.py`
+
 ### Add a real survey source (Freecash)
 
 User-provided survey listing:
