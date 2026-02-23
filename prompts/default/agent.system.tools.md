@@ -10,6 +10,10 @@
 
 {{ include './agent.system.tool.memory.md' }}
 
+{{ include './agent.system.tool.persona.md' }}
+
+{{ include './agent.system.tool.survey.md' }}
+
 {{ include './agent.system.tool.code_exe.md' }}
 
 {{ include './agent.system.tool.input.md' }}
