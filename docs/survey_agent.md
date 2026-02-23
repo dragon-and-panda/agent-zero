@@ -72,6 +72,25 @@ The tool supports multiple URL sources:
 
 ## Example tool calls
 
+### Add a real survey source (Freecash)
+
+User-provided survey listing:
+
+- `https://freecash.com/surveys`
+
+You can queue it directly:
+
+```json
+{
+  "tool_name": "survey_agent",
+  "tool_args": {
+    "action": "enqueue",
+    "survey_url": "https://freecash.com/surveys",
+    "source": "freecash"
+  }
+}
+```
+
 ### Run one survey with persona
 
 ```json
