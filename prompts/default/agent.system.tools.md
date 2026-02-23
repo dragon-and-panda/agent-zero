@@ -16,4 +16,6 @@
 
 {{ include './agent.system.tool.browser.md' }}
 
+{{ include './agent.system.tool.survey.md' }}
+
 {{ include './agent.system.tool.collaboration.md' }}
