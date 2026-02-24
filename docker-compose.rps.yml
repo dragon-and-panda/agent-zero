@@ -1,0 +1,45 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  backend:
+    image: python:3.12-slim
+    working_dir: /app
+    volumes:
+      - ./rps-backend:/app
+    environment:
+      DJANGO_DEBUG: "1"
+      DJANGO_ALLOWED_HOSTS: "*"
+      REDIS_URL: "redis://redis:6379/0"
+    command: >
+      sh -c "
+      pip install -r requirements.txt &&
+      python manage.py migrate &&
+      python -m daphne -b 0.0.0.0 -p 8000 rps_backend.asgi:application
+      "
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+
+  frontend:
+    image: node:22-alpine
+    working_dir: /app
+    volumes:
+      - ./rps-frontend:/app
+    environment:
+      VITE_BACKEND_URL: "http://localhost:8000"
+      VITE_WS_URL: "ws://localhost:8000/ws/lobby/"
+      VITE_CHAIN_ID: "80001"
+    command: >
+      sh -c "
+      npm install &&
+      npm run dev -- --host 0.0.0.0 --port 5173
+      "
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
