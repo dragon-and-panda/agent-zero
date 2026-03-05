@@ -42,10 +42,27 @@ bash scripts/start_survey_helper.sh
 
 This script sets up a local `.venv/` and installs only the **minimal** packages needed for the Survey Helper (BeautifulSoup + Playwright), then installs Playwright’s Chromium browser.
 
+If the script reports `tkinter` is missing, install it:
+- Ubuntu/Debian: `sudo apt-get update && sudo apt-get install -y python3-tk`
+
 Then in the window:
 - Paste URL → **Load (render + screenshot)**
 - **Extract questions**
 - (Optional) start Ollama and click **Suggest answers**
+
+### A2) CLI mode (no GUI)
+
+If you don’t have a GUI environment (or don’t want one), run:
+
+```bash
+SURVEY_HELPER_MODE=cli bash scripts/start_survey_helper.sh "https://example.com/survey"
+```
+
+Or directly:
+
+```bash
+python3 run_survey_helper_cli.py "https://example.com/survey" --json
+```
 
 ### B) Inside Agent Zero (tool mode)
 
