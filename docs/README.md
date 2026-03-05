@@ -4,6 +4,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 
 - **[Installation](installation.md):** Set up (or [update](installation.md#how-to-update-agent-zero)) Agent Zero on your system.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
+- **[Survey Agent](survey_agent.md):** Persona-aware survey automation and profile optimization.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
@@ -41,6 +42,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Voice Interface](usage.md#voice-interface)
   - [Mathematical Expressions](usage.md#mathematical-expressions)
   - [File Browser](usage.md#file-browser)
+- [Survey Agent](survey_agent.md)
 - [Architecture Overview](architecture.md)
   - [System Architecture](architecture.md#system-architecture)
   - [Runtime Architecture](architecture.md#runtime-architecture)
