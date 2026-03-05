@@ -3,6 +3,13 @@
 **/.env
 **/__pycache__/
 **/.conda/
+**/node_modules/
+**/dist/
+**/.vite/
+**/artifacts/
+**/cache/
+**/coverage/
+**/db.sqlite3
 
 # ignore test files in root dir
 /*.test.py
