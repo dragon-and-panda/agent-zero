@@ -327,7 +327,7 @@ The UI, multi-LLM routing, and sandbox strategy together enable a testable, grap
 ## 15. Living Documentation & Iterative Improvement Protocol
 
 ### 15.1 Continuous Documentation Streams
-- **Mission Diaries:** Every active program (e.g., the Autonomous Listing Service) maintains a rolling log in `docs/programs/<mission>/journal.md` capturing decisions, blockers, and outcomes per sprint.
+- **Mission Diaries:** Every active program (e.g., the Autonomous Listing Service, Ethical Financial System) maintains a rolling log in `docs/programs/<mission>/journal.md` capturing decisions, blockers, and outcomes per sprint.
 - **Agent Telemetry Snapshots:** Telemetry Sentinel exports weekly health summaries (latency, cost, delegation frequency) into `logs/reports/<week>.md`, feeding performance discussions.
 - **Prompt Changelog:** Persona prompt updates are versioned under `prompts/super-agency/CHANGELOG.md`, ensuring traceability between behavioral tweaks and observed results.
 
