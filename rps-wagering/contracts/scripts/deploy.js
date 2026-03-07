@@ -1,9 +1,9 @@
 const hre = require("hardhat");
 
 async function main() {
-  const usdcAddress = process.env.USDC_MUMBAI;
+  const usdcAddress = process.env.USDC_TOKEN;
   if (!usdcAddress) {
-    throw new Error("USDC_MUMBAI env var is required.");
+    throw new Error("USDC_TOKEN env var is required.");
   }
 
   const rockPaperScissors = await hre.ethers.deployContract("RockPaperScissors", [usdcAddress]);

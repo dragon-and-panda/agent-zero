@@ -1,7 +1,8 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
-const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL || "";
+const POLYGON_AMOY_RPC_URL = process.env.POLYGON_AMOY_RPC_URL || "";
+const POLYGON_MAINNET_RPC_URL = process.env.POLYGON_MAINNET_RPC_URL || "";
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "";
 
 module.exports = {
@@ -16,9 +17,14 @@ module.exports = {
   },
   networks: {
     hardhat: {},
-    mumbai: {
-      url: MUMBAI_RPC_URL,
-      chainId: 80001,
+    amoy: {
+      url: POLYGON_AMOY_RPC_URL,
+      chainId: 80002,
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+    },
+    polygon: {
+      url: POLYGON_MAINNET_RPC_URL,
+      chainId: 137,
       accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
     },
   },

@@ -39,7 +39,9 @@ rps-wagering/
 
 ---
 
-## 3) Smart Contract (Mumbai)
+## 3) Smart Contract (Polygon Amoy testnet)
+
+> Mumbai is deprecated; this starter uses Amoy as the default Polygon testnet profile.
 
 ### Setup
 ```bash
@@ -49,18 +51,24 @@ npm install
 ```
 
 Edit `.env`:
-- `MUMBAI_RPC_URL` (Alchemy/Infura URL)
+- `POLYGON_AMOY_RPC_URL` (Alchemy/Infura URL)
+- `POLYGON_MAINNET_RPC_URL` (optional, for mainnet deploy profile)
 - `PRIVATE_KEY` (deployer key)
-- `USDC_MUMBAI` (Mumbai USDC test token or mock token)
+- `USDC_TOKEN` (USDC token address for target network; use test USDC on Amoy)
 
 ### Test locally
 ```bash
 npm run test
 ```
 
-### Deploy to Mumbai
+### Deploy to Amoy
 ```bash
-npm run deploy:mumbai
+npm run deploy:amoy
+```
+
+### Deploy to Polygon mainnet (optional)
+```bash
+npm run deploy:polygon
 ```
 
 Save the deployed contract address and place it in:
