@@ -66,6 +66,15 @@ npm run test
 npm run deploy:amoy
 ```
 
+### Deploy to Amoy with MockUSDC (for rapid testing)
+```bash
+npm run deploy:amoy:mock
+```
+
+This path still requires:
+- `POLYGON_AMOY_RPC_URL`
+- `PRIVATE_KEY` (funded on Amoy for gas)
+
 ### Deploy to Polygon mainnet (optional)
 ```bash
 npm run deploy:polygon
