@@ -6,6 +6,8 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Compliance Pack](policies/compliance_pack.md):** Guardrails for data use, outreach, monetization, and finance automation.
+- **[Self-Sustaining Finance Program](programs/self_sustaining_finance/mission.md):** A consent-based blueprint for autonomous online income and disciplined investing.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
