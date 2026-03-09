@@ -147,6 +147,7 @@ docker run -p 50001:80 frdel/agent-zero-run
 |-------|-------------|
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
+| [Ethical Financial System Blueprint](./docs/ethical_financial_system_blueprint.md) | Compliance-first plan for autonomous revenue, reinvestment, and content operations |
 | [Architecture](./docs/architecture.md) | System design and components |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
