@@ -6,6 +6,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Autonomous Financial System Blueprint](autonomous_financial_system.md):** Compliance-first plan for building a self-sustaining online revenue and treasury program.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -60,6 +61,16 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Autonomous Financial System Blueprint](autonomous_financial_system.md)
+  - [Mission and Hard Constraints](autonomous_financial_system.md#1-mission-and-hard-constraints)
+  - [System Architecture (Agentic Framework)](autonomous_financial_system.md#2-system-architecture-agentic-framework)
+  - [Data Extraction and RAG Pipeline (Email-Safe Design)](autonomous_financial_system.md#3-data-extraction-and-rag-pipeline-email-safe-design)
+  - [Monetization Phase 1 (Compliant Alternatives)](autonomous_financial_system.md#4-monetization-phase-1-compliant-alternatives-to-list-resale)
+  - [Financial Expansion](autonomous_financial_system.md#5-financial-expansion-after-stable-phase-1-cash-flow)
+  - [Funds Routing and Cash App Operations](autonomous_financial_system.md#6-funds-routing-and-cash-app-operations)
+  - [Content System (Course + YouTube Adaptation)](autonomous_financial_system.md#7-content-system-course--youtube-adaptation)
+  - [90-Day Implementation Roadmap](autonomous_financial_system.md#8-90-day-implementation-roadmap)
+  - [Core KPI Stack](autonomous_financial_system.md#9-core-kpi-stack)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
