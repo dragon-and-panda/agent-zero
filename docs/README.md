@@ -5,6 +5,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Installation](installation.md):** Set up (or [update](installation.md#how-to-update-agent-zero)) Agent Zero on your system.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Programs Index](programs/README.md):** Track mission blueprints, journals, and improvement backlogs.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -60,6 +61,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Programs Index](programs/README.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
