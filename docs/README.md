@@ -6,6 +6,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Financial System Playbook](financial_system_playbook.md):** Run a compliant, agentic path to online revenue, reinvestment, and content creation.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -60,6 +61,11 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Financial System Playbook](financial_system_playbook.md)
+  - [Mission](financial_system_playbook.md#1-mission)
+  - [Non-Negotiable Guardrails](financial_system_playbook.md#2-non-negotiable-guardrails)
+  - [Agentic Framework Architecture](financial_system_playbook.md#3-agentic-framework-architecture)
+  - [30/60/90-Day Execution](financial_system_playbook.md#9-306090-day-execution)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
