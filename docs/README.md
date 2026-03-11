@@ -6,6 +6,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **Programs**
+  - **[Agentic Financial System Blueprint](programs/agentic_financial_system/mission_blueprint.md):** Mission plan for building a compliant autonomous online income system.
+  - **[Agentic Financial System Diary](programs/agentic_financial_system/journal.md):** Running log of progress, metrics, and next actions.
+  - **[Agentic Financial System Backlog](programs/agentic_financial_system/improvements.md):** Prioritized technical and operational improvements.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -29,6 +33,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Using Agent Zero on Mobile](installation.md#using-agent-zero-on-your-mobile-device)
   - [How to Update Agent Zero](installation.md#how-to-update-agent-zero)
   - [Full Binaries Installation](installation.md#in-depth-guide-for-full-binaries-installation)
+- [Programs](programs/agentic_financial_system/mission_blueprint.md)
+  - [Agentic Financial System Blueprint](programs/agentic_financial_system/mission_blueprint.md)
+  - [Agentic Financial System Diary](programs/agentic_financial_system/journal.md)
+  - [Agentic Financial System Backlog](programs/agentic_financial_system/improvements.md)
 - [Usage Guide](usage.md)
   - [Basic Operations](usage.md#basic-operations)
     - [Restart Framework](usage.md#restart-framework)
