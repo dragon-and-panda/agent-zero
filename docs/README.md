@@ -6,6 +6,11 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **Program Playbooks:**
+  - [Autonomous Listing](programs/autonomous_listing/journal.md)
+  - [Agentic Financial System Mission Charter](programs/agentic_financial_system/mission_charter.md)
+  - [Agentic Financial System Journal](programs/agentic_financial_system/journal.md)
+  - [Agentic Financial System Improvement Backlog](programs/agentic_financial_system/improvements.md)
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
