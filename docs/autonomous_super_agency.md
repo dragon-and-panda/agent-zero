@@ -2,6 +2,10 @@
 
 This document describes how to configure the Agent Zero framework to run a fully autonomous research, development, and technology commercialization agency that rivals the combined capabilities of top-tier labs. It defines agent archetypes, department structures, and low-touch protocols designed to minimize human intervention while maintaining safety and governance.
 
+Program packs built on this blueprint:
+- `docs/programs/autonomous_listing/` (listing automation mission)
+- `docs/programs/financial_system/` (compliant financial system mission)
+
 ---
 
 ## 1. Guiding Principles
