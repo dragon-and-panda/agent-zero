@@ -33,6 +33,17 @@ Available tools include:
 - `validate_listing_request(payload)` → returns normalized payload
 - `list_supported_platforms()` → returns platform ids
 
+## Additional Products API (async task polling)
+
+The service now also exposes a dropshipping-oriented API namespace:
+
+- `POST /v1/products/research` → queues research and returns `task_id`
+- `GET /v1/products/tasks/{task_id}` → polls status/progress/result
+- `POST /v1/products/listings/generate?product_url=<url>` → one-shot scrape + listing generation
+
+Current behavior uses an in-memory task store so it works without extra infrastructure.
+If you later add Celery/Redis workers, keep the same API contract and swap internals.
+
 POST a sample request:
 
 ```bash

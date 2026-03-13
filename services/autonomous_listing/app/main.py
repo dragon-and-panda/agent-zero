@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 
 from . import schemas
+from .api.v1.products import router as products_router
 from .services.intake_template import listing_intake_template
 from .services.product_research import ProductResearcher
 from .services.orchestrator import ListingOrchestrator
@@ -15,6 +16,7 @@ app = FastAPI(
     description="Transforms seller inputs into multi-channel listings via AI pipelines.",
     version="0.1.0",
 )
+app.include_router(products_router)
 
 orchestrator = ListingOrchestrator(
     enhancer=ImageEnhancer(),
