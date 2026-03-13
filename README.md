@@ -148,6 +148,7 @@ docker run -p 50001:80 frdel/agent-zero-run
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
 | [Architecture](./docs/architecture.md) | System design and components |
+| [Agentic Financial System Blueprint](./docs/agentic_financial_system.md) | Compliance-first plan for autonomous income operations |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
 
