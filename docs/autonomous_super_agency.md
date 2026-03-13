@@ -352,6 +352,10 @@ When launching new services (like the Autonomous Listing Service):
 - Embed the mission diary + improvement backlog from day one.
 - Reuse the iterative loop above so the service and the core agency evolve together.
 - Require each release to document: decision rationale, metrics impacted, and next hypothesis, guaranteeing a living blueprint as the system scales.
+- For a compliant finance mission, use the dedicated pack in `docs/programs/agentic_financial_system/`:
+  - `mission.md` for guardrails + phased roadmap,
+  - `journal.md` for operational history,
+  - `improvements.md` for prioritized optimization backlog.
 
 This protocol keeps the agency’s documentation synchronized with real operations while institutionalizing an experiment-driven mindset for every new service it incubates.
 
