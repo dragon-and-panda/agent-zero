@@ -6,6 +6,8 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Autonomous Listing Program Journal](programs/autonomous_listing/journal.md):** Track iterative progress for the listing-service mission.
+- **[Agentic Financial System Blueprint](programs/agentic_financial_system/blueprint.md):** Compliance-first plan for building a sustainable online income system.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -63,3 +65,17 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
+- [Program Docs](#program-docs)
+  - [Autonomous Listing Service Journal](programs/autonomous_listing/journal.md)
+  - [Autonomous Listing Service Backlog](programs/autonomous_listing/improvements.md)
+  - [Agentic Financial System Blueprint](programs/agentic_financial_system/blueprint.md)
+  - [Agentic Financial System Journal](programs/agentic_financial_system/journal.md)
+  - [Agentic Financial System Backlog](programs/agentic_financial_system/improvements.md)
+
+## Program Docs
+
+- [Autonomous Listing Service Journal](programs/autonomous_listing/journal.md)
+- [Autonomous Listing Service Backlog](programs/autonomous_listing/improvements.md)
+- [Agentic Financial System Blueprint](programs/agentic_financial_system/blueprint.md)
+- [Agentic Financial System Journal](programs/agentic_financial_system/journal.md)
+- [Agentic Financial System Backlog](programs/agentic_financial_system/improvements.md)
