@@ -108,17 +108,18 @@ def parse_message_date(raw_date: str | None) -> datetime | None:
         return None
 
 
-def classify_source(
+def classify_source_for_address(
+    address: str,
     sender: set[str],
     to_list: set[str],
     cc_list: set[str],
     owners: set[str],
 ) -> str:
-    # Classification is heuristic and should be interpreted as directional hints.
+    # Address-level classification preserves explicit CC provenance.
+    if address in cc_list:
+        return "cc"
     if owners and sender & owners:
         return "sent"
-    if owners and cc_list & owners:
-        return "cc"
     if owners and to_list & owners:
         return "received"
     return "other"
@@ -152,13 +153,15 @@ def process_mbox(
         sender = headers.get("from", set())
         to_list = headers.get("to", set())
         cc_list = headers.get("cc", set())
-        source = classify_source(sender, to_list, cc_list, owners)
         seen_at = parse_message_date(msg.get("date"))
 
         for email_address in iter_relevant_addresses(headers):
             # Skip owner addresses in exported contact result.
             if email_address in owners:
                 continue
+            source = classify_source_for_address(
+                email_address, sender, to_list, cc_list, owners
+            )
             stats[email_address].observe(source, seen_at)
 
 
