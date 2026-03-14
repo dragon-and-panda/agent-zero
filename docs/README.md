@@ -8,6 +8,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
+- **[Program Docs](#program-docs):** Mission-specific blueprints, journals, and improvement backlogs.
 
 ### Your experience with Agent Zero starts now!
 
@@ -63,3 +64,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
+- [Program Docs](#program-docs)
+
+## Program Docs
+
+- [Agentic Financial System Blueprint](programs/agentic_financial_system/blueprint.md)
+- [Agentic Financial System Mission Diary](programs/agentic_financial_system/journal.md)
+- [Agentic Financial System Improvement Backlog](programs/agentic_financial_system/improvements.md)
