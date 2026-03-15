@@ -1,0 +1,120 @@
+# Contractor Client Hub (AI + Web3 Escrow MVP)
+
+This service provides an MVP for:
+- AI-assisted contract drafting in a shared client/contractor thread,
+- line-item deliverables with explicit expectations for both parties,
+- documentation instructions (`before`, `during`, `after`) per deliverable,
+- evidence submissions + automated AI review,
+- remediation addendum flow + dispute/arbitration handling,
+- escrow state transitions suitable for USDT smart-contract integration.
+
+It is designed as a practical backend scaffold that can be paired with a web frontend.
+
+---
+
+## 1) Quick Start
+
+```bash
+cd services/contractor_client_hub
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8010
+```
+
+Health check:
+
+```bash
+curl http://localhost:8010/health
+```
+
+---
+
+## 2) Core Workflow
+
+1. `POST /threads`  
+   Create a contract thread from intended summary + terms.
+2. `POST /threads/{thread_id}/messages`  
+   Client/contractor collaborate in chat.
+3. `POST /threads/{thread_id}/ai/refresh-scope`  
+   AI rebuilds deliverables and evidence plan from thread context.
+4. `POST /threads/{thread_id}/acknowledge` (both parties)  
+   Scope lock and readiness for escrow funding.
+5. `POST /threads/{thread_id}/escrow/fund`  
+   Record escrow funding (USDT flow stub with tx metadata).
+6. `POST /threads/{thread_id}/deliverables/{deliverable_id}/evidence`  
+   Contractor submits evidence artifacts.
+7. `POST /threads/{thread_id}/ai/review`  
+   AI checks evidence completeness; pass or remediation addendum.
+8. `POST /threads/{thread_id}/escrow/release`  
+   Disburse contractor/platform split.
+9. Optional: `POST /threads/{thread_id}/dispute` and `/arbitrate`.
+
+---
+
+## 3) MCP Server
+
+Run as MCP stdio server:
+
+```bash
+cd services/contractor_client_hub
+python -m app.mcp_server
+```
+
+Includes tools such as:
+- `create_contract_thread`
+- `add_thread_message`
+- `refresh_scope_with_ai`
+- `fund_contract_escrow`
+- `submit_deliverable_evidence`
+- `run_ai_evidence_review`
+- `release_escrow`
+- `raise_dispute`
+- `arbitrate_dispute`
+
+---
+
+## 4) Smart Contract Artifact
+
+Reference Solidity contract:
+
+- `contracts/AIAssistedEscrow.sol`
+
+This contract is a starting point for on-chain escrow, with AI-arbiter-mediated approval and dispute settlement.
+
+---
+
+## 5) Desktop Local Signing UI (Optional)
+
+Local validation/signing desktop client:
+
+- `clients/desktop_escrow_ui.py`
+
+Install extras:
+
+```bash
+pip install customtkinter
+```
+
+Run:
+
+```bash
+python clients/desktop_escrow_ui.py
+```
+
+---
+
+## 6) Research Seed Scraper (Optional)
+
+Public listing title seed collector for market-language research:
+
+- `app/services/research_seeds.py`
+
+Use responsibly and comply with target site policies.
+
+---
+
+## 7) Important Notes
+
+- This is an MVP and **not** a full legal/compliance product.
+- Smart contracts should be externally audited before production funds.
+- AI evidence review should be treated as assistive; retain human oversight for high-stakes jobs.
