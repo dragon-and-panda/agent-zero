@@ -20,14 +20,12 @@ import csv
 import os
 import re
 import sys
-from collections import Counter
 
 input_csv, output_dir, email_col, consent_col, consent_values = sys.argv[1:]
 allowed = {v.strip().lower() for v in consent_values.split(",") if v.strip()}
 email_re = re.compile(r"^[A-Za-z0-9._%+\-']+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$")
 
 consented = set()
-domains = Counter()
 invalid = []
 
 with open(input_csv, newline="", encoding="utf-8") as f:
@@ -50,7 +48,11 @@ with open(input_csv, newline="", encoding="utf-8") as f:
             continue
 
         consented.add(email)
-        domains[email.split("@", 1)[1]] += 1
+
+domains = {}
+for email in consented:
+    domain = email.split("@", 1)[1]
+    domains[domain] = domains.get(domain, 0) + 1
 
 emails_path = os.path.join(output_dir, "consented_emails.txt")
 with open(emails_path, "w", encoding="utf-8") as f:
