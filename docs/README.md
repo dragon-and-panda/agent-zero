@@ -6,6 +6,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Autonomous Financial System Blueprint](autonomous_financial_system.md):** Compliance-first mission plan for autonomous revenue, data operations, and content.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -55,6 +56,11 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
     - [Knowledge](architecture.md#5-knowledge)
     - [Instruments](architecture.md#6-instruments)
     - [Extensions](architecture.md#7-extensions)
+- [Autonomous Financial System Blueprint](autonomous_financial_system.md)
+  - [Mission and Non-Negotiable Constraints](autonomous_financial_system.md#1-mission-and-non-negotiable-constraints)
+  - [Data Extraction + RAG](autonomous_financial_system.md#3-data-extraction--rag-google-email-data)
+  - [Monetization Phase 1](autonomous_financial_system.md#4-monetization-phase-1-legal-alternatives-to-list-selling)
+  - [Financial Expansion](autonomous_financial_system.md#5-financial-expansion-post-phase-1)
   - [Contributing](contribution.md)
   - [Getting Started](contribution.md#getting-started)
   - [Making Changes](contribution.md#making-changes)

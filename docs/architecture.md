@@ -286,6 +286,9 @@ Instruments provide a way to add custom functionalities to Agent Zero without ad
 3. Add `.sh` script (or other executable) for implementation
 4. The agent will automatically detect and use the instrument
 
+Example default instrument:
+- `instruments/default/email_contact_extractor/` extracts and deduplicates contacts from first-party `.mbox`/`.eml` sources into CSV/JSON for compliant segmentation workflows.
+
 ### 7. Extensions
 Extensions are a powerful feature of Agent Zero, designed to keep the main codebase clean and organized while allowing for greater flexibility and modularity.
 
