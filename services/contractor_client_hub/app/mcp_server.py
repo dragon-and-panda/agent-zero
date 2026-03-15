@@ -58,8 +58,52 @@ def add_thread_message(thread_id: str, payload: Dict[str, Any]) -> Dict[str, Any
 
 
 @mcp.tool()
+def submit_contractor_bid(thread_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    req = schemas.ContractorBidRequest.model_validate(payload)
+    return orchestrator.submit_bid(thread_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
+def create_meeting_session(thread_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    req = schemas.CreateMeetingRequest.model_validate(payload)
+    return orchestrator.create_meeting(thread_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
+def add_meeting_event(thread_id: str, meeting_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    req = schemas.MeetingEventRequest.model_validate(payload)
+    return orchestrator.add_meeting_event(thread_id, meeting_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
+def end_meeting_session(thread_id: str, meeting_id: str, transcript_summary: str | None = None) -> Dict[str, Any]:
+    req = schemas.EndMeetingRequest(transcript_summary=transcript_summary)
+    return orchestrator.end_meeting(thread_id, meeting_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
 def refresh_scope_with_ai(thread_id: str) -> Dict[str, Any]:
     return orchestrator.refresh_scope(thread_id).model_dump(mode="json")
+
+
+@mcp.tool()
+def create_progress_report(thread_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    req = schemas.ProgressReportRequest.model_validate(payload)
+    return orchestrator.create_progress_report(thread_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
+def draft_progress_email(thread_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    req = schemas.ProgressEmailRequest.model_validate(payload)
+    return orchestrator.draft_progress_email(thread_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
+def mark_progress_email_sent(
+    thread_id: str, email_id: str, sent_at: float | None = None
+) -> Dict[str, Any]:
+    req = schemas.MarkEmailSentRequest(sent_at=sent_at)
+    return orchestrator.mark_email_sent(thread_id, email_id, req).model_dump(mode="json")
 
 
 @mcp.tool()

@@ -92,6 +92,175 @@ class ContractOrchestrator:
         )
         return thread
 
+    def submit_bid(self, thread_id: str, req: schemas.ContractorBidRequest) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        contractor = next(
+            (p for p in thread.parties if p.id == req.contractor_id and p.role == schemas.PartyRole.contractor),
+            None,
+        )
+        if not contractor:
+            raise ValueError("Bid must be submitted by the assigned contractor.")
+
+        computed_total = round(
+            sum(item.estimated_cost_usdt * item.quantity for item in req.line_items), 6
+        )
+        total = req.total_estimated_usdt if req.total_estimated_usdt is not None else computed_total
+        if total is None or total <= 0:
+            raise ValueError("Bid total must be positive.")
+        if req.total_estimated_usdt is not None and computed_total > 0:
+            if abs(req.total_estimated_usdt - computed_total) > 1e-6:
+                raise ValueError("Provided bid total does not match line-item total.")
+
+        bid = schemas.ContractorBid(
+            bid_id=str(uuid.uuid4()),
+            contractor_id=req.contractor_id,
+            created_at=time.time(),
+            source=req.source,
+            proposal_uri=req.proposal_uri,
+            line_items=req.line_items,
+            assumptions=req.assumptions,
+            total_estimated_usdt=round(total, 6),
+            notes=req.notes,
+        )
+        thread.contractor_bids.append(bid)
+        thread.messages.append(
+            schemas.ThreadMessage(
+                message_id=str(uuid.uuid4()),
+                role=schemas.PartyRole.ai,
+                author_id="ai_contract_assistant",
+                content=(
+                    f"Contractor bid received ({bid.total_estimated_usdt} USDT). "
+                    "Line-item proposal is available for neutral review and meeting discussion."
+                ),
+                created_at=time.time(),
+            )
+        )
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "bid.submitted",
+            thread.thread_id,
+            {"bid_id": bid.bid_id, "total_estimated_usdt": bid.total_estimated_usdt},
+        )
+        return thread
+
+    def create_meeting(self, thread_id: str, req: schemas.CreateMeetingRequest) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        if req.created_by not in thread.acknowledgements:
+            raise ValueError("Meeting creator must be a contract party.")
+
+        attached_bid_id = req.attach_bid_id
+        if attached_bid_id and not any(b.bid_id == attached_bid_id for b in thread.contractor_bids):
+            raise ValueError("Attached bid was not found in this thread.")
+
+        now = time.time()
+        is_future = req.scheduled_start_at is not None and req.scheduled_start_at > now
+        meeting = schemas.MeetingSession(
+            meeting_id=str(uuid.uuid4()),
+            status=schemas.MeetingStatus.scheduled if is_future else schemas.MeetingStatus.live,
+            created_by=req.created_by,
+            created_at=now,
+            scheduled_start_at=req.scheduled_start_at,
+            started_at=None if is_future else now,
+            webrtc_room_url=req.webrtc_room_url,
+            attached_bid_id=attached_bid_id,
+            agenda=req.agenda,
+        )
+        meeting.events.append(
+            schemas.MeetingEvent(
+                event_id=str(uuid.uuid4()),
+                created_at=now,
+                role=schemas.PartyRole.ai,
+                author_id="aegis_neutral_avatar",
+                content=(
+                    "Neutral AI avatar initialized. I will facilitate scope clarity, "
+                    "capture decisions, and map outcomes to deliverables/evidence."
+                ),
+            )
+        )
+        thread.meetings.append(meeting)
+        thread.messages.append(
+            schemas.ThreadMessage(
+                message_id=str(uuid.uuid4()),
+                role=schemas.PartyRole.ai,
+                author_id="aegis_neutral_avatar",
+                content=(
+                    f"Meeting room created ({meeting.status.value}). "
+                    + ("Bid attached for review." if attached_bid_id else "No bid attached yet.")
+                ),
+                created_at=now,
+            )
+        )
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "meeting.created",
+            thread.thread_id,
+            {"meeting_id": meeting.meeting_id, "status": meeting.status.value},
+        )
+        return thread
+
+    def add_meeting_event(
+        self, thread_id: str, meeting_id: str, req: schemas.MeetingEventRequest
+    ) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        meeting = _find_meeting(thread, meeting_id)
+        if meeting.status == schemas.MeetingStatus.ended:
+            raise ValueError("Meeting is already ended.")
+        if req.author_id not in thread.acknowledgements and req.role not in (
+            schemas.PartyRole.ai,
+            schemas.PartyRole.system,
+            schemas.PartyRole.arbitrator,
+        ):
+            raise ValueError("Unknown meeting participant.")
+        if meeting.status == schemas.MeetingStatus.scheduled:
+            meeting.status = schemas.MeetingStatus.live
+            meeting.started_at = meeting.started_at or time.time()
+
+        meeting.events.append(
+            schemas.MeetingEvent(
+                event_id=str(uuid.uuid4()),
+                created_at=time.time(),
+                role=req.role,
+                author_id=req.author_id,
+                content=req.content,
+            )
+        )
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "meeting.event_added",
+            thread.thread_id,
+            {"meeting_id": meeting_id, "role": req.role.value},
+        )
+        return thread
+
+    def end_meeting(
+        self, thread_id: str, meeting_id: str, req: schemas.EndMeetingRequest
+    ) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        meeting = _find_meeting(thread, meeting_id)
+        meeting.status = schemas.MeetingStatus.ended
+        meeting.ended_at = time.time()
+        meeting.transcript_summary = req.transcript_summary
+        thread.messages.append(
+            schemas.ThreadMessage(
+                message_id=str(uuid.uuid4()),
+                role=schemas.PartyRole.ai,
+                author_id="aegis_neutral_avatar",
+                content="Meeting ended. Summary captured and available for progress correspondence.",
+                created_at=time.time(),
+            )
+        )
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "meeting.ended",
+            thread.thread_id,
+            {"meeting_id": meeting_id},
+        )
+        return thread
+
     def refresh_scope(self, thread_id: str) -> schemas.ContractThread:
         thread = self.get_thread(thread_id)
         transcript = " ".join(m.content for m in thread.messages[-12:])
@@ -193,6 +362,103 @@ class ContractOrchestrator:
                 "deliverable_id": deliverable_id,
                 "evidence_type": req.evidence_type.value,
             },
+        )
+        return thread
+
+    def create_progress_report(
+        self, thread_id: str, req: schemas.ProgressReportRequest
+    ) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        if req.created_by not in thread.acknowledgements:
+            raise ValueError("Report author must be a contract party.")
+        report = schemas.ProgressReport(
+            report_id=str(uuid.uuid4()),
+            created_at=time.time(),
+            created_by=req.created_by,
+            summary=req.summary,
+            completed_items=req.completed_items,
+            pending_items=req.pending_items,
+            next_steps=req.next_steps,
+            attachment_uris=req.attachment_uris,
+        )
+        thread.progress_reports.append(report)
+        thread.messages.append(
+            schemas.ThreadMessage(
+                message_id=str(uuid.uuid4()),
+                role=schemas.PartyRole.ai,
+                author_id="ai_contract_assistant",
+                content="Progress report logged. You can now draft a correspondence email.",
+                created_at=time.time(),
+            )
+        )
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "progress_report.created",
+            thread.thread_id,
+            {"report_id": report.report_id},
+        )
+        return thread
+
+    def draft_progress_email(
+        self, thread_id: str, req: schemas.ProgressEmailRequest
+    ) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        if req.created_by not in thread.acknowledgements:
+            raise ValueError("Email drafter must be a contract party.")
+        report: schemas.ProgressReport | None = None
+        if req.report_id:
+            report = _find_report(thread, req.report_id)
+        elif thread.progress_reports:
+            report = thread.progress_reports[-1]
+        if report is None:
+            raise ValueError("No progress report available to draft correspondence.")
+
+        client_party = next((p for p in thread.parties if p.role == schemas.PartyRole.client), None)
+        contractor_party = next((p for p in thread.parties if p.role == schemas.PartyRole.contractor), None)
+        subject = f"{req.subject_prefix} — Contract {thread.thread_id[:8]}"
+        intro = req.custom_intro or (
+            f"Hello, this is an automated neutral summary for contract thread {thread.thread_id}."
+        )
+        body = _build_progress_email_body(
+            intro=intro,
+            report=report,
+            client_name=client_party.display_name if client_party else "Client",
+            contractor_name=contractor_party.display_name if contractor_party else "Contractor",
+        )
+        email = schemas.EmailRecord(
+            email_id=str(uuid.uuid4()),
+            created_at=time.time(),
+            status=schemas.EmailStatus.draft,
+            to=req.to,
+            cc=req.cc,
+            subject=subject,
+            body=body,
+            related_report_id=report.report_id,
+        )
+        thread.emails.append(email)
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "email.drafted",
+            thread.thread_id,
+            {"email_id": email.email_id, "report_id": report.report_id},
+        )
+        return thread
+
+    def mark_email_sent(
+        self, thread_id: str, email_id: str, req: schemas.MarkEmailSentRequest
+    ) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        email = _find_email(thread, email_id)
+        email.status = schemas.EmailStatus.sent
+        email.sent_at = req.sent_at or time.time()
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "email.sent",
+            thread.thread_id,
+            {"email_id": email_id},
         )
         return thread
 
@@ -359,3 +625,59 @@ def _find_deliverable(thread: schemas.ContractThread, deliverable_id: str) -> sc
         if d.deliverable_id == deliverable_id:
             return d
     raise ValueError("Deliverable not found.")
+
+
+def _find_meeting(thread: schemas.ContractThread, meeting_id: str) -> schemas.MeetingSession:
+    for m in thread.meetings:
+        if m.meeting_id == meeting_id:
+            return m
+    raise ValueError("Meeting not found.")
+
+
+def _find_report(thread: schemas.ContractThread, report_id: str) -> schemas.ProgressReport:
+    for r in thread.progress_reports:
+        if r.report_id == report_id:
+            return r
+    raise ValueError("Progress report not found.")
+
+
+def _find_email(thread: schemas.ContractThread, email_id: str) -> schemas.EmailRecord:
+    for e in thread.emails:
+        if e.email_id == email_id:
+            return e
+    raise ValueError("Email record not found.")
+
+
+def _build_progress_email_body(
+    *,
+    intro: str,
+    report: schemas.ProgressReport,
+    client_name: str,
+    contractor_name: str,
+) -> str:
+    lines = [
+        intro.strip(),
+        "",
+        f"Client: {client_name}",
+        f"Contractor: {contractor_name}",
+        f"Report ID: {report.report_id}",
+        "",
+        "Summary:",
+        report.summary,
+        "",
+        "Completed:",
+    ]
+    lines.extend([f"- {item}" for item in report.completed_items] or ["- None logged."])
+    lines.append("")
+    lines.append("Pending:")
+    lines.extend([f"- {item}" for item in report.pending_items] or ["- None logged."])
+    lines.append("")
+    lines.append("Next Steps:")
+    lines.extend([f"- {item}" for item in report.next_steps] or ["- None logged."])
+    if report.attachment_uris:
+        lines.append("")
+        lines.append("Attachments:")
+        lines.extend([f"- {uri}" for uri in report.attachment_uris])
+    lines.append("")
+    lines.append("This update was generated via the neutral AI correspondence workflow.")
+    return "\n".join(lines)

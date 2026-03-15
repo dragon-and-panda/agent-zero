@@ -71,10 +71,89 @@ async def add_message(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
+@app.post("/threads/{thread_id}/bids", response_model=schemas.ContractThread)
+async def submit_bid(
+    thread_id: str, req: schemas.ContractorBidRequest
+) -> schemas.ContractThread:
+    try:
+        return orchestrator.submit_bid(thread_id, req)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/threads/{thread_id}/meetings", response_model=schemas.ContractThread)
+async def create_meeting(
+    thread_id: str, req: schemas.CreateMeetingRequest
+) -> schemas.ContractThread:
+    try:
+        return orchestrator.create_meeting(thread_id, req)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post(
+    "/threads/{thread_id}/meetings/{meeting_id}/events",
+    response_model=schemas.ContractThread,
+)
+async def add_meeting_event(
+    thread_id: str, meeting_id: str, req: schemas.MeetingEventRequest
+) -> schemas.ContractThread:
+    try:
+        return orchestrator.add_meeting_event(thread_id, meeting_id, req)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post(
+    "/threads/{thread_id}/meetings/{meeting_id}/end",
+    response_model=schemas.ContractThread,
+)
+async def end_meeting(
+    thread_id: str, meeting_id: str, req: schemas.EndMeetingRequest
+) -> schemas.ContractThread:
+    try:
+        return orchestrator.end_meeting(thread_id, meeting_id, req)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
 @app.post("/threads/{thread_id}/ai/refresh-scope", response_model=schemas.ContractThread)
 async def refresh_scope(thread_id: str) -> schemas.ContractThread:
     try:
         return orchestrator.refresh_scope(thread_id)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/threads/{thread_id}/progress-reports", response_model=schemas.ContractThread)
+async def create_progress_report(
+    thread_id: str, req: schemas.ProgressReportRequest
+) -> schemas.ContractThread:
+    try:
+        return orchestrator.create_progress_report(thread_id, req)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post("/threads/{thread_id}/emails/draft", response_model=schemas.ContractThread)
+async def draft_progress_email(
+    thread_id: str, req: schemas.ProgressEmailRequest
+) -> schemas.ContractThread:
+    try:
+        return orchestrator.draft_progress_email(thread_id, req)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@app.post(
+    "/threads/{thread_id}/emails/{email_id}/sent",
+    response_model=schemas.ContractThread,
+)
+async def mark_email_sent(
+    thread_id: str, email_id: str, req: schemas.MarkEmailSentRequest
+) -> schemas.ContractThread:
+    try:
+        return orchestrator.mark_email_sent(thread_id, email_id, req)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 

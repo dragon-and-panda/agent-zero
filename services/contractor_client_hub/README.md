@@ -2,9 +2,12 @@
 
 This service provides an MVP for:
 - AI-assisted contract drafting in a shared client/contractor thread,
+- meeting-session workflow for video chat orchestration with a neutral AI avatar,
+- contractor bid intake (pre-chat uploads or in-meeting submission),
 - line-item deliverables with explicit expectations for both parties,
 - documentation instructions (`before`, `during`, `after`) per deliverable,
 - evidence submissions + automated AI review,
+- AI-generated progress reports and email correspondence drafts,
 - remediation addendum flow + dispute/arbitration handling,
 - escrow state transitions suitable for USDT smart-contract integration.
 
@@ -35,19 +38,33 @@ curl http://localhost:8010/health
    Create a contract thread from intended summary + terms.
 2. `POST /threads/{thread_id}/messages`  
    Client/contractor collaborate in chat.
-3. `POST /threads/{thread_id}/ai/refresh-scope`  
+3. `POST /threads/{thread_id}/bids`  
+   Contractor uploads templated line-item bid + estimated costs.
+4. `POST /threads/{thread_id}/meetings`  
+   Create video-room session metadata and launch neutral AI avatar facilitation.
+5. `POST /threads/{thread_id}/meetings/{meeting_id}/events`  
+   Append live meeting transcript events (client, contractor, AI avatar).
+6. `POST /threads/{thread_id}/meetings/{meeting_id}/end`  
+   Close session and store transcript summary.
+7. `POST /threads/{thread_id}/ai/refresh-scope`  
    AI rebuilds deliverables and evidence plan from thread context.
-4. `POST /threads/{thread_id}/acknowledge` (both parties)  
+8. `POST /threads/{thread_id}/progress-reports`  
+   Generate structured progress report entries.
+9. `POST /threads/{thread_id}/emails/draft`  
+   Draft neutral progress correspondence email from report data.
+10. `POST /threads/{thread_id}/emails/{email_id}/sent`  
+   Mark correspondence sent (audit trail).
+11. `POST /threads/{thread_id}/acknowledge` (both parties)  
    Scope lock and readiness for escrow funding.
-5. `POST /threads/{thread_id}/escrow/fund`  
+12. `POST /threads/{thread_id}/escrow/fund`  
    Record escrow funding (USDT flow stub with tx metadata).
-6. `POST /threads/{thread_id}/deliverables/{deliverable_id}/evidence`  
+13. `POST /threads/{thread_id}/deliverables/{deliverable_id}/evidence`  
    Contractor submits evidence artifacts.
-7. `POST /threads/{thread_id}/ai/review`  
+14. `POST /threads/{thread_id}/ai/review`  
    AI checks evidence completeness; pass or remediation addendum.
-8. `POST /threads/{thread_id}/escrow/release`  
+15. `POST /threads/{thread_id}/escrow/release`  
    Disburse contractor/platform split.
-9. Optional: `POST /threads/{thread_id}/dispute` and `/arbitrate`.
+16. Optional: `POST /threads/{thread_id}/dispute` and `/arbitrate`.
 
 ---
 
@@ -63,7 +80,14 @@ python -m app.mcp_server
 Includes tools such as:
 - `create_contract_thread`
 - `add_thread_message`
+- `submit_contractor_bid`
+- `create_meeting_session`
+- `add_meeting_event`
+- `end_meeting_session`
 - `refresh_scope_with_ai`
+- `create_progress_report`
+- `draft_progress_email`
+- `mark_progress_email_sent`
 - `fund_contract_escrow`
 - `submit_deliverable_evidence`
 - `run_ai_evidence_review`

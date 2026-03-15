@@ -56,6 +56,18 @@ class EscrowStatus(str, Enum):
     refunded = "refunded"
 
 
+class MeetingStatus(str, Enum):
+    scheduled = "scheduled"
+    live = "live"
+    ended = "ended"
+
+
+class EmailStatus(str, Enum):
+    draft = "draft"
+    queued = "queued"
+    sent = "sent"
+
+
 class Party(BaseModel):
     id: str = Field(..., description="Unique participant id from your identity provider.")
     role: PartyRole
@@ -115,6 +127,128 @@ class EvidenceSubmissionRequest(BaseModel):
     uri: str
     note: str | None = None
     metadata: dict[str, Any] = Field(default_factory=dict)
+
+
+class BidLineItem(BaseModel):
+    title: str
+    description: str
+    estimated_cost_usdt: float = Field(..., gt=0)
+    quantity: float = Field(default=1.0, gt=0)
+
+
+class ContractorBid(BaseModel):
+    bid_id: str
+    contractor_id: str
+    created_at: float
+    source: str = Field(
+        default="uploaded",
+        description="How the bid entered the thread: uploaded | pre_chat | live_chat.",
+    )
+    proposal_uri: str | None = Field(
+        default=None,
+        description="Optional URI (IPFS/file storage) to full proposal document.",
+    )
+    line_items: list[BidLineItem] = Field(default_factory=list)
+    assumptions: list[str] = Field(default_factory=list)
+    total_estimated_usdt: float = Field(..., gt=0)
+    notes: str | None = None
+
+
+class ContractorBidRequest(BaseModel):
+    contractor_id: str
+    source: str = "uploaded"
+    proposal_uri: str | None = None
+    line_items: list[BidLineItem] = Field(default_factory=list)
+    assumptions: list[str] = Field(default_factory=list)
+    total_estimated_usdt: float | None = Field(
+        default=None,
+        gt=0,
+        description="If omitted, total is computed from line items.",
+    )
+    notes: str | None = None
+
+
+class MeetingEvent(BaseModel):
+    event_id: str
+    created_at: float
+    role: PartyRole
+    author_id: str
+    content: str
+
+
+class MeetingSession(BaseModel):
+    meeting_id: str
+    status: MeetingStatus = MeetingStatus.scheduled
+    created_by: str
+    created_at: float
+    scheduled_start_at: float | None = None
+    started_at: float | None = None
+    ended_at: float | None = None
+    webrtc_room_url: str | None = None
+    ai_avatar_name: str = "Aegis Neutral"
+    attached_bid_id: str | None = None
+    agenda: list[str] = Field(default_factory=list)
+    transcript_summary: str | None = None
+    events: list[MeetingEvent] = Field(default_factory=list)
+
+
+class CreateMeetingRequest(BaseModel):
+    created_by: str
+    scheduled_start_at: float | None = None
+    webrtc_room_url: str | None = None
+    attach_bid_id: str | None = None
+    agenda: list[str] = Field(default_factory=list)
+
+
+class MeetingEventRequest(BaseModel):
+    role: PartyRole
+    author_id: str
+    content: str = Field(..., min_length=1)
+
+
+class EndMeetingRequest(BaseModel):
+    transcript_summary: str | None = None
+
+
+class ProgressReport(BaseModel):
+    report_id: str
+    created_at: float
+    created_by: str
+    summary: str
+    completed_items: list[str] = Field(default_factory=list)
+    pending_items: list[str] = Field(default_factory=list)
+    next_steps: list[str] = Field(default_factory=list)
+    attachment_uris: list[str] = Field(default_factory=list)
+
+
+class ProgressReportRequest(BaseModel):
+    created_by: str
+    summary: str = Field(..., min_length=10)
+    completed_items: list[str] = Field(default_factory=list)
+    pending_items: list[str] = Field(default_factory=list)
+    next_steps: list[str] = Field(default_factory=list)
+    attachment_uris: list[str] = Field(default_factory=list)
+
+
+class EmailRecord(BaseModel):
+    email_id: str
+    created_at: float
+    sent_at: float | None = None
+    status: EmailStatus = EmailStatus.draft
+    to: list[str] = Field(default_factory=list)
+    cc: list[str] = Field(default_factory=list)
+    subject: str
+    body: str
+    related_report_id: str | None = None
+
+
+class ProgressEmailRequest(BaseModel):
+    created_by: str
+    to: list[str] = Field(default_factory=list)
+    cc: list[str] = Field(default_factory=list)
+    report_id: str | None = None
+    custom_intro: str | None = None
+    subject_prefix: str = "Progress Update"
 
 
 class Deliverable(BaseModel):
@@ -191,7 +325,11 @@ class ContractThread(BaseModel):
     parties: list[Party] = Field(default_factory=list)
     acknowledgements: dict[str, bool] = Field(default_factory=dict)
     messages: list[ThreadMessage] = Field(default_factory=list)
+    contractor_bids: list[ContractorBid] = Field(default_factory=list)
+    meetings: list[MeetingSession] = Field(default_factory=list)
     deliverables: list[Deliverable] = Field(default_factory=list)
+    progress_reports: list[ProgressReport] = Field(default_factory=list)
+    emails: list[EmailRecord] = Field(default_factory=list)
     terms: ContractTerms
     escrow: EscrowRecord = Field(default_factory=EscrowRecord)
     latest_review: ReviewResult | None = None
@@ -237,3 +375,7 @@ class ArbitrateRequest(BaseModel):
     refund_to_client_usdt: float = Field(..., ge=0)
     platform_fee_usdt: float = Field(default=0.0, ge=0)
     addendum: list[str] = Field(default_factory=list)
+
+
+class MarkEmailSentRequest(BaseModel):
+    sent_at: float | None = None
