@@ -6,6 +6,8 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Agentic Financial System Program](programs/agentic_financial_system/blueprint.md):** Compliant blueprint for building a self-sustaining online income engine.
+- **[Contractor Client Hub Program](programs/contractor_client_hub/blueprint.md):** AI-assisted contract, evidence, escrow, and arbitration framework.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -63,3 +65,11 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
+- [Program Docs](programs/agentic_financial_system/blueprint.md)
+  - [Agentic Financial System Blueprint](programs/agentic_financial_system/blueprint.md)
+  - [Mission Diary](programs/agentic_financial_system/journal.md)
+  - [Improvement Backlog](programs/agentic_financial_system/improvements.md)
+- [Contractor Client Hub Docs](programs/contractor_client_hub/blueprint.md)
+  - [Contractor Client Hub Blueprint](programs/contractor_client_hub/blueprint.md)
+  - [Mission Diary](programs/contractor_client_hub/journal.md)
+  - [Improvement Backlog](programs/contractor_client_hub/improvements.md)

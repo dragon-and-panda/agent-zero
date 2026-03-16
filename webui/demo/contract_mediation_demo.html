@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contract Mediation Room Demo</title>
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <span class="badge">Contractor Client Hub</span>
+        <h1>Video mediation room with neutral AI avatar</h1>
+        <p style="color: var(--text-muted); max-width: 780px">
+          Demo concept for a two-party call where a neutral AI avatar moderates scope,
+          ingests contractor bids, tracks line-item commitments, and drafts progress email updates.
+        </p>
+      </section>
+
+      <section class="panel status-bar-wrap">
+        <div class="badge">Session flow</div>
+        <div class="status-bar" style="margin-top: 0.8rem">
+          <div class="status-step active"></div>
+          <div class="status-step active"></div>
+          <div class="status-step active"></div>
+          <div class="status-step"></div>
+          <div class="status-step"></div>
+        </div>
+        <p class="kpi-trend">Bid review in progress — awaiting client confirmation.</p>
+      </section>
+
+      <section class="meeting-grid">
+        <article class="tile video-tile">
+          <div class="badge">Client</div>
+          <div class="name">Jordan (Client)</div>
+          <div class="camera-feed"></div>
+          <p style="margin-top: 0.8rem">“Please confirm electrical code references in the bid.”</p>
+        </article>
+        <article class="tile video-tile">
+          <div class="badge">Contractor</div>
+          <div class="name">Maya (Contractor)</div>
+          <div class="camera-feed"></div>
+          <p style="margin-top: 0.8rem">“Line item 3 includes permit closeout and final inspection.”</p>
+        </article>
+        <article class="tile video-tile ai-neutral">
+          <div class="badge">Neutral AI Avatar</div>
+          <div class="name">Aegis Neutral</div>
+          <div class="avatar-core"></div>
+          <p style="margin-top: 0.8rem">
+            “I have attached bid version 4 and mapped each line item to evidence requirements.”
+          </p>
+        </article>
+      </section>
+
+      <section class="composer" style="margin-top: 1.5rem">
+        <article class="panel">
+          <div class="badge">Bid intake</div>
+          <h3 style="margin-top: 0.5rem">Upload or capture contractor bid</h3>
+          <div class="field-row">
+            <label for="bid-uri">Proposal URI (IPFS / file link)</label>
+            <input id="bid-uri" placeholder="ipfs://... or https://..." />
+          </div>
+          <div class="field-row">
+            <label for="line-item">Line item + estimated cost</label>
+            <textarea
+              id="line-item"
+              rows="4"
+              placeholder="Kitchen rewiring + panel upgrade — 3500 USDT"
+            ></textarea>
+          </div>
+          <div class="cta-row">
+            <button class="cta" id="attach-bid-btn">Attach Bid to Session</button>
+            <button class="cta secondary">Generate Neutral Review</button>
+          </div>
+          <div id="bid-toast-anchor" style="margin-top: 1rem; color: var(--text-muted)">
+            Waiting for bid attachment...
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="badge">Progress correspondence</div>
+          <h3 style="margin-top: 0.5rem">AI-drafted update email</h3>
+          <div class="email-preview">
+            <div><strong>Subject:</strong> Progress Update — Contract 92f1da8b</div>
+            <div><strong>To:</strong> jordan@client.example</div>
+            <div><strong>CC:</strong> maya@contractor.example</div>
+            <hr />
+            <p>
+              Hello, this is the neutral mediation update. Two deliverables completed, one pending
+              permit inspection. Evidence links and before/during/after photos are attached.
+            </p>
+            <ul>
+              <li>Completed: wiring replacement, safety panel install</li>
+              <li>Pending: permit closeout inspection</li>
+              <li>Next step: final authority sign-off appointment</li>
+            </ul>
+          </div>
+          <div class="cta-row">
+            <button class="cta secondary">Edit Draft</button>
+            <button class="cta" id="send-email-btn">Mark Sent</button>
+          </div>
+          <div id="email-status" style="margin-top: 1rem; color: var(--text-muted)">
+            Draft not yet sent.
+          </div>
+        </article>
+      </section>
+
+      <section class="panel timeline">
+        <div class="badge">Meeting timeline</div>
+        <div class="timeline-item">10:00 — Room opened, Aegis Neutral joined.</div>
+        <div class="timeline-item">10:03 — Contractor uploaded bid v4 with line-item costs.</div>
+        <div class="timeline-item">
+          10:06 — AI mapped deliverables to evidence requirements (before/during/after).
+        </div>
+        <div class="timeline-item">10:12 — Progress report drafted and email generated.</div>
+      </section>
+    </main>
+
+    <script src="./contract_mediation_demo.js"></script>
+  </body>
+</html>
