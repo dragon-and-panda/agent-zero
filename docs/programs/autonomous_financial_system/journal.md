@@ -16,3 +16,16 @@
 - Build OAuth-based Gmail ingestion with least-privilege scopes.
 - Generate internal contact graph and segmentation outputs.
 - Launch first opt-in monetization experiment.
+
+## 2026-03-16 — Governance Hardening Pass
+- Extended the blueprint with an operational control addendum (contact provenance schema, transfer checklist, weekly cadence).
+- Clarified required metadata for compliant contact handling before Orange segmentation and outreach.
+- Added explicit treasury transfer preconditions for safer capital movement operations.
+
+### Metrics / Signals
+- Compliance readiness: improved (clearer audit fields and transfer controls).
+- Execution clarity: improved (standard weekly control loop now defined).
+
+### Next Focus
+- Implement provenance fields in ingestion outputs.
+- Add transfer-reconciliation log format and receipt tracking.

@@ -5,8 +5,10 @@ Prioritized backlog for iterative optimization of acquisition, monetization, and
 ## P0 (Current Sprint)
 - [ ] Implement compliant Gmail ingestion instrument with consent-first OAuth flow.
 - [ ] Build email/contact de-duplication + relationship graph pipeline.
+- [ ] Add contact provenance fields (`source_channel`, `consent_status`, `consent_evidence_ref`) to every exported record.
 - [ ] Define KPI schema (MRR, CPL, conversion, churn, margin) and JSONL telemetry sink.
 - [ ] Launch first opt-in funnel (lead magnet + landing page + nurture sequence).
+- [ ] Implement treasury transfer checklist log (reconciliation + reserve allocation + receipt reference).
 
 ## P1 (Near-Term)
 - [ ] Add Orange workflow for clustering contacts by topic and intent.

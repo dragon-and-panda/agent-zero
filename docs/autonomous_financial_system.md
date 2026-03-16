@@ -199,3 +199,32 @@ Build a recurring narrator character for story continuity:
   - KPI reporting
   - content release scheduling
 - Enforce guardrails in prompts/behavior files before enabling full autonomy.
+
+---
+
+## 11. Operational Control Addendum
+
+### 11.1 Contact Provenance Schema (Required)
+Every contact record should include:
+- `source_channel` (received/sent/cc/file/import)
+- `consent_status` (opt_in, legitimate_interest_review, unknown, opted_out)
+- `consent_evidence_ref` (form/event/log reference)
+- `last_policy_check_at` (timestamp)
+- `suppression_reason` (if excluded from outreach)
+
+This keeps Orange segmentation and downstream campaigns auditable and prevents accidental misuse of non-compliant data.
+
+### 11.2 Treasury Transfer Checklist
+Before any transfer to the designated destination account (e.g., Cash App `$Nicsins`), require:
+1. Revenue reconciliation completed.
+2. Fraud/chargeback hold window respected.
+3. Tax and operating reserve allocations applied.
+4. Two-step confirmation logged to mission diary.
+5. Transfer receipt hash or reference stored in finance logs.
+
+### 11.3 Weekly Autonomy Review Cadence
+- **Monday:** KPI + data-quality review.
+- **Wednesday:** monetization experiment check-in.
+- **Friday:** treasury close + next-week plan lock.
+
+The goal is high automation with explicit review gates around compliance and capital movement.
