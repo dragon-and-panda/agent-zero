@@ -46,3 +46,25 @@ pip install -r requirements.txt
 python -m app.mcp_server
 ```
 
+### Ethical Financial System service (implemented scaffold)
+
+A consent-aware ingestion service is available at:
+
+- `services/ethical_financial_system`
+
+Capabilities:
+
+- Ingest Gmail-style headers (`from`, `to`, `cc`, `bcc`) with explicit owner consent assertion.
+- Ingest CSV contact files with consent/suppression fields.
+- Normalize + deduplicate addresses and persist compliance attributes.
+- Export Orange-ready CSV for segmentation and analysis.
+
+Run it:
+
+```bash
+cd services/ethical_financial_system
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
