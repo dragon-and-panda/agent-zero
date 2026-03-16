@@ -30,3 +30,17 @@
 ### Next Focus
 - Integrate real WebRTC signaling and authenticated email delivery provider.
 - Add bid versioning/diff view and approval checkpoints in frontend.
+
+## 2026-03-15 — Sprint 2 Realtime + Delivery Hooks
+- Added backend meeting-room provider with deterministic room URL generation and signed join-token issuance per participant.
+- Added email gateway abstraction with `log` provider (local outbox) and `relay` provider (HTTP relay endpoint).
+- Added webhook endpoint + signature verification flow to reconcile provider delivery/bounce events into thread email records.
+- Extended MCP tools and REST endpoints for join-token issuance and provider email send events.
+
+### Signals
+- Meeting sessions can now provide backend-issued join tokens for client/contractor participants.
+- Progress correspondence supports queued/send/failure paths and webhook-driven status updates.
+
+### Next Focus
+- Swap deterministic room provider with managed WebRTC SDK tokens.
+- Add provider-specific adapters (SendGrid/Postmark) and webhook payload translators.

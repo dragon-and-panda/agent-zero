@@ -13,9 +13,11 @@ from mcp.server.fastmcp import FastMCP
 from . import schemas
 from .config import get_settings
 from .services.ai_assistant import AIContractAssistant
+from .services.email_gateway import EmailGateway
 from .services.escrow_adapter import EscrowAdapter
 from .services.experience_memory import ExperienceMemory
 from .services.mcp_router import MCPRouter
+from .services.meeting_provider import MeetingProvider
 from .services.orchestrator import ContractOrchestrator
 from .services.rag import RAGService
 from .services.store import HubStore
@@ -32,6 +34,18 @@ orchestrator = ContractOrchestrator(
     escrow=EscrowAdapter(),
     telemetry=TelemetryClient(settings.telemetry_path),
     memory=ExperienceMemory(path=settings.experience_memory_path),
+    meeting_provider=MeetingProvider(
+        room_base_url=settings.realtime_room_base_url,
+        signing_secret=settings.realtime_token_secret,
+        ttl_seconds=settings.realtime_token_ttl_seconds,
+    ),
+    email_gateway=EmailGateway(
+        provider=settings.email_provider,
+        from_address=settings.email_from_address,
+        relay_endpoint=settings.email_relay_endpoint,
+        relay_bearer_token=settings.email_relay_bearer_token,
+        outbox_path=settings.email_outbox_path,
+    ),
 )
 
 
@@ -76,6 +90,12 @@ def add_meeting_event(thread_id: str, meeting_id: str, payload: Dict[str, Any]) 
 
 
 @mcp.tool()
+def issue_meeting_join_token(thread_id: str, meeting_id: str, party_id: str) -> Dict[str, Any]:
+    req = schemas.MeetingJoinTokenRequest(party_id=party_id)
+    return orchestrator.issue_meeting_join_token(thread_id, meeting_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
 def end_meeting_session(thread_id: str, meeting_id: str, transcript_summary: str | None = None) -> Dict[str, Any]:
     req = schemas.EndMeetingRequest(transcript_summary=transcript_summary)
     return orchestrator.end_meeting(thread_id, meeting_id, req).model_dump(mode="json")
@@ -104,6 +124,18 @@ def mark_progress_email_sent(
 ) -> Dict[str, Any]:
     req = schemas.MarkEmailSentRequest(sent_at=sent_at)
     return orchestrator.mark_email_sent(thread_id, email_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
+def send_progress_email(thread_id: str, email_id: str, requested_by: str) -> Dict[str, Any]:
+    req = schemas.SendEmailRequest(requested_by=requested_by)
+    return orchestrator.send_progress_email(thread_id, email_id, req).model_dump(mode="json")
+
+
+@mcp.tool()
+def apply_email_webhook(payload: Dict[str, Any]) -> Dict[str, Any]:
+    req = schemas.EmailWebhookEventRequest.model_validate(payload)
+    return orchestrator.apply_email_webhook(req).model_dump(mode="json")
 
 
 @mcp.tool()

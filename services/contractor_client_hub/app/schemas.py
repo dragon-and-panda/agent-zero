@@ -66,6 +66,9 @@ class EmailStatus(str, Enum):
     draft = "draft"
     queued = "queued"
     sent = "sent"
+    delivered = "delivered"
+    bounced = "bounced"
+    failed = "failed"
 
 
 class Party(BaseModel):
@@ -210,6 +213,19 @@ class EndMeetingRequest(BaseModel):
     transcript_summary: str | None = None
 
 
+class MeetingJoinTokenRequest(BaseModel):
+    party_id: str
+
+
+class MeetingJoinTokenResponse(BaseModel):
+    meeting_id: str
+    participant_id: str
+    participant_role: PartyRole
+    room_url: str
+    token: str
+    expires_at: float
+
+
 class ProgressReport(BaseModel):
     report_id: str
     created_at: float
@@ -230,6 +246,14 @@ class ProgressReportRequest(BaseModel):
     attachment_uris: list[str] = Field(default_factory=list)
 
 
+class EmailDeliveryEvent(BaseModel):
+    event_id: str
+    event_type: str
+    created_at: float
+    provider: str
+    details: dict[str, Any] = Field(default_factory=dict)
+
+
 class EmailRecord(BaseModel):
     email_id: str
     created_at: float
@@ -239,6 +263,10 @@ class EmailRecord(BaseModel):
     cc: list[str] = Field(default_factory=list)
     subject: str
     body: str
+    provider: str | None = None
+    provider_message_id: str | None = None
+    error_message: str | None = None
+    delivery_events: list[EmailDeliveryEvent] = Field(default_factory=list)
     related_report_id: str | None = None
 
 
@@ -249,6 +277,10 @@ class ProgressEmailRequest(BaseModel):
     report_id: str | None = None
     custom_intro: str | None = None
     subject_prefix: str = "Progress Update"
+
+
+class SendEmailRequest(BaseModel):
+    requested_by: str
 
 
 class Deliverable(BaseModel):
@@ -379,3 +411,14 @@ class ArbitrateRequest(BaseModel):
 
 class MarkEmailSentRequest(BaseModel):
     sent_at: float | None = None
+
+
+class EmailWebhookEventRequest(BaseModel):
+    thread_id: str
+    email_id: str
+    provider: str
+    event_type: str
+    status: EmailStatus
+    provider_message_id: str | None = None
+    occurred_at: float | None = None
+    details: dict[str, Any] = Field(default_factory=dict)

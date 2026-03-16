@@ -6,8 +6,8 @@
 | P0 | Replace JSON persistence with Postgres + append-only audit log | Data Engineer | Needed for durability and analytics |
 | P0 | Integrate audited on-chain escrow deployment flow + event listener | Web3 Engineer | Connect `AIAssistedEscrow.sol` lifecycle |
 | P1 | Add rich web UI for thread chat, deliverables, and evidence uploads | Product Engineer | Improves adoption |
-| P1 | Integrate WebRTC room tokens + recording for mediation sessions | Realtime Engineer | Move from metadata demo to live calls |
-| P1 | Add provider-backed email delivery + status webhooks | Platform Engineer | Replace draft/sent marker with actual delivery |
+| P1 | Integrate WebRTC room tokens + recording for mediation sessions | Realtime Engineer | MVP join-token issuer done; replace with managed provider + recording |
+| P1 | Add provider-backed email delivery + status webhooks | Platform Engineer | MVP relay + webhook reconciliation done; add production adapters |
 | P1 | Add bid template library and version comparison UI | Product Engineer | Needed for transparent estimate negotiations |
 | P1 | Add multimodal evidence scoring (image + doc checks) via MCP services | AI Engineer | Stronger completion confidence |
 | P1 | Introduce SLA timers, reminders, and automated escalation policies | Ops Agent | Keeps contracts moving |

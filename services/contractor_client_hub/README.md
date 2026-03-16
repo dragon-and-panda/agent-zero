@@ -3,11 +3,13 @@
 This service provides an MVP for:
 - AI-assisted contract drafting in a shared client/contractor thread,
 - meeting-session workflow for video chat orchestration with a neutral AI avatar,
+- backend-issued meeting join tokens for WebRTC room access,
 - contractor bid intake (pre-chat uploads or in-meeting submission),
 - line-item deliverables with explicit expectations for both parties,
 - documentation instructions (`before`, `during`, `after`) per deliverable,
 - evidence submissions + automated AI review,
 - AI-generated progress reports and email correspondence drafts,
+- provider-backed progress email send attempts + webhook delivery reconciliation,
 - remediation addendum flow + dispute/arbitration handling,
 - escrow state transitions suitable for USDT smart-contract integration.
 
@@ -46,25 +48,31 @@ curl http://localhost:8010/health
    Append live meeting transcript events (client, contractor, AI avatar).
 6. `POST /threads/{thread_id}/meetings/{meeting_id}/end`  
    Close session and store transcript summary.
-7. `POST /threads/{thread_id}/ai/refresh-scope`  
+7. `POST /threads/{thread_id}/meetings/{meeting_id}/join-token`  
+   Issue signed room token for participant join.
+8. `POST /threads/{thread_id}/ai/refresh-scope`  
    AI rebuilds deliverables and evidence plan from thread context.
-8. `POST /threads/{thread_id}/progress-reports`  
+9. `POST /threads/{thread_id}/progress-reports`  
    Generate structured progress report entries.
-9. `POST /threads/{thread_id}/emails/draft`  
+10. `POST /threads/{thread_id}/emails/draft`  
    Draft neutral progress correspondence email from report data.
-10. `POST /threads/{thread_id}/emails/{email_id}/sent`  
-   Mark correspondence sent (audit trail).
-11. `POST /threads/{thread_id}/acknowledge` (both parties)  
+11. `POST /threads/{thread_id}/emails/{email_id}/send`  
+   Send drafted email via configured provider (`log` or `relay`).
+12. `POST /integrations/email/webhook`  
+   Apply delivery/bounce events from provider webhook callbacks.
+13. `POST /threads/{thread_id}/emails/{email_id}/sent`  
+   Manual sent marker (fallback/audit override).
+14. `POST /threads/{thread_id}/acknowledge` (both parties)  
    Scope lock and readiness for escrow funding.
-12. `POST /threads/{thread_id}/escrow/fund`  
+15. `POST /threads/{thread_id}/escrow/fund`  
    Record escrow funding (USDT flow stub with tx metadata).
-13. `POST /threads/{thread_id}/deliverables/{deliverable_id}/evidence`  
+16. `POST /threads/{thread_id}/deliverables/{deliverable_id}/evidence`  
    Contractor submits evidence artifacts.
-14. `POST /threads/{thread_id}/ai/review`  
+17. `POST /threads/{thread_id}/ai/review`  
    AI checks evidence completeness; pass or remediation addendum.
-15. `POST /threads/{thread_id}/escrow/release`  
+18. `POST /threads/{thread_id}/escrow/release`  
    Disburse contractor/platform split.
-16. Optional: `POST /threads/{thread_id}/dispute` and `/arbitrate`.
+19. Optional: `POST /threads/{thread_id}/dispute` and `/arbitrate`.
 
 ---
 
@@ -83,10 +91,13 @@ Includes tools such as:
 - `submit_contractor_bid`
 - `create_meeting_session`
 - `add_meeting_event`
+- `issue_meeting_join_token`
 - `end_meeting_session`
 - `refresh_scope_with_ai`
 - `create_progress_report`
 - `draft_progress_email`
+- `send_progress_email`
+- `apply_email_webhook`
 - `mark_progress_email_sent`
 - `fund_contract_escrow`
 - `submit_deliverable_evidence`
@@ -142,3 +153,21 @@ Use responsibly and comply with target site policies.
 - This is an MVP and **not** a full legal/compliance product.
 - Smart contracts should be externally audited before production funds.
 - AI evidence review should be treated as assistive; retain human oversight for high-stakes jobs.
+
+---
+
+## 8) Key Environment Variables
+
+```bash
+# Realtime rooms/tokens
+CCH_REALTIME_ROOM_BASE_URL=https://meet.example.com
+CCH_REALTIME_TOKEN_SECRET=replace-with-strong-secret
+CCH_REALTIME_TOKEN_TTL_SECONDS=3600
+
+# Email delivery
+CCH_EMAIL_PROVIDER=log              # log | relay
+CCH_EMAIL_FROM_ADDRESS=no-reply@example.com
+CCH_EMAIL_RELAY_ENDPOINT=https://mailer.example.com/send
+CCH_EMAIL_RELAY_BEARER_TOKEN=...
+CCH_EMAIL_WEBHOOK_SECRET=...
+```

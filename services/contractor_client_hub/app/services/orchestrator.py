@@ -5,8 +5,10 @@ import uuid
 
 from .. import schemas
 from .ai_assistant import AIContractAssistant
+from .email_gateway import EmailGateway
 from .escrow_adapter import EscrowAdapter
 from .experience_memory import ExperienceMemory
+from .meeting_provider import MeetingProvider
 from .store import HubStore
 from .telemetry import TelemetryClient
 
@@ -19,12 +21,16 @@ class ContractOrchestrator:
         escrow: EscrowAdapter,
         telemetry: TelemetryClient,
         memory: ExperienceMemory,
+        meeting_provider: MeetingProvider,
+        email_gateway: EmailGateway,
     ) -> None:
         self._store = store
         self._assistant = assistant
         self._escrow = escrow
         self._telemetry = telemetry
         self._memory = memory
+        self._meeting_provider = meeting_provider
+        self._email_gateway = email_gateway
 
     def create_thread(self, req: schemas.CreateThreadRequest) -> schemas.ContractThread:
         now = time.time()
@@ -155,14 +161,21 @@ class ContractOrchestrator:
 
         now = time.time()
         is_future = req.scheduled_start_at is not None and req.scheduled_start_at > now
+        meeting_id = str(uuid.uuid4())
+        room_url = req.webrtc_room_url
+        if not room_url:
+            room = self._meeting_provider.create_room(
+                thread_id=thread.thread_id, meeting_id=meeting_id
+            )
+            room_url = room.room_url
         meeting = schemas.MeetingSession(
-            meeting_id=str(uuid.uuid4()),
+            meeting_id=meeting_id,
             status=schemas.MeetingStatus.scheduled if is_future else schemas.MeetingStatus.live,
             created_by=req.created_by,
             created_at=now,
             scheduled_start_at=req.scheduled_start_at,
             started_at=None if is_future else now,
-            webrtc_room_url=req.webrtc_room_url,
+            webrtc_room_url=room_url,
             attached_bid_id=attached_bid_id,
             agenda=req.agenda,
         )
@@ -199,6 +212,34 @@ class ContractOrchestrator:
             {"meeting_id": meeting.meeting_id, "status": meeting.status.value},
         )
         return thread
+
+    def issue_meeting_join_token(
+        self, thread_id: str, meeting_id: str, req: schemas.MeetingJoinTokenRequest
+    ) -> schemas.MeetingJoinTokenResponse:
+        thread = self.get_thread(thread_id)
+        meeting = _find_meeting(thread, meeting_id)
+        party = next((p for p in thread.parties if p.id == req.party_id), None)
+        if not party:
+            raise ValueError("Party is not part of this contract thread.")
+        token = self._meeting_provider.issue_join_token(
+            thread_id=thread.thread_id,
+            meeting_id=meeting.meeting_id,
+            participant_id=party.id,
+            participant_role=party.role.value,
+        )
+        self._telemetry.record_event(
+            "meeting.join_token_issued",
+            thread.thread_id,
+            {"meeting_id": meeting.meeting_id, "party_id": party.id},
+        )
+        return schemas.MeetingJoinTokenResponse(
+            meeting_id=meeting.meeting_id,
+            participant_id=party.id,
+            participant_role=party.role,
+            room_url=meeting.webrtc_room_url or token.room_url,
+            token=token.token,
+            expires_at=token.expires_at,
+        )
 
     def add_meeting_event(
         self, thread_id: str, meeting_id: str, req: schemas.MeetingEventRequest
@@ -459,6 +500,100 @@ class ContractOrchestrator:
             "email.sent",
             thread.thread_id,
             {"email_id": email_id},
+        )
+        return thread
+
+    def send_progress_email(
+        self, thread_id: str, email_id: str, req: schemas.SendEmailRequest
+    ) -> schemas.ContractThread:
+        thread = self.get_thread(thread_id)
+        if req.requested_by not in thread.acknowledgements:
+            raise ValueError("Email sender must be a contract party.")
+        email = _find_email(thread, email_id)
+        if email.status in (
+            schemas.EmailStatus.sent,
+            schemas.EmailStatus.delivered,
+        ):
+            raise ValueError("Email already sent.")
+        email.status = schemas.EmailStatus.queued
+        result = self._email_gateway.send(
+            thread_id=thread.thread_id,
+            email_id=email.email_id,
+            to=email.to,
+            cc=email.cc,
+            subject=email.subject,
+            body=email.body,
+        )
+        email.provider = result.provider
+        if result.success:
+            email.provider_message_id = result.provider_message_id
+            email.status = schemas.EmailStatus.sent
+            email.sent_at = result.sent_at or time.time()
+            email.error_message = None
+            email.delivery_events.append(
+                schemas.EmailDeliveryEvent(
+                    event_id=str(uuid.uuid4()),
+                    event_type="sent",
+                    created_at=email.sent_at,
+                    provider=result.provider,
+                    details={
+                        "provider_message_id": result.provider_message_id,
+                    },
+                )
+            )
+        else:
+            email.status = schemas.EmailStatus.failed
+            email.error_message = result.error
+            email.delivery_events.append(
+                schemas.EmailDeliveryEvent(
+                    event_id=str(uuid.uuid4()),
+                    event_type="failed",
+                    created_at=time.time(),
+                    provider=result.provider,
+                    details={"error": result.error or "unknown error"},
+                )
+            )
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "email.send_attempt",
+            thread.thread_id,
+            {
+                "email_id": email.email_id,
+                "success": result.success,
+                "provider": result.provider,
+            },
+        )
+        return thread
+
+    def apply_email_webhook(
+        self, req: schemas.EmailWebhookEventRequest
+    ) -> schemas.ContractThread:
+        thread = self.get_thread(req.thread_id)
+        email = _find_email(thread, req.email_id)
+        if req.provider_message_id:
+            email.provider_message_id = req.provider_message_id
+        email.provider = req.provider
+        email.status = req.status
+        if req.status in (schemas.EmailStatus.sent, schemas.EmailStatus.delivered):
+            email.sent_at = email.sent_at or req.occurred_at or time.time()
+        if req.status in (schemas.EmailStatus.failed, schemas.EmailStatus.bounced):
+            email.error_message = str(req.details.get("error") or req.event_type)
+        email.delivery_events.append(
+            schemas.EmailDeliveryEvent(
+                event_id=str(uuid.uuid4()),
+                event_type=req.event_type,
+                created_at=req.occurred_at or time.time(),
+                provider=req.provider,
+                details=req.details,
+            )
+        )
+        self._touch(thread)
+        self._store.upsert_thread(thread)
+        self._telemetry.record_event(
+            "email.webhook_applied",
+            thread.thread_id,
+            {"email_id": email.email_id, "event_type": req.event_type, "status": req.status.value},
         )
         return thread
 
