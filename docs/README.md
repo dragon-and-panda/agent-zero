@@ -6,6 +6,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Agentic Financial System Blueprint](programs/agentic_financial_system/blueprint.md):** Compliance-first plan for building autonomous online income systems.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -60,6 +61,12 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Agentic Financial System Blueprint](programs/agentic_financial_system/blueprint.md)
+  - [Mission](programs/agentic_financial_system/blueprint.md#mission)
+  - [Data Extraction and RAG (Safe Version)](programs/agentic_financial_system/blueprint.md#2-data-extraction-and-rag-safe-version)
+  - [Monetization Phase 1 (Compliant Alternatives)](programs/agentic_financial_system/blueprint.md#3-monetization-phase-1-compliant-alternatives)
+  - [Mission Diary](programs/agentic_financial_system/journal.md)
+  - [Improvement Backlog](programs/agentic_financial_system/improvements.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
