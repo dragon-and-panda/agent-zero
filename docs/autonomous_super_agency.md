@@ -106,7 +106,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 ### 5.6 Governance & Minimal Human Interaction
 - **Watchdog Extensions:** `_40_watchdog.py` evaluates tool outputs, halting loops on anomaly scores.
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
-- **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
+- **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains. Revenue-focused workflows should load `docs/policies/revenue_compliance.md` before handling outreach, inbox data, or capital allocation.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
 ---
@@ -214,6 +214,7 @@ Store each persona file as a reusable fragment referenced from `agent.system.mai
 | `telemetry_push.sh` | `instruments/ops/` | Publishes mission KPIs to shared dashboards. |
 | `knowledge_ingest.py` | `instruments/research/` | Normalizes scouting outputs and stores them in `knowledge/custom/main`. |
 | `compliance_pack.md` | `docs/policies/` | Canonical policy bundle referenced by Compliance Guardian. |
+| `revenue_compliance.md` | `docs/policies/` | Guardrails for consent-based data use, outreach, and speculative-capital limits. |
 
 ### Build Steps
 1. **Prompts:** Generate persona files using the template in Section 8 and register them in `agent.system.main.md`.
