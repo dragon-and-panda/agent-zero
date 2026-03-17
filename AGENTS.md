@@ -18,3 +18,5 @@ Agent Zero is a Python-based AI agent framework with a Flask web UI. See `README
 - No formal test suite or linting config exists in the repo. `ruff` is available as a transitive dependency and can be used for basic linting: `ruff check .`
 - Settings are persisted in `tmp/settings.json`; API keys are stored in `.env`.
 - The two satellite microservices under `services/` (autonomous_listing, collab_doc) are optional and not required for the core agent to function.
+- For local LLM usage with Ollama: install Ollama (`curl -fsSL https://ollama.com/install.sh | sh`), start it manually (`ollama serve &`), and pull a model (e.g. `ollama pull llama3.2:3b`). Then configure Agent Zero via Settings UI or `tmp/settings.json` with provider `OLLAMA`. The cloud VM has ~15 GB RAM; models requiring more (e.g. `nemotron-3-super` at 86 GB) will fail with a memory error.
+- The `python3.12-venv` system package must be installed before creating the venv (`sudo apt-get install -y python3.12-venv`).
