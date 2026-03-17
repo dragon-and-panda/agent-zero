@@ -76,7 +76,6 @@ def _infer_label(soup: BeautifulSoup, field_tag: Tag) -> str | None:
         field_tag.get("name"),
     )
 
-
 def _infer_group_label(soup: BeautifulSoup, first_input: Tag) -> str | None:
     # Prefer <fieldset><legend>Question</legend>...</fieldset>
     fs = first_input.find_parent("fieldset")
@@ -103,7 +102,6 @@ def _infer_group_label(soup: BeautifulSoup, first_input: Tag) -> str | None:
         probe = probe.parent if isinstance(probe.parent, Tag) else None
 
     return _first_non_empty(first_input.get("name"), first_input.get("aria-label"))
-
 
 def _iter_controls(soup: BeautifulSoup) -> Iterable[Tag]:
     for tag in soup.find_all(["input", "textarea", "select"]):

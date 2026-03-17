@@ -4,7 +4,7 @@ This feature helps you **review** a survey page, **extract** form questions, and
 
 It is intentionally designed to be human-in-the-loop:
 - It **does not** automatically submit surveys.
-- It **does not** fabricate personal details; if your profile doesn’t contain needed info, suggestions should return **UNKNOWN**.
+- It **does not** fabricate personal details; if your profile doesn’t contain needed info, predictions are flagged as **needs_clarification=true** for later review.
 
 ## How it works
 

@@ -4,7 +4,7 @@ Extracts form/survey questions from a URL (rendered) or provided HTML, and retur
 
 Safety constraints:
 - This tool **does not fill** fields and **does not submit** surveys.
-- Do not fabricate personal details; rely on the user's saved profile (if suggestions are requested) or return UNKNOWN.
+- Do not fabricate personal details; rely on the user's saved profile. If info is missing, predictions must be marked `needs_clarification=true` with assumptions noted in the rationale.
 
 Arguments:
 - `url` (string, optional): web page to render and extract fields from

@@ -64,7 +64,6 @@ def suggest_answers_with_ollama(
     msg = resp.get("message", {}) if isinstance(resp, dict) else {}
     return str(msg.get("content", "")).strip()
 
-
 def predict_answers_json_with_ollama(
     *,
     model: str,
@@ -131,4 +130,3 @@ def predict_answers_json_with_ollama(
     except Exception:
         pass
     return {"error": "Model did not return valid JSON", "raw": content}
-
