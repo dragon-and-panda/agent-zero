@@ -46,3 +46,25 @@ pip install -r requirements.txt
 python -m app.mcp_server
 ```
 
+### Revenue Planner MCP server (implemented)
+
+The compliant revenue-planning workflow in `services/revenue_planner` is exposed as an MCP stdio server at:
+
+- `services/revenue_planner/app/mcp_server.py`
+
+Tools:
+
+- `generate_revenue_plan(payload)` -> returns a staged, redundant revenue plan with guardrails
+- `assess_strategy_risk(summary, tactics)` -> flags risky or disallowed tactics and suggests compliant replacements
+- `list_safe_revenue_tracks()` -> returns built-in revenue track definitions
+- `revenue_plan_request_schema()` / `revenue_plan_response_schema()` -> JSON schema helpers
+
+Run it:
+
+```bash
+cd services/revenue_planner
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python -m app.mcp_server
+```
+
