@@ -6,6 +6,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Autonomous Super Agency Blueprint](autonomous_super_agency.md):** Define multi-agent departments, governance, and low-touch execution protocols.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Run a lawful, diversified revenue program with compliance and redundancy built in.
+- **[Compliance Pack](policies/compliance_pack.md):** Apply guardrails for monetization, contact-data handling, and capital-risk controls.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -55,7 +58,13 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
     - [Knowledge](architecture.md#5-knowledge)
     - [Instruments](architecture.md#6-instruments)
     - [Extensions](architecture.md#7-extensions)
-  - [Contributing](contribution.md)
+- [Autonomous Super Agency Blueprint](autonomous_super_agency.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+  - [Mission Diary](programs/agentic_financial_system/journal.md)
+  - [Improvement Backlog](programs/agentic_financial_system/improvements.md)
+  - [Strategy Intake Queue](strategy/incoming.md)
+  - [Compliance Pack](policies/compliance_pack.md)
+- [Contributing](contribution.md)
   - [Getting Started](contribution.md#getting-started)
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
