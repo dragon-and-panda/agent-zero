@@ -6,6 +6,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Agentic Financial System Playbook](agentic_financial_system_playbook.md):** A compliant blueprint for building an autonomous online-income operating system.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -60,6 +61,17 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Agentic Financial System Playbook](agentic_financial_system_playbook.md)
+  - [Mission Objective](agentic_financial_system_playbook.md#1-mission-objective)
+  - [Non-Negotiable Guardrails](agentic_financial_system_playbook.md#2-non-negotiable-guardrails)
+  - [Agentic Framework Blueprint](agentic_financial_system_playbook.md#3-agentic-framework-blueprint)
+  - [Data Extraction + RAG (Gmail, Compliant)](agentic_financial_system_playbook.md#4-data-extraction--rag-gmail-compliant)
+  - [Monetization Phase 1 (Compliant Replacement)](agentic_financial_system_playbook.md#5-monetization-phase-1-compliant-replacement)
+  - [Financial Expansion (Post Phase 1)](agentic_financial_system_playbook.md#6-financial-expansion-post-phase-1)
+  - [Financial Management](agentic_financial_system_playbook.md#7-financial-management)
+  - [Content Creation System](agentic_financial_system_playbook.md#8-content-creation-system)
+  - [KPI Dashboard](agentic_financial_system_playbook.md#9-kpi-dashboard)
+  - [Immediate Build Checklist](agentic_financial_system_playbook.md#10-immediate-build-checklist)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
