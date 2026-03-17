@@ -148,6 +148,8 @@ docker run -p 50001:80 frdel/agent-zero-run
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
 | [Architecture](./docs/architecture.md) | System design and components |
+| [Autonomous Financial System Charter](./docs/programs/agentic_financial_system/charter.md) | Compliance-first blueprint for autonomous revenue generation |
+| [Compliance Pack](./docs/policies/compliance_pack.md) | Privacy, consent, and trading-risk guardrails for monetization workflows |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
 
