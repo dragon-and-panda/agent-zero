@@ -18,3 +18,4 @@ Agent Zero is a Python-based AI agent framework with a Flask web UI. See `README
 - No formal test suite or linting config exists in the repo. `ruff` is available as a transitive dependency and can be used for basic linting: `ruff check .`
 - Settings are persisted in `tmp/settings.json`; API keys are stored in `.env`.
 - The two satellite microservices under `services/` (autonomous_listing, collab_doc) are optional and not required for the core agent to function.
+- System packages `python3.12-venv`, `python3-dev`, `build-essential`, and `ffmpeg` are needed for venv creation and native extensions. These are pre-installed in the VM snapshot.
