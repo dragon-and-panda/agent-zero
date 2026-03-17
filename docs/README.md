@@ -5,6 +5,11 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Installation](installation.md):** Set up (or [update](installation.md#how-to-update-agent-zero)) Agent Zero on your system.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Innovation Super-Agency Blueprint](autonomous_super_agency.md):** Run the repo as a multi-program autonomous organization with governance and telemetry.
+- **[Autonomous Listing Service](autonomous_listing_service.md):** Explore the first monetizable capability-service blueprint in the repo.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Use a compliant, revenue-first operating plan for autonomous commercialization.
+- **[Compliance Pack](policies/compliance_pack.md):** Review the policy bundle that governs contact data, outreach, platform usage, and financial risk.
+- **[Strategy Intake Queue](strategy/incoming.md):** Keep a scored backlog of opportunities before launching new autonomous ventures.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -60,6 +65,13 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Autonomous Innovation Super-Agency Blueprint](autonomous_super_agency.md)
+- [Autonomous Listing Service](autonomous_listing_service.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+- [Financial System Mission Diary](programs/agentic_financial_system/journal.md)
+- [Financial System Improvement Backlog](programs/agentic_financial_system/improvements.md)
+- [Compliance Pack](policies/compliance_pack.md)
+- [Strategy Intake Queue](strategy/incoming.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
