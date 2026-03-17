@@ -16,9 +16,14 @@
 
 - Governance gap closed: repo now contains explicit policy language for privacy-sensitive monetization requests.
 - Immediate execution path identified: sell service work first, then compound into content and productized workflows.
+- Initial scoring results from `instruments/strategy/score.sh`:
+  - Inbox-to-CRM Hygiene Service: **GO** at 75.8
+  - Autonomous Listing Concierge: **HOLD** at 74.0
+  - Course + Character Content Funnel: **HOLD** at 71.9
+  - Personal Email List Brokerage: **REJECT** at 43.3
 
 ### Next Focus
 
-- Score the active opportunity queue and select the highest-confidence first-cash lane.
+- Translate the Inbox-to-CRM Hygiene Service into a customer-facing workflow spec, sample export, and intake checklist.
 - Translate the autonomous listing blueprint into a customer-facing pilot offer and sample deliverables.
 - Define the Gmail-to-CRM workflow in a way that preserves consent tagging and auditability.
