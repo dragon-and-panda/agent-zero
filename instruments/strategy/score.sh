@@ -182,14 +182,7 @@ score=$(
     -v legal="$legal" \
     -v platform="$platform" \
     'BEGIN {
-      weighted = ((revenue * 2.00) +
-        (speed * 1.50) +
-        (automation * 1.50) +
-        (resilience * 1.25) +
-        (trust * 1.25) +
-        (capital * 1.00) +
-        (legal * 2.50) +
-        ((10 - platform) * 1.00));
+      weighted = ((revenue * 2.00) + (speed * 1.50) + (automation * 1.50) + (resilience * 1.25) + (trust * 1.25) + (capital * 1.00) + (legal * 2.50) + ((10 - platform) * 1.00));
       normalized = (weighted / 120.0) * 100.0;
       printf "%.1f", normalized;
     }'
