@@ -43,6 +43,9 @@ instruments/**
 # Explicitly allow the default folder in instruments
 !instruments/default/
 !instruments/default/**
+# Allow tracked strategy instruments used in docs/programs
+!instruments/strategy/
+!instruments/strategy/**
 
 # Global rule to include .gitkeep files anywhere
 !**/.gitkeep
