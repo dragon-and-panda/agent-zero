@@ -20,8 +20,8 @@ text = os.environ["OPPORTUNITY"].strip()
 normalized = text.lower()
 
 reject_patterns = {
-    "private email list resale": r"(sell|broker|rent).*(email list|contact list)|email list.*(sell|broker|rent)",
-    "mailbox harvesting": r"(harvest|scrape|extract).*(gmail|google mail|mailbox|inbox|sent|cc)",
+    "private email list resale": r"((sell|broker|rent).*(email list|contact list|list of emails|email addresses?|contacts?))|((email list|contact list|list of emails|email addresses?|contacts?).*(sell|broker|rent))",
+    "mailbox harvesting": r"((harvest|scrape|extract).*(gmail|google mail|mailbox|inbox|sent|cc|email addresses?|contacts?))|((gmail|google mail|mailbox|inbox|sent|cc).*(harvest|scrape|extract))",
     "spam or bulk unsolicited outreach": r"\bspam\b|bulk unsolicited|cold blast|mass outreach",
     "anti-bot or captcha evasion": r"captcha|anti-bot|evad(e|ing)|bypass",
 }
