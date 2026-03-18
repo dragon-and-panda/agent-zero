@@ -80,6 +80,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 1. Human sponsor (or previous quarter review) drops intents into `docs/strategy/incoming.md`.
 2. Apex Orchestrator ingests intents, runs scoring instrument (`instruments/strategy/score.sh`), and updates `behaviour.md` with fresh OKRs.
 3. Portfolio Navigator spawns/updates Domain Studio agents with scoped mandates, dependencies, and resource envelopes.
+4. Compliance Guardian blocks missions that depend on personal-data brokerage, spam, unauthorized inbox access, or speculative capital deployment before they enter execution.
 
 ### 5.2 Research Sprint Loop
 1. Scouting Agents continuously run watchlists (scheduled via cron + CLI) and push summaries to knowledge base.
@@ -108,6 +109,8 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
 - **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
+
+Revenue-seeking missions should additionally reference `docs/policies/compliance_pack.md` and the active program docs under `docs/programs/agentic_financial_system/` before any data handling or monetization workflow is launched.
 
 ---
 

@@ -5,6 +5,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Installation](installation.md):** Set up (or [update](installation.md#how-to-update-agent-zero)) Agent Zero on your system.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Super Agency Blueprint](autonomous_super_agency.md):** Configure Agent Zero as a low-touch multi-agent operating system.
+- **[Compliance Pack](policies/compliance_pack.md):** Apply legal and ethical guardrails to autonomous revenue workflows.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Review the compliant financial mission and operating constraints.
+- **[Agentic Financial System Revenue Plan](programs/agentic_financial_system/revenue_plan.md):** See the redundancy-first plan for accumulating revenue through services and assets.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
