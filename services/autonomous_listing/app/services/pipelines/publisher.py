@@ -1,14 +1,22 @@
 from __future__ import annotations
 
 import asyncio
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Dict, List
 
 from ... import schemas
-from ..orchestrator import PublishResult
-from .marketplaces.base import MarketplacePublisher, PublicationResult
-from .marketplaces.craigslist import CraigslistPublisher
-from .marketplaces.mercari import MercariPublisher
+from ..marketplaces.base import MarketplacePublisher, PublicationResult
+from ..marketplaces.craigslist import CraigslistPublisher
+from ..marketplaces.mercari import MercariPublisher
+
+
+@dataclass
+class PublishResult:
+    pending: bool
+    confirmed_platforms: List[schemas.PlatformEnum] = field(default_factory=list)
+    failed_platforms: List[schemas.PlatformEnum] = field(default_factory=list)
+    notes: str = ""
+    platform_results: Dict[str, dict] = field(default_factory=dict)
 
 
 class ChannelPublisher:

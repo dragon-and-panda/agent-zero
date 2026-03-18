@@ -110,6 +110,11 @@ def listing_intake_template(
             "target_price": None,
             "pickup_only": False,
         },
+        "seller_attestations": {
+            "owns_or_can_sell_item": True,
+            "description_is_truthful": True,
+            "no_prohibited_items": True,
+        },
     }
 
     # Platform mock preview (what we’ll generate after you fill the template)
@@ -122,13 +127,15 @@ def listing_intake_template(
             "raw_description",
             "location (for local platforms)",
             "at least 3 assets (photos)",
+            "seller_attestations set to true before publication",
         ],
         "platform_checklist": {primary.value: platform_checklist(primary)},
         "mock_listing_preview": mock,
         "how_to_use": [
             "1) Fill in the template fields (leave unknowns blank).",
             "2) Replace asset URLs with your photo URLs (or base64 in `base64_payload`).",
-            "3) Send the filled JSON to `create_listing_draft` (safe) or `create_listing` (includes publishing packages).",
+            "3) Confirm the seller attestations; requests without them stay in review mode.",
+            "4) Send the filled JSON to `create_listing_draft` (safe) or `create_listing` (includes publishing packages).",
         ],
     }
 

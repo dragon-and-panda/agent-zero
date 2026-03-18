@@ -4,7 +4,7 @@ import asyncio
 from typing import List
 
 from ... import schemas
-from ..config import get_settings
+from ...config import get_settings
 from .base import MarketplacePublisher, PublicationResult
 
 

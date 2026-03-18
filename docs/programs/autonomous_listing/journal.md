@@ -55,3 +55,16 @@
 ### Next Focus
 - Produce interactive prototypes based on the brief.
 - Start backend work for collaboration room (session orchestrator + WebRTC signaling).
+
+## 2026-03-18 — Compliance gate for lawful listings
+- Added a compliance reviewer to block personal-data resale and trading-promotion style requests from flowing through the listing service.
+- Publication now requires explicit seller attestations; missing attestations route the request into `needs_review` instead of auto-publishing.
+- Updated the intake template, README, and test coverage so the safer behavior is visible to downstream users.
+
+### Metrics / Signals
+- Compliance status is now part of the listing response and telemetry stream.
+- Unsafe requests fail earlier, reducing wasted publication work.
+
+### Next Focus
+- Expand per-platform policy packs for restricted categories and prohibited items.
+- Add a human-review queue view with clearer remediation guidance.
