@@ -1,11 +1,9 @@
 import time
 import uuid
-from dataclasses import dataclass, field
-from typing import Dict, List
 
 from .pipelines.description_generator import DescriptionGenerator
 from .pipelines.image_enhancer import ImageEnhancer
-from .pipelines.publisher import ChannelPublisher
+from .pipelines.publisher import ChannelPublisher, PublishResult
 from .compliance import ComplianceReviewer
 from .perception import PerceptionEngine
 from .storage import ListingStore
@@ -252,12 +250,3 @@ class ListingOrchestrator:
                 )
         except Exception:
             pass
-
-
-@dataclass
-class PublishResult:
-    pending: bool
-    confirmed_platforms: List[schemas.PlatformEnum] = field(default_factory=list)
-    failed_platforms: List[schemas.PlatformEnum] = field(default_factory=list)
-    notes: str = ""
-    platform_results: Dict[str, dict] = field(default_factory=dict)
