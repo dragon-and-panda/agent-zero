@@ -6,6 +6,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Autonomous Super-Agency Blueprint](autonomous_super_agency.md):** Configure Agent Zero as a governed multi-agent operating system.
+- **[Financial System Charter](programs/agentic_financial_system/charter.md):** Launch a compliant, multi-lane revenue program with contingency planning.
+- **[Compliance Pack](policies/compliance_pack.md):** Guardrails for privacy, outreach, monetization, and risk management.
+- **[Strategy Intake Queue](strategy/incoming.md):** Prioritized venture queue scored for legality, speed to cash, and automation fit.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
