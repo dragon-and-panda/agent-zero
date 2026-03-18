@@ -16,10 +16,20 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **Share your Work:** Share your Agent Zero creations, workflows and discoverings on our [Show and Tell](https://github.com/frdel/agent-zero/discussions/categories/show-and-tell) area on GitHub.
 - **Report Issues:** Use the [GitHub issue tracker](https://github.com/frdel/agent-zero/issues) to report framework-relative bugs or suggest new features.
 
+## Program and Policy Packs
+
+- **[Autonomous Super Agency](autonomous_super_agency.md):** High-level operating blueprint for a low-touch multi-agent organization.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Revenue program focused on ethical, legal, repeatable monetization.
+- **[Financial System Journal](programs/agentic_financial_system/journal.md):** Running log of decisions, assumptions, and next actions for the financial-system mission.
+- **[Financial System Improvements](programs/agentic_financial_system/improvements.md):** Prioritized backlog for strengthening the program over time.
+- **[Compliance Pack](policies/compliance_pack.md):** Privacy, consent, and risk guardrails for monetization workflows.
+- **[Strategy Intake Queue](strategy/incoming.md):** Intake and prioritization list for new business opportunities.
+
 ## Table of Contents
 
 - [Welcome to the Agent Zero Documentation](#agent-zero-documentation)
   - [Your Experience with Agent Zero](#your-experience-with-agent-zero-starts-now)
+  - [Program and Policy Packs](#program-and-policy-packs)
   - [Table of Contents](#table-of-contents)
 - [Installation Guide](installation.md)
   - [Windows, macOS and Linux Setup](installation.md#windows-macos-and-linux-setup-guide)
