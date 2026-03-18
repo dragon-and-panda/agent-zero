@@ -8,7 +8,7 @@ from typing import Dict, List, Tuple
 import httpx
 
 from ... import schemas
-from ..config import get_settings
+from ...config import get_settings
 from ..llm_client import LLMClient
 
 
