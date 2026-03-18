@@ -90,3 +90,5 @@ Create sellable research artifacts from lawful public sources:
 4. Start the documentation flywheel so each build step also becomes content inventory.
 
 This program turns the original mission into a compliant business-building system rather than a personal-data extraction pipeline.
+
+For the concrete execution sequence, see `launch_plan.md`.
