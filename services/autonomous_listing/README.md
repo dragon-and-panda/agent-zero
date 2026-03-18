@@ -4,7 +4,8 @@ This folder contains a FastAPI-based microservice that simulates the AI pipeline
 
 1. Accepts listing requests with seller notes, assets, preferences, and target platforms.
 2. Runs through pluggable pipelines for image enhancement (vision API stub), marketing copy (OpenAI + RAG hook), and multi-platform publishing.
-3. Returns a structured preview containing the listing status, suggested price, generated description, enhanced asset URIs, and per-platform states.
+3. Applies a compliance gate before publication so risky or prohibited offers are blocked or routed to manual review.
+4. Returns a structured preview containing the listing status, compliance review, suggested price, generated description, enhanced asset URIs, and per-platform states.
 
 ## Quick Start
 
@@ -44,11 +45,19 @@ curl -X POST http://localhost:8000/listings \
     "location": "Austin, TX",
     "assets": [{"source_uri": "https://example.com/photo1.jpg"}],
     "target_platforms": ["craigslist", "mercari"],
-    "preferences": {"tone": "premium", "target_price": 350}
+    "preferences": {"tone": "premium", "target_price": 350},
+    "seller_attestations": {
+      "owns_or_can_sell_item": true,
+      "description_is_truthful": true,
+      "no_prohibited_items": true
+    }
   }'
 ```
 
 ## Next Steps
+- Compliance behavior:
+  - Requests that mention personal data resale, scraped contacts, or trading-signal style financial offers are blocked.
+  - Requests without seller attestations can still produce drafts, but publication is paused in `needs_review` state.
 - Provide production credentials:
   - `ALS_OPENAI_API_KEY` / `ALS_OPENAI_MODEL`
   - `ALS_MARKETING_RAG_ENDPOINT`

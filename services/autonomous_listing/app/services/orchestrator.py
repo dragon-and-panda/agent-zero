@@ -6,6 +6,7 @@ from typing import Dict, List
 from .pipelines.description_generator import DescriptionGenerator
 from .pipelines.image_enhancer import ImageEnhancer
 from .pipelines.publisher import ChannelPublisher
+from .compliance import ComplianceReviewer
 from .perception import PerceptionEngine
 from .storage import ListingStore
 from .telemetry import TelemetryClient
@@ -20,6 +21,7 @@ class ListingOrchestrator:
         enhancer: ImageEnhancer,
         copywriter: DescriptionGenerator,
         publisher: ChannelPublisher,
+        reviewer: ComplianceReviewer | None = None,
         perception: PerceptionEngine | None = None,
         storage: ListingStore | None = None,
         telemetry: TelemetryClient | None = None,
@@ -27,6 +29,7 @@ class ListingOrchestrator:
         self._enhancer = enhancer
         self._copywriter = copywriter
         self._publisher = publisher
+        self._reviewer = reviewer or ComplianceReviewer()
         self._perception = perception or PerceptionEngine()
         self._storage = storage or ListingStore()
         self._telemetry = telemetry or TelemetryClient()
@@ -46,6 +49,46 @@ class ListingOrchestrator:
                 "asset_count": len(payload.assets),
             },
         )
+
+        compliance_review = self._reviewer.review_listing(payload)
+        self._record(
+            "listing.compliance_checked",
+            listing_id,
+            {
+                "status": compliance_review.status,
+                "reason_count": len(compliance_review.reasons),
+            },
+        )
+        if compliance_review.status == "blocked":
+            response = schemas.ListingResponse(
+                status=schemas.ListingStatus(
+                    listing_id=listing_id,
+                    state="blocked",
+                    platforms_live=[],
+                    notes="Request blocked by compliance policy.",
+                ),
+                compliance_review=compliance_review,
+                recommended_price=None,
+                title_options=[],
+                selected_title=None,
+                preview_description=None,
+                platform_variants={},
+                platform_publication={},
+                verified_attributes={},
+                perception_report={},
+                quality_report={},
+                enhanced_assets=[],
+            )
+            self._record(
+                "listing.blocked",
+                listing_id,
+                {
+                    "duration_ms": round((time.perf_counter() - overall_start) * 1000, 2),
+                    "reasons": compliance_review.reasons,
+                },
+            )
+            self._persist_listing(listing_id, payload, response)
+            return response
 
         stage_start = time.perf_counter()
         enhanced_assets = await self._enhancer.process(listing_id, payload.assets)
@@ -93,7 +136,15 @@ class ListingOrchestrator:
         )
 
         publish_results = None
-        if publish and payload.target_platforms:
+        publish_requested = publish and bool(payload.target_platforms)
+        publish_allowed = publish_requested and compliance_review.status == "passed"
+        if publish_requested and not publish_allowed:
+            self._record(
+                "listing.publication_skipped",
+                listing_id,
+                {"compliance_status": compliance_review.status},
+            )
+        if publish_allowed:
             stage_start = time.perf_counter()
             publish_results = await self._publisher.schedule_publication(
                 listing_id=listing_id,
@@ -123,6 +174,14 @@ class ListingOrchestrator:
                 notes=publish_results.notes,
             )
             platform_publication = publish_results.platform_results
+        elif publish_requested and compliance_review.status == "needs_review":
+            status = schemas.ListingStatus(
+                listing_id=listing_id,
+                state="needs_review",
+                platforms_live=[],
+                notes="Draft generated; manual compliance review required before publishing.",
+            )
+            platform_publication = {}
         else:
             status = schemas.ListingStatus(
                 listing_id=listing_id,
@@ -134,6 +193,7 @@ class ListingOrchestrator:
 
         response = schemas.ListingResponse(
             status=status,
+            compliance_review=compliance_review,
             recommended_price=suggested_price,
             title_options=copy_pkg.title_options,
             selected_title=copy_pkg.selected_title,
@@ -155,26 +215,7 @@ class ListingOrchestrator:
             },
         )
 
-        # Persist listing + create publish jobs (assisted by default).
-        try:
-            req_dump = payload.model_dump(mode="json")
-            res_dump = response.model_dump(mode="json")
-            owner_id = payload.owner_id
-            self._storage.upsert_listing(
-                listing_id=listing_id,
-                owner_id=owner_id,
-                request=req_dump,
-                response=res_dump,
-            )
-            if platform_publication:
-                self._storage.create_publish_jobs(
-                    listing_id=listing_id,
-                    platform_publication=platform_publication,
-                    mode_by_platform={k: "assisted" for k in platform_publication.keys()},
-                )
-        except Exception:
-            # Persistence should not block listing creation.
-            pass
+        self._persist_listing(listing_id, payload, response)
 
         return response
 
@@ -183,6 +224,33 @@ class ListingOrchestrator:
             self._telemetry.record_event(event, listing_id, payload)
         except Exception:
             # Telemetry should never block main workflow; swallow errors silently for now.
+            pass
+
+    def _persist_listing(
+        self,
+        listing_id: str,
+        payload: schemas.ListingRequest,
+        response: schemas.ListingResponse,
+    ) -> None:
+        # Persistence should not block listing creation.
+        try:
+            req_dump = payload.model_dump(mode="json")
+            res_dump = response.model_dump(mode="json")
+            self._storage.upsert_listing(
+                listing_id=listing_id,
+                owner_id=payload.owner_id,
+                request=req_dump,
+                response=res_dump,
+            )
+            if response.platform_publication:
+                self._storage.create_publish_jobs(
+                    listing_id=listing_id,
+                    platform_publication=response.platform_publication,
+                    mode_by_platform={
+                        k: "assisted" for k in response.platform_publication.keys()
+                    },
+                )
+        except Exception:
             pass
 
 

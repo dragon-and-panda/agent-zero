@@ -33,6 +33,21 @@ class SellerPreference(BaseModel):
     )
 
 
+class SellerAttestation(BaseModel):
+    owns_or_can_sell_item: bool = Field(
+        False,
+        description="Seller confirms they own the item or are authorized to sell it.",
+    )
+    description_is_truthful: bool = Field(
+        False,
+        description="Seller confirms the description, photos, and claims are accurate.",
+    )
+    no_prohibited_items: bool = Field(
+        False,
+        description="Seller confirms the listing does not include prohibited or restricted goods.",
+    )
+
+
 class ListingAsset(BaseModel):
     source_uri: Optional[HttpUrl] = Field(
         None, description="Publicly accessible URL for the uploaded asset."
@@ -94,6 +109,25 @@ class ListingRequest(BaseModel):
         default_factory=SellerPreference,
         description="Preferences controlling tone, pricing, negotiations.",
     )
+    seller_attestations: SellerAttestation = Field(
+        default_factory=SellerAttestation,
+        description="Required attestations for compliance review before publication.",
+    )
+
+
+class ComplianceReview(BaseModel):
+    status: str = Field(
+        ...,
+        description="Compliance outcome: passed | needs_review | blocked.",
+    )
+    reasons: List[str] = Field(
+        default_factory=list,
+        description="Reasons explaining the current compliance status.",
+    )
+    required_actions: List[str] = Field(
+        default_factory=list,
+        description="Actions needed before the listing can proceed.",
+    )
 
 
 class ListingStatus(BaseModel):
@@ -110,6 +144,7 @@ class ListingStatus(BaseModel):
 
 class ListingResponse(BaseModel):
     status: ListingStatus
+    compliance_review: ComplianceReview
     recommended_price: Optional[float] = Field(
         None, description="Initial suggestion from valuation pipeline."
     )
