@@ -79,7 +79,7 @@ elif [[ "$lower_summary" =~ (live\ forex|leveraged\ trading|managed\ account|gua
   reason="Live leveraged trading and financial-promotion schemes are out of scope."
 fi
 
-weighted_score=$((time_to_cash * 20 + repeatability * 20 + compliance * 20 + resilience * 20 + capital * 20))
+weighted_score=$((((time_to_cash + repeatability + compliance + resilience + capital) * 20) / 5))
 
 if [[ "$decision" != "REJECT" ]]; then
   if [[ "$lower_summary" =~ (paper\ trading|trading\ simulation|simulated\ trading|research\ only) ]]; then
