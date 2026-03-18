@@ -40,6 +40,9 @@ knowledge/**
 # Handle instruments directory
 instruments/**
 !instruments/**/
+# Track strategy instruments used by autonomous planning.
+!instruments/strategy/
+!instruments/strategy/**
 # Explicitly allow the default folder in instruments
 !instruments/default/
 !instruments/default/**
