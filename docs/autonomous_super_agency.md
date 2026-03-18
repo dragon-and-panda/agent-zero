@@ -81,6 +81,8 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 2. Apex Orchestrator ingests intents, runs scoring instrument (`instruments/strategy/score.sh`), and updates `behaviour.md` with fresh OKRs.
 3. Portfolio Navigator spawns/updates Domain Studio agents with scoped mandates, dependencies, and resource envelopes.
 
+The compliant financial-system example for this workflow lives under `docs/programs/agentic_financial_system/` and should be used as the reference implementation for revenue-oriented missions.
+
 ### 5.2 Research Sprint Loop
 1. Scouting Agents continuously run watchlists (scheduled via cron + CLI) and push summaries to knowledge base.
 2. Program Architects cluster findings, design hypotheses, and enqueue experiments in `docs/research_backlog.md`.
@@ -209,6 +211,7 @@ Store each persona file as a reusable fragment referenced from `agent.system.mai
 | Component | Location | Purpose |
 | --- | --- | --- |
 | `score.sh` | `instruments/strategy/` | Multi-factor opportunity scoring (impact, effort, risk). |
+| `score.md` | `instruments/strategy/` | Usage guide and decision rubric for intake scoring. |
 | `budget_guard.py` | `python/extensions/` (e.g., `_35_budget_guard.py`) | Monitors token/compute usage; triggers behavior adjustments on overruns. |
 | `watchdog.py` | `python/extensions/` (e.g., `_40_watchdog.py`) | Validates outputs, halts workflows on anomalies. |
 | `telemetry_push.sh` | `instruments/ops/` | Publishes mission KPIs to shared dashboards. |
