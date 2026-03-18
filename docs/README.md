@@ -6,6 +6,8 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Compliance Pack](policies/compliance_pack.md):** Guardrails for autonomous revenue programs and data-handling workflows.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** A compliant multi-lane monetization plan for this repo's autonomous agency pattern.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -50,12 +52,17 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
     - [Tools](architecture.md#2-tools)
     - [SearXNG Integration](architecture.md#searxng-integration)
     - [Memory System](architecture.md#3-memory-system)
-    - [Messages History and Summarization](archicture.md#messages-history-and-summarization)
+    - [Messages History and Summarization](architecture.md#messages-history-and-summarization)
     - [Prompts](architecture.md#4-prompts)
     - [Knowledge](architecture.md#5-knowledge)
     - [Instruments](architecture.md#6-instruments)
     - [Extensions](architecture.md#7-extensions)
-  - [Contributing](contribution.md)
+- [Compliance Pack](policies/compliance_pack.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+- [Agentic Financial System Mission Diary](programs/agentic_financial_system/journal.md)
+- [Agentic Financial System Improvement Backlog](programs/agentic_financial_system/improvements.md)
+- [Incoming Opportunities Queue](strategy/incoming.md)
+- [Contributing](contribution.md)
   - [Getting Started](contribution.md#getting-started)
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
