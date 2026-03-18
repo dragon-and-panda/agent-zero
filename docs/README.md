@@ -6,6 +6,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Super Agency Template](super_agency_template.md):** Use this repo as an extendable “super agency” + MCP-capable services template.
+- **[Autonomous Super Agency Blueprint](autonomous_super_agency.md):** Run a governed multi-agent organization with low human touch.
+- **[Autonomous Listing Service](autonomous_listing_service.md):** Reference blueprint for an AI-native listing and engagement business.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Launch a compliant, redundant revenue program with scoring and guardrails.
+- **[Compliance Pack](policies/compliance_pack.md):** Enforce privacy, consent, and anti-abuse rules across monetization workflows.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -63,3 +67,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)
+- [Autonomous Super Agency Blueprint](autonomous_super_agency.md)
+- [Autonomous Listing Service](autonomous_listing_service.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+- [Compliance Pack](policies/compliance_pack.md)
