@@ -5,9 +5,9 @@ from dataclasses import dataclass, field
 from typing import Dict, List
 
 from ... import schemas
-from .marketplaces.base import MarketplacePublisher, PublicationResult
-from .marketplaces.craigslist import CraigslistPublisher
-from .marketplaces.mercari import MercariPublisher
+from ..marketplaces.base import MarketplacePublisher, PublicationResult
+from ..marketplaces.craigslist import CraigslistPublisher
+from ..marketplaces.mercari import MercariPublisher
 
 
 @dataclass
