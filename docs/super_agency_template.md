@@ -15,6 +15,9 @@ This repository can be used as a **“super agency” template**: a core multi-a
   - Add instruments in `instruments/custom/` for low-token reusable procedures.
 - **Knowledge**
   - Put org-specific docs into `knowledge/custom/` and keep them versioned.
+- **Governance**
+  - Keep compliance and monetization guardrails in versioned docs such as `docs/policies/compliance_pack.md`.
+  - Store active venture plans and journals under `docs/programs/`.
 - **Services**
   - Add new capabilities under `services/<capability_name>/` with:
     - `app/` (business logic)
