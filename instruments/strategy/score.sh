@@ -148,8 +148,13 @@ max_total=34
 
 decision="HOLD"
 reason="compliant lane, but it needs stronger economics or automation before activation."
+has_soft_low=0
 
-if (( total >= 25 )); then
+if [[ "$time_to_value" == "low" || "$margin" == "low" || "$repeatability" == "low" || "$automation" == "low" || "$defensibility" == "low" ]]; then
+  has_soft_low=1
+fi
+
+if (( total >= 25 )) && (( has_soft_low == 0 )); then
   decision="PASS"
   reason="cleared hard gates and scored strongly on repeatability, economics, and automation fit."
 elif (( total < 18 )); then
