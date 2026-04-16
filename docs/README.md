@@ -6,6 +6,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Super-Agency Blueprint](autonomous_super_agency.md):** Configure Agent Zero as a governed multi-agent operating system for research, product, and venture execution.
+- **[Autonomous Listing Service](autonomous_listing_service.md):** Review the marketplace-automation service blueprint and its commercialization path.
+- **[Compliance Pack](policies/compliance_pack.md):** Apply privacy, consent, and legality guardrails before launching any revenue workflow.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Track the current ethical revenue program, its lanes, and activation rules.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -62,6 +66,13 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Autonomous Super-Agency Blueprint](autonomous_super_agency.md)
+- [Autonomous Listing Service](autonomous_listing_service.md)
+- [Compliance Pack](policies/compliance_pack.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+- [Agentic Financial System Journal](programs/agentic_financial_system/journal.md)
+- [Agentic Financial System Improvements](programs/agentic_financial_system/improvements.md)
+- [Strategy Intake Queue](strategy/incoming.md)
 - [Token Compression Protocol](token_compression_protocol.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
