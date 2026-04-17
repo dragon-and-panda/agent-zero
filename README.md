@@ -148,6 +148,9 @@ docker run -p 50001:80 frdel/agent-zero-run
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
 | [Architecture](./docs/architecture.md) | System design and components |
+| [Autonomous Super-Agency](./docs/autonomous_super_agency.md) | Multi-agent operating model, governance, and department blueprint |
+| [Compliance Pack](./docs/policies/compliance_pack.md) | Hard guardrails for lawful, consent-based autonomous revenue programs |
+| [Agentic Financial System](./docs/programs/agentic_financial_system/charter.md) | Charter for a compliant, self-sustaining revenue program |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
 
