@@ -42,6 +42,7 @@ This architecture ensures:
 | --- | --- |
 | `/docker` | Docker-related files for runtime container |
 | `/docs` | Documentation files and guides |
+| `/docs/policies` | Compliance and lawful-use policy packs |
 | `/instruments` | Custom scripts and tools for runtime environment |
 | `/knowledge` | Knowledge base storage |
 | `/logs` | HTML CLI-style chat logs |
@@ -204,6 +205,7 @@ The `prompts` directory contains various Markdown files that control agent behav
 | Prompt File | Description |
 |---|---|
 | agent.system.main.role.md | Defines the agent's overall role and capabilities |
+| agent.system.main.safety.md | Encodes lawful-use, privacy, and consent guardrails |
 | agent.system.main.communication.md | Specifies how the agent should communicate |
 | agent.system.main.solving.md | Describes the agent's approach to tasks |
 | agent.system.main.tips.md | Provides additional tips or guidance |
