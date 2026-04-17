@@ -53,11 +53,13 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Ecosystem Cartographers:** Map ecosystems, scout potential partners, and maintain opportunity graphs in knowledge base.
 - **Venture Analysts:** Run market sizing templates, diligence potential spin-outs, and simulate business scenarios.
 - **Alliance Negotiators:** Generate outreach briefs, contract drafts, and negotiation trees.
+- **Revenue Engine Constraint:** All monetization workflows must follow `docs/autonomous_revenue_engine.md` and the policy pack under `docs/policies/`, especially for consent, contact handling, and channel compliance.
 
 ### 3.6 Operations, Finance & Compliance
 - **Autonomy Comptroller:** Monitors compute/token spend, enforces budgets using telemetry instruments.
 - **Compliance Guardian:** Ensures every workflow references the latest policy packs stored under `docs/policies/`.
 - **Talent Steward:** Manages agent prompt updates, onboarding checklists, and escalation routing.
+- **Commercial Rule:** Any workflow based on harvested contact data, inbox mining for outreach, or contact-list resale should be blocked and redirected to an opt-in acquisition strategy.
 
 ---
 
