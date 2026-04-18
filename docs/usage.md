@@ -101,6 +101,7 @@ Agent Zero supports direct file attachments in the chat interface for seamless f
 Agent Zero's power comes from its ability to use [tools](architecture.md#tools). Here's how to leverage them effectively:
 
 - **Understand Tools:** Agent Zero includes default tools like knowledge (powered by SearXNG), webpage content, code execution, and communication. Understand the capabilities of these tools and how to invoke them.
+- **Screen monetization ideas first:** For revenue-oriented missions, use the `revenue_planning` tool before gathering data or automating outreach. It forces the agent to check consent, legality, platform terms, and data provenance before a venture lane is pursued.
 
 ## Example of Tools Usage: Web Search and Code Execution
 Let's say you want Agent Zero to perform some financial analysis tasks. Here's a possible prompt:
@@ -118,6 +119,16 @@ Agent Zero might then:
 > The first run of `code_execution_tool` may take a while as it downloads and builds the Agent Zero Docker image. Subsequent runs will be faster.
 
 This example demonstrates how to combine multiple tools to achieve an analysis task. By mastering prompt engineering and tool usage, you can unlock the full potential of Agent Zero to solve complex problems.
+
+## Compliant Revenue Automation
+If your goal is to build an autonomous business system, keep the workflow compliant from the start:
+
+1. Put new ideas into `docs/strategy/incoming.md`.
+2. Score them with `instruments/strategy/score.sh`.
+3. Use the `revenue_planning` tool to produce a lane recommendation and required guardrails.
+4. Execute only lanes that rely on consented data, first-party assets, lawful automation, and platform-compliant operations.
+
+Examples of acceptable early lanes include opt-in lead magnets, digital research products, client-authorized CRM enrichment, and marketplace listing services. Personal email scraping, inbox mining without consent, spam systems, and contact-list resale should be rejected.
 
 ## Multi-Agent Cooperation
 One of Agent Zero's unique features is multi-agent cooperation.
