@@ -6,6 +6,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Innovation Super-Agency Blueprint](autonomous_super_agency.md):** Configure Agent Zero as a multi-department autonomous agency.
+- **[Autonomous Listing Service Blueprint](autonomous_listing_service.md):** Explore a compliant monetization lane for agentic listing operations.
+- **[Revenue Compliance Pack](policies/compliance_pack.md):** Apply legal and ethical constraints to revenue-seeking workflows.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -44,6 +47,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Mathematical Expressions](usage.md#mathematical-expressions)
   - [File Browser](usage.md#file-browser)
 - [Architecture Overview](architecture.md)
+  - [Autonomous Innovation Super-Agency Blueprint](autonomous_super_agency.md)
+  - [Autonomous Listing Service Blueprint](autonomous_listing_service.md)
+  - [Revenue Compliance Pack](policies/compliance_pack.md)
   - [System Architecture](architecture.md#system-architecture)
   - [Runtime Architecture](architecture.md#runtime-architecture)
   - [Implementation Details](architecture.md#implementation-details)
