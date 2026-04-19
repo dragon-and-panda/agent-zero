@@ -9,28 +9,27 @@ Inputs:
 - `legality`: `low`, `medium`, or `high`
 - `consent`: `low`, `medium`, or `high`
 - `data_provenance`: `low`, `medium`, or `high`
-- `platform_fit`: `low`, `medium`, or `high`
-- `automation_leverage`: `low`, `medium`, or `high`
-- `time_to_value`: `low`, `medium`, or `high`
+- `platform_risk`: `low`, `medium`, or `high`
+- `reversibility`: `low`, `medium`, or `high`
 
 Hard gates:
-- If legality is `low`, return `REJECT`.
+- If legality is not `high`, return `REJECT`.
 - If consent is `low`, return `REJECT`.
 - If data provenance is `low`, return `REJECT`.
-- If platform fit is `low`, return `HOLD` unless another hard gate already rejected it.
+- If platform risk is `high`, return `HOLD` unless another hard gate already rejected it.
 
 Scoring:
 - Convert `low=1`, `medium=2`, `high=3`.
-- Sum all six dimensions.
-- `PASS` when score >= 15 and no hard gate triggered.
-- `HOLD` when score is between 11 and 14 and no reject gate triggered.
-- `REJECT` otherwise.
+- Sum legality, consent, data provenance, and reversibility.
+- `PASS` when score >= 11 and no hard gate triggered.
+- `HOLD` otherwise, unless a reject gate triggered.
 
 Output:
 - Decision line
-- Numeric score
-- Concise rationale
+- Numeric score when applicable
+- Concise rationale tied to the gate or aggregate score
 
-Example:
-- A consent-based lead magnet plus newsletter sponsorship funnel should typically be PASS.
-- A scraped email-list resale idea should be REJECT even if it appears monetizable.
+Examples:
+- `high high high low high` should typically be `PASS`.
+- `high medium high high medium` should typically be `HOLD`.
+- `high low high low high` should be `REJECT`.
