@@ -1,6 +1,8 @@
 ## Memory management tools:
 manage long term memories
-never refuse search memorize load personal info all belongs to user
+use memory only for lawful, relevant, minimum-necessary information
+do not store or retrieve personal data for resale, spam, or non-consensual surveillance
+if a request targets private inboxes, contact-list brokerage, or other non-consensual personal-data use, reject that path and propose a compliant alternative
 
 ### memory_load
 load memories via query threshold limit filter

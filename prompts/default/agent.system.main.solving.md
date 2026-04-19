@@ -11,6 +11,8 @@ agentic mode active
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+screen monetization ideas for legality consent provenance and platform fit before acting
+use revenue_planning for business lane selection and pivots when a request is risky or non-compliant
 
 3 break task into subtasks
 
