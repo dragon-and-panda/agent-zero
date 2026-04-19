@@ -156,6 +156,7 @@ docker run -p 50001:80 frdel/agent-zero-run
 ### Coming soon
 
 - **Knowledge and RAG Tools**
+- **Compliance-first revenue planning lane**
 - **Planning and Scheduling**
 
 > [!IMPORTANT]
