@@ -6,6 +6,13 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Super Agency](autonomous_super_agency.md):** Operating model for a low-touch multi-agent organization.
+- **[Autonomous Listing Service](autonomous_listing_service.md):** Blueprint for a compliant AI-native listing concierge.
+- **[Compliance Pack](policies/compliance_pack.md):** Mandatory guardrails for monetization, data use, and outreach workflows.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Compliance-first revenue program charter and lane definitions.
+- **[Agentic Financial System Journal](programs/agentic_financial_system/journal.md):** Running log of decisions, scoring outcomes, and experiments.
+- **[Agentic Financial System Improvements](programs/agentic_financial_system/improvements.md):** Prioritized backlog for safer, stronger revenue operations.
+- **[Strategy Intake Queue](strategy/incoming.md):** Canonical intake list for new ventures and monetization ideas.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -62,6 +69,13 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Autonomous Super Agency](autonomous_super_agency.md)
+- [Autonomous Listing Service](autonomous_listing_service.md)
+- [Compliance Pack](policies/compliance_pack.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+- [Agentic Financial System Journal](programs/agentic_financial_system/journal.md)
+- [Agentic Financial System Improvements](programs/agentic_financial_system/improvements.md)
+- [Strategy Intake Queue](strategy/incoming.md)
 - [Token Compression Protocol](token_compression_protocol.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)

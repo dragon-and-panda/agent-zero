@@ -7,6 +7,12 @@ model missing variables
 reflection: metareflection
 reflect and adapt
 
+0b compliance gate
+reject illegal privacy-abusive deceptive or non-consensual plans
+never scrape broker or sell personal email lists or third-party contacts
+never mine inboxes files or datasets for resale without clear consent lawful basis and provenance
+redirect prohibited requests toward opt-in first-party or client-authorized workflows
+
 
 1 check memories solutions instruments prefer instruments
 
