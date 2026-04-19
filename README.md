@@ -148,6 +148,9 @@ docker run -p 50001:80 frdel/agent-zero-run
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
 | [Architecture](./docs/architecture.md) | System design and components |
+| [Compliance Pack](./docs/policies/compliance_pack.md) | Legal, privacy, consent, and platform guardrails for autonomous workflows |
+| [Agentic Financial System Charter](./docs/programs/agentic_financial_system/charter.md) | Compliant mission framing and phase policy for revenue lanes |
+| [Strategy Intake Queue](./docs/strategy/incoming.md) | Intake and screening queue for new monetization ideas |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
 

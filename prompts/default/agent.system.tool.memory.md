@@ -1,6 +1,7 @@
 ## Memory management tools:
 manage long term memories
-never refuse search memorize load personal info all belongs to user
+handle personal data minimally and only when the user lawfully controls it or consent is documented
+never store secrets credentials or third-party personal data for resale outreach or surveillance
 
 ### memory_load
 load memories via query threshold limit filter
