@@ -58,6 +58,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Autonomy Comptroller:** Monitors compute/token spend, enforces budgets using telemetry instruments.
 - **Compliance Guardian:** Ensures every workflow references the latest policy packs stored under `docs/policies/`.
 - **Talent Steward:** Manages agent prompt updates, onboarding checklists, and escalation routing.
+- **Privacy-Safe Revenue Rule:** Growth workflows must follow `docs/policies/compliance_pack.md` and prefer consent-based acquisition patterns documented in `docs/roadmaps/ethical_revenue_engine.md`.
 
 ---
 
@@ -68,7 +69,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 | Prompt hierarchy | `prompts/default/` → `prompts/super-agency/` | Copy defaults, add persona-specific files, reference via settings. |
 | Behavior rules | `behaviour/*.md` + `python/tools/behaviour_adjustment.py` | Executive Cortex updates rules at runtime for global pivots. |
 | Tools & instruments | `python/tools/`, `instruments/` | Department-specific instruments encapsulate workflows without bloating prompts. |
-| Memory & knowledge | `memory/`, `knowledge/`, `docs/` | Research insights and SOPs persist for reuse and grounding. |
+| Memory & knowledge | `memory/`, `knowledge/`, `docs/` | Research insights, compliance packs, and revenue SOPs persist for reuse and grounding. |
 | Extensions | `python/extensions/` | Add watchdog, telemetry, and summarization hooks to enforce autonomy constraints. |
 | Web UI + CLI | `webui/`, `run_cli.py`, Docker stack | Enables monitoring dashboards and manual overrides if needed. |
 
@@ -79,7 +80,8 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 ### 5.1 Mission Intake & Prioritization
 1. Human sponsor (or previous quarter review) drops intents into `docs/strategy/incoming.md`.
 2. Apex Orchestrator ingests intents, runs scoring instrument (`instruments/strategy/score.sh`), and updates `behaviour.md` with fresh OKRs.
-3. Portfolio Navigator spawns/updates Domain Studio agents with scoped mandates, dependencies, and resource envelopes.
+3. Compliance Guardian validates the mission against `docs/policies/compliance_pack.md` before any data-touching task begins.
+4. Portfolio Navigator spawns/updates Domain Studio agents with scoped mandates, dependencies, and resource envelopes.
 
 ### 5.2 Research Sprint Loop
 1. Scouting Agents continuously run watchlists (scheduled via cron + CLI) and push summaries to knowledge base.
@@ -107,6 +109,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Watchdog Extensions:** `_40_watchdog.py` evaluates tool outputs, halting loops on anomaly scores.
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
 - **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
+- **Growth Constraint:** Agents must not treat scraped or inbox-derived personal contacts as a monetizable asset; approved growth motions live in `docs/roadmaps/ethical_revenue_engine.md`.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
 ---
@@ -120,7 +123,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
    - Required tools/instruments list
 3. **Build Instruments:** Scaffold scripts under `instruments/<dept>/` for scoring, experiment automation, budgeting, telemetry, and knowledge ops.
 4. **Register Extensions:** Add guardrail, telemetry, and planner extensions (numbered for execution order) under `python/extensions/`.
-5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, and SOPs.
+5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, and SOPs. Mirror the canonical compliance pack in `docs/policies/compliance_pack.md` and the active revenue playbook in `docs/roadmaps/ethical_revenue_engine.md`.
 6. **Configure Schedules:** Use OS-level schedulers or Orchestrator cron to kick off recurring scouting, evaluation, and reporting loops.
 7. **Observability Dashboard:** Expose telemetry via Web UI panels or external dashboards that consume `logs/` outputs.
 
