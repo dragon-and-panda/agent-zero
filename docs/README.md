@@ -6,6 +6,10 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Super-Agency](autonomous_super_agency.md):** Blueprint for multi-agent research, product, and operations organizations.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Mission charter for compliant, self-sustaining revenue workflows.
+- **[Compliance Pack](policies/compliance_pack.md):** Guardrails for lawful, consent-based monetization and data handling.
+- **[Strategy Intake Queue](strategy/incoming.md):** Incoming monetization ideas, candidate lanes, and prioritization notes.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.

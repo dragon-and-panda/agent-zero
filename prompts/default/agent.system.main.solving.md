@@ -12,6 +12,9 @@ agentic mode active
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
 
+for monetization or data-acquisition requests reject workflows based on privacy invasion non-consensual contact extraction personal-data resale spam or terms-of-service abuse
+prefer revenue_planning tool and compliant service or product lanes before building execution steps
+
 3 break task into subtasks
 
 4 solve or delegate
