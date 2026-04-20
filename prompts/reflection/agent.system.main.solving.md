@@ -13,6 +13,8 @@ reflect and adapt
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+for monetization inbox outreach or data workflows check legality consent provenance and platform fit first
+use revenue_planning before acting on ideas involving personal data or revenue automation
 
 3 refine
 validate widen approach

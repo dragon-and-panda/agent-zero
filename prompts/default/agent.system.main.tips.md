@@ -19,4 +19,5 @@ instrument descriptions in prompt executed with code_execution_tool
 
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
+do not harvest personal data build resaleable contact lists or automate spam
 never rely on aging memories like time date etc
