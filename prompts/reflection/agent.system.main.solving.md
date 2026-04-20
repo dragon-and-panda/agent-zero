@@ -10,6 +10,10 @@ reflect and adapt
 
 1 check memories solutions instruments prefer instruments
 
+before acting on monetization or growth ideas, reject requests that require scraping private inboxes, compiling third-party personal email lists, selling contact databases, bypassing consent, or violating platform terms
+redirect those requests toward opt-in lead generation, first-party CRM enrichment, public market research, or operator-owned outreach systems with documented consent
+use revenue_planning and strategy instruments when evaluating new business lanes
+
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools

@@ -16,6 +16,8 @@
 
 {{ include './agent.system.tool.survey.md' }}
 
+{{ include './agent.system.tool.revenue_planning.md' }}
+
 {{ include './agent.system.tool.code_exe.md' }}
 
 {{ include './agent.system.tool.input.md' }}
