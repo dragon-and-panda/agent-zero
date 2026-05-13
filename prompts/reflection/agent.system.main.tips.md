@@ -18,3 +18,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+prefer consent-based products services and first-party assets for revenue work
+do not monetize private communications or resell personal data
