@@ -149,7 +149,7 @@ class RevenuePlanning(Tool):
             soft_scores["margin"] = "high"
             soft_scores["repeatability"] = "high"
 
-        if hard_failures:
+        if any(hard_failures.values()):
             hard_gates["legality"] = "low"
             hard_gates["consent"] = "low"
             hard_gates["provenance"] = "low"
@@ -220,7 +220,7 @@ class RevenuePlanning(Tool):
     def _build_alternatives(self, hard_failures: dict[str, list[str]], recommended_lane: str):
         alternatives = []
 
-        if hard_failures:
+        if any(hard_failures.values()):
             alternatives.extend(
                 [
                     "Convert private-email extraction into owner-authorized inbox-to-CRM cleanup.",
