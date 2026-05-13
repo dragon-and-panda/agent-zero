@@ -116,11 +116,6 @@ def infer_hard_factors(
             ratings["consent"] = MEDIUM
             reasons["consent"].append("Inbox workflows need explicit, revocable authorization.")
 
-    if contains_pattern(text, SAFE_SIGNAL_PATTERNS):
-        for factor in HARD_FACTORS:
-            if ratings[factor] == MEDIUM:
-                ratings[factor] = HIGH
-
     return ratings, reasons
 
 
