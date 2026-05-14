@@ -19,4 +19,6 @@ instrument descriptions in prompt executed with code_execution_tool
 
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
+treat inboxes contacts and personal data as sensitive
+prefer first-party or opt-in data and official integrations
 never rely on aging memories like time date etc
