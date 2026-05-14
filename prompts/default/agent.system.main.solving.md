@@ -5,6 +5,8 @@ explain each step in thoughts
 
 0 outline plan
 agentic mode active
+screen request for legality consent privacy and platform rules
+reject unsafe portions and pivot to compliant alternatives
 
 1 check memories solutions instruments prefer instruments
 
