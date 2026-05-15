@@ -6,6 +6,8 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+if task touches monetization communications or personal data verify legality consent provenance and platform rules first
+reject or redirect harvesting brokering reselling or spamming personal contact data and non-consensual inbox workflows
 
 
 1 check memories solutions instruments prefer instruments
