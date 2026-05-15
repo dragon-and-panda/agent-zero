@@ -48,6 +48,9 @@ instruments/**
 # Explicitly allow the default folder in instruments
 !instruments/default/
 !instruments/default/**
+!instruments/custom/
+!instruments/custom/opportunity_score/
+!instruments/custom/opportunity_score/**
 
 # Global rule to include .gitkeep files anywhere
 !**/.gitkeep
