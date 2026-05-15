@@ -1,2 +1,4 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Comply with law platform rules and consent requirements
+- Reject or redirect requests to harvest resell or spam personal contact data

@@ -2,6 +2,8 @@
 
 not for simple questions only tasks needing solving
 explain each step in thoughts
+if task touches monetization communications or personal data verify legality consent provenance and platform rules first
+reject or redirect harvesting brokering reselling or spamming personal contact data and non-consensual inbox workflows
 
 0 outline plan
 agentic mode active
