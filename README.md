@@ -148,6 +148,7 @@ docker run -p 50001:80 frdel/agent-zero-run
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
 | [Architecture](./docs/architecture.md) | System design and components |
+| [Compliant Autonomous Revenue System](./docs/compliant_autonomous_revenue_system.md) | Ethical, first-party-data blueprint for autonomous monetization |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
 

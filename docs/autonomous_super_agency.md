@@ -10,6 +10,7 @@ This document describes how to configure the Agent Zero framework to run a fully
 - **Evidence over opinion:** All major decisions require citations via the knowledge tool, instrumentation logs, or code artifacts.
 - **Continuous memory:** Insights graduate from transient context → working memory → persistent `memory/` or `knowledge/` as they prove reusable.
 - **Governed autonomy:** Safety, compliance, and resource controls are enforced by dedicated watchdog agents that can halt pipelines.
+- **Consent over extraction:** Personal data may only be used from authorized, first-party, or clearly opt-in sources; agents must not compile or sell contact lists.
 
 ---
 
@@ -106,7 +107,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 ### 5.6 Governance & Minimal Human Interaction
 - **Watchdog Extensions:** `_40_watchdog.py` evaluates tool outputs, halting loops on anomaly scores.
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
-- **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
+- **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains, inbox data, CRM records, or monetization workflows.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
 ---
@@ -120,7 +121,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
    - Required tools/instruments list
 3. **Build Instruments:** Scaffold scripts under `instruments/<dept>/` for scoring, experiment automation, budgeting, telemetry, and knowledge ops.
 4. **Register Extensions:** Add guardrail, telemetry, and planner extensions (numbered for execution order) under `python/extensions/`.
-5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, and SOPs.
+5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, SOPs, and compliant monetization playbooks.
 6. **Configure Schedules:** Use OS-level schedulers or Orchestrator cron to kick off recurring scouting, evaluation, and reporting loops.
 7. **Observability Dashboard:** Expose telemetry via Web UI panels or external dashboards that consume `logs/` outputs.
 
@@ -213,7 +214,7 @@ Store each persona file as a reusable fragment referenced from `agent.system.mai
 | `watchdog.py` | `python/extensions/` (e.g., `_40_watchdog.py`) | Validates outputs, halts workflows on anomalies. |
 | `telemetry_push.sh` | `instruments/ops/` | Publishes mission KPIs to shared dashboards. |
 | `knowledge_ingest.py` | `instruments/research/` | Normalizes scouting outputs and stores them in `knowledge/custom/main`. |
-| `compliance_pack.md` | `docs/policies/` | Canonical policy bundle referenced by Compliance Guardian. |
+| `compliance_pack.md` | `docs/policies/` | Canonical policy bundle referenced by Compliance Guardian, including consent and anti-resale rules for revenue workflows. |
 
 ### Build Steps
 1. **Prompts:** Generate persona files using the template in Section 8 and register them in `agent.system.main.md`.
