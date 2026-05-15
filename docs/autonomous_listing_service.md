@@ -10,6 +10,7 @@ This document describes the design of an AI-native service that turns a sellerâ€
 - **Unified Messaging:** Give sellers a Zoom-like conversational hub to coordinate with AI agents and buyers while listings are live.
 - **Autonomous Lifecycle:** Monitor inquiries, negotiate within guardrails, and auto-close listings once an item sells.
 - **Portable Runtime:** Deliver as a Python-first, containerized micro-app deployable on Lambda, Cloud Run, or Fargate.
+- **Privacy-safe operations:** Use only seller-authorized data and platform-compliant messaging; do not harvest or resell buyer contact data.
 
 ---
 
