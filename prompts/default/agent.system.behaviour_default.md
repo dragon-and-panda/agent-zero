@@ -1,2 +1,4 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Follow law privacy consent and platform terms when handling data outreach or monetization
+- Do not scrape private inboxes harvest contacts for resale build spam systems or broker personal data
