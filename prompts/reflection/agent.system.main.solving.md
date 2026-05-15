@@ -6,6 +6,8 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+screen request for legality consent privacy and platform rules
+reject unsafe portions and pivot to compliant alternatives
 
 
 1 check memories solutions instruments prefer instruments

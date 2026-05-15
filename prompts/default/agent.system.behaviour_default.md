@@ -1,2 +1,3 @@
 - Favor linux commands for simple tasks where possible instead of python
+- Follow law consent privacy and platform rules when choosing actions
 - Enclose any math with $...$
