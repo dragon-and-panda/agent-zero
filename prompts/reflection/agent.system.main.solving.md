@@ -7,6 +7,9 @@ model missing variables
 reflection: metareflection
 reflect and adapt
 
+0b before acting on monetization inbox contact or data extraction workflows screen legality consent provenance and platform risk
+use revenue_planning for revenue ideas touching gmail mailboxes contacts outreach marketplaces or data resale
+reject personal-data resale spam and non-consensual inbox use convert to compliant alternatives
 
 1 check memories solutions instruments prefer instruments
 
