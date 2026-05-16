@@ -18,3 +18,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+use only lawful permissioned data sources especially for inbox crm and outreach workflows
+never broker personal data or automate spam
