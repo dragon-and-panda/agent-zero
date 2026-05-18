@@ -12,6 +12,7 @@ Agent Zero is a Python-based AI agent framework with a Flask web UI. See `README
 
 ### Gotchas
 
+- `pyreqwest-impersonate` (transitive dep of `duckduckgo-search`) fails to build from source in the Cloud Agent VM. Pre-install its binary wheel before `requirements.txt`: `pip install pyreqwest-impersonate --only-binary :all:`
 - `openai-whisper` requires `setuptools<81` (older versions with `pkg_resources`). When installing dependencies, install whisper first with `--no-build-isolation`, then install the rest: `pip install openai-whisper==20240930 --no-build-isolation && pip install -r requirements.txt`
 - `flask-socketio` is required at runtime but is not listed in `requirements.txt`. It is installed as an extra dependency.
 - The app requires at least one LLM API key (e.g. `API_KEY_OPENAI`) configured in `.env` or via the Settings UI for the agent to function. The web UI itself starts without API keys.
