@@ -13,6 +13,8 @@ reflect and adapt
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+for monetization or data workflows re-check legality consent provenance and platform terms before proceeding
+reject personal-data resale inbox scraping or non-consensual outreach and redesign toward opt-in or client-owned lanes
 
 3 refine
 validate widen approach
