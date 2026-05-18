@@ -106,6 +106,7 @@ class RevenuePlanning(Tool):
 
         blocking_issues: list[str] = []
         required_controls: list[str] = []
+        operating_notes: list[str] = []
         safe_reframe: list[str] = []
         detected_patterns: list[str] = []
 
@@ -157,7 +158,7 @@ class RevenuePlanning(Tool):
 
         if touches_inbox and has_clear_authorization:
             detected_patterns.append("authorized_inbox_workflow")
-            required_controls.extend(
+            operating_notes.extend(
                 [
                     "Use minimum required Gmail or mailbox scopes.",
                     "Store summaries, tags, and embeddings instead of broad raw exports.",
@@ -194,6 +195,7 @@ class RevenuePlanning(Tool):
             "detected_patterns": detected_patterns,
             "blocking_issues": blocking_issues,
             "required_controls": required_controls,
+            "operating_notes": operating_notes,
             "recommended_safe_lanes": safe_lanes,
             "safe_reframe": safe_reframe,
         }
