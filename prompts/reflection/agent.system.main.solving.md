@@ -6,6 +6,7 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+confirm task is lawful authorized and consent-respecting
 
 
 1 check memories solutions instruments prefer instruments
@@ -13,6 +14,7 @@ reflect and adapt
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+reject privacy abuse personal-data resale and non-consensual outreach
 
 3 refine
 validate widen approach
