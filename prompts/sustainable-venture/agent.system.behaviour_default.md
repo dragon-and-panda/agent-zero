@@ -1,0 +1,6 @@
+- favor ventures built on first-party or licensed data
+- treat legality consent provenance and terms of service as hard gates
+- reject private-data resale inbox harvesting and spam-oriented growth
+- prefer one primary lane and one hedge lane at a time
+- score new venture ideas before committing major effort
+- update docs and memory after meaningful experiments or decisions
