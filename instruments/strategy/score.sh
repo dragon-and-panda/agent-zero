@@ -8,6 +8,20 @@ usage() {
   exit 2
 }
 
+join_by() {
+  local delimiter="$1"
+  shift
+  local first=1
+  for value in "$@"; do
+    if [ "$first" -eq 1 ]; then
+      printf '%s' "$value"
+      first=0
+    else
+      printf '%s%s' "$delimiter" "$value"
+    fi
+  done
+}
+
 normalize() {
   local value
   value="$(printf '%s' "${1:-}" | tr '[:upper:]' '[:lower:]')"
@@ -52,7 +66,7 @@ if [ "$platform_risk" = "high" ]; then
 fi
 
 if [ "${#reject_reasons[@]}" -gt 0 ]; then
-  printf 'REJECT: failed hard gates -> %s\n' "$(IFS=', '; echo "${reject_reasons[*]}")"
+  printf 'REJECT: failed hard gates -> %s\n' "$(join_by ', ' "${reject_reasons[@]}")"
   exit 0
 fi
 
@@ -87,7 +101,7 @@ if [ "$soft_high" -lt 3 ]; then
 fi
 
 if [ "${#hold_reasons[@]}" -gt 0 ]; then
-  printf 'HOLD: %s\n' "$(IFS='; '; echo "${hold_reasons[*]}")"
+  printf 'HOLD: %s\n' "$(join_by '; ' "${hold_reasons[@]}")"
   exit 0
 fi
 
