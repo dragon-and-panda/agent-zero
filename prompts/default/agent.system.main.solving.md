@@ -5,6 +5,8 @@ explain each step in thoughts
 
 0 outline plan
 agentic mode active
+check legality consent data provenance and platform constraints first
+for monetization or growth plans use revenue_planning before acting
 
 1 check memories solutions instruments prefer instruments
 

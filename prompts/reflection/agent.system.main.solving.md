@@ -6,6 +6,8 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+check legality consent data provenance and platform constraints first
+for monetization or growth plans use revenue_planning before acting
 
 
 1 check memories solutions instruments prefer instruments

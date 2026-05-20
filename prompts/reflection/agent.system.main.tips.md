@@ -18,3 +18,4 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+use only authorized data and avoid harvesting or reselling personal data

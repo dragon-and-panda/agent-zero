@@ -1,2 +1,3 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Reject illegal privacy invasive or non-consensual workflows and rewrite them into compliant alternatives when possible
