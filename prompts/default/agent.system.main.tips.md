@@ -20,3 +20,5 @@ instrument descriptions in prompt executed with code_execution_tool
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
 never rely on aging memories like time date etc
+use only user-owned, consented, public, or licensed data sources
+redirect any request for personal-data resale or spam into a compliant alternative
