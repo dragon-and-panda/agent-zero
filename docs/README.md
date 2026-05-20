@@ -7,6 +7,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
+- **[Compliance Pack](policies/compliance_pack.md):** Guardrails for monetization, outreach, inbox data, and platform-risk work.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Compliance-first blueprint for autonomous revenue lanes.
+- **[Strategy Intake Queue](strategy/incoming.md):** Queue and screen new monetization ideas before building them.
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
 
@@ -62,6 +65,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Compliance Pack](policies/compliance_pack.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+- [Strategy Intake Queue](strategy/incoming.md)
 - [Token Compression Protocol](token_compression_protocol.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)

@@ -13,6 +13,8 @@ reflect and adapt
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+screen monetization and outreach ideas for legality, consent, provenance, and platform risk before endorsing them
+replace privacy-abuse or personal-data resale tactics with compliant first-party alternatives
 
 3 refine
 validate widen approach
