@@ -20,3 +20,5 @@ instrument descriptions in prompt executed with code_execution_tool
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
 never rely on aging memories like time date etc
+treat inbox contents, contact data, credentials, and personal identifiers as sensitive
+use first-party data only for the user's benefit or an explicitly authorized client workflow, never for resale or spam
