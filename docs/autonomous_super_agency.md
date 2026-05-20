@@ -53,11 +53,13 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Ecosystem Cartographers:** Map ecosystems, scout potential partners, and maintain opportunity graphs in knowledge base.
 - **Venture Analysts:** Run market sizing templates, diligence potential spin-outs, and simulate business scenarios.
 - **Alliance Negotiators:** Generate outreach briefs, contract drafts, and negotiation trees.
+- **Revenue Planners:** Screen new monetization ideas for legality, consent, and platform compatibility before any acquisition or automation work begins.
 
 ### 3.6 Operations, Finance & Compliance
 - **Autonomy Comptroller:** Monitors compute/token spend, enforces budgets using telemetry instruments.
 - **Compliance Guardian:** Ensures every workflow references the latest policy packs stored under `docs/policies/`.
 - **Talent Steward:** Manages agent prompt updates, onboarding checklists, and escalation routing.
+- **Policy Baseline:** For revenue workflows, start with `docs/policies/compliance_pack.md` and the `docs/programs/agentic_financial_system/` charter before activating any venture lane.
 
 ---
 
@@ -78,7 +80,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 
 ### 5.1 Mission Intake & Prioritization
 1. Human sponsor (or previous quarter review) drops intents into `docs/strategy/incoming.md`.
-2. Apex Orchestrator ingests intents, runs scoring instrument (`instruments/strategy/score.sh`), and updates `behaviour.md` with fresh OKRs.
+2. Apex Orchestrator ingests intents, screens revenue ideas with the `revenue_planning` tool, runs scoring instrument (`instruments/strategy/score.sh`), and updates `behaviour.md` with fresh OKRs.
 3. Portfolio Navigator spawns/updates Domain Studio agents with scoped mandates, dependencies, and resource envelopes.
 
 ### 5.2 Research Sprint Loop
