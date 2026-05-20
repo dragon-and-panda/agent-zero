@@ -53,6 +53,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Ecosystem Cartographers:** Map ecosystems, scout potential partners, and maintain opportunity graphs in knowledge base.
 - **Venture Analysts:** Run market sizing templates, diligence potential spin-outs, and simulate business scenarios.
 - **Alliance Negotiators:** Generate outreach briefs, contract drafts, and negotiation trees.
+- **Compliance boundary:** Growth work must follow `docs/policies/compliance_pack.md`; personal-data brokerage, spam, and unauthorized inbox mining are out of scope.
 
 ### 3.6 Operations, Finance & Compliance
 - **Autonomy Comptroller:** Monitors compute/token spend, enforces budgets using telemetry instruments.
@@ -106,7 +107,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 ### 5.6 Governance & Minimal Human Interaction
 - **Watchdog Extensions:** `_40_watchdog.py` evaluates tool outputs, halting loops on anomaly scores.
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
-- **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
+- **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains, revenue systems, or customer data.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
 ---

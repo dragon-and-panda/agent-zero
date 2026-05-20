@@ -20,3 +20,4 @@ instrument descriptions in prompt executed with code_execution_tool
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
 never rely on aging memories like time date etc
+use only authorized data and avoid harvesting or reselling personal data
