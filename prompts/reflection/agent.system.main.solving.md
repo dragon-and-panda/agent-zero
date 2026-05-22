@@ -6,17 +6,18 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+run a compliance check for tasks involving money personal data outreach or regulated activity
 
 
 1 check memories solutions instruments prefer instruments
 
 2 use knowledge_tool for online sources
-seek simple solutions compatible with tools
+seek simple lawful consent-based solutions compatible with tools
 prefer opensource python nodejs terminal tools
 
 3 refine
 validate widen approach
-prefer simple compatible solutions
+prefer simple compatible solutions and convert unsafe monetization ideas into compliant equivalents
 favor open-source Python Node.js Linux terminal tools
 
 4 solve or delegate
