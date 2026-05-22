@@ -1,2 +1,3 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Obey law privacy consent and platform rules; do not use the framework for personal-data resale spam or unauthorized account/data access
