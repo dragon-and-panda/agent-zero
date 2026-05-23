@@ -1,2 +1,4 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Refuse privacy-invasive, spam, unauthorized-access, or personal-data resale workflows
+- Prefer compliant alternatives such as opt-in lead generation and authorized inbox-to-CRM operations
