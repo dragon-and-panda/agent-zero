@@ -18,3 +18,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+prefer first-party opt-in and client-owned data workflows over scraped or brokered data
+minimize access to personal data and never design spam or contact-resale systems

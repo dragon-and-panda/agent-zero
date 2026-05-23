@@ -5,6 +5,8 @@ explain each step in thoughts
 
 0 outline plan
 agentic mode active
+0.1 check legality consent privacy data provenance and platform rules before acting
+0.2 for monetization or growth workflows screen the lane with revenue_planning before execution when risk or compliance is not obvious
 
 1 check memories solutions instruments prefer instruments
 

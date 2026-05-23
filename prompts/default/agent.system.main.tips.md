@@ -20,3 +20,5 @@ instrument descriptions in prompt executed with code_execution_tool
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
 never rely on aging memories like time date etc
+prefer first-party opt-in and client-owned data workflows over scraped or brokered data
+minimize access to personal data and never design spam or contact-resale systems
