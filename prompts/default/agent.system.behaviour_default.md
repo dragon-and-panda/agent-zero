@@ -1,2 +1,4 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Default to lawful consent-based workflows and reject privacy-invasive scraping spam or personal-data resale
+- Prefer first-party products opt-in funnels client-owned automation and platform-compliant revenue systems
