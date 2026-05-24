@@ -56,7 +56,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 
 ### 3.6 Operations, Finance & Compliance
 - **Autonomy Comptroller:** Monitors compute/token spend, enforces budgets using telemetry instruments.
-- **Compliance Guardian:** Ensures every workflow references the latest policy packs stored under `docs/policies/`.
+- **Compliance Guardian:** Ensures every workflow references the latest policy packs stored under `docs/policies/`, especially `docs/policies/compliance_pack.md`.
 - **Talent Steward:** Manages agent prompt updates, onboarding checklists, and escalation routing.
 
 ---
@@ -107,6 +107,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Watchdog Extensions:** `_40_watchdog.py` evaluates tool outputs, halting loops on anomaly scores.
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
 - **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
+- **Revenue Safety Rule:** Growth workflows must rely on first-party, licensed, or opt-in data. Compiling, brokering, or selling contact lists is out of scope.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
 ---
@@ -121,6 +122,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 3. **Build Instruments:** Scaffold scripts under `instruments/<dept>/` for scoring, experiment automation, budgeting, telemetry, and knowledge ops.
 4. **Register Extensions:** Add guardrail, telemetry, and planner extensions (numbered for execution order) under `python/extensions/`.
 5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, and SOPs.
+   - For business workflows, include `docs/policies/compliance_pack.md` and `docs/ethical_autonomous_revenue.md` as canonical guidance.
 6. **Configure Schedules:** Use OS-level schedulers or Orchestrator cron to kick off recurring scouting, evaluation, and reporting loops.
 7. **Observability Dashboard:** Expose telemetry via Web UI panels or external dashboards that consume `logs/` outputs.
 
