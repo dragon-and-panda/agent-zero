@@ -106,7 +106,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 ### 5.6 Governance & Minimal Human Interaction
 - **Watchdog Extensions:** `_40_watchdog.py` evaluates tool outputs, halting loops on anomaly scores.
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
-- **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
+- **Compliance Hooks:** Policies stored in `docs/policies/` such as `docs/policies/compliance_pack.md` are injected into prompts for any workflow touching regulated domains.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
 ---
