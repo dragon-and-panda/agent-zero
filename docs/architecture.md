@@ -120,6 +120,7 @@ Agent Zero comes with a set of built-in tools designed to help agents perform ta
 | code_execution_tool | Allows agents to execute Python, Node.js, and Shell code in the terminal |
 | input | Allows agents to use the keyboard to interact with an active shell |
 | knowledge_tool | Enables agents to retrieve information from memory, knowledge base or online external sources |
+| revenue_planning | Screens monetization ideas for legality, consent, provenance, and execution quality before activation |
 | response_tool | Allows agents to output a response |
 | memory_tool | Enables agents to save, load, delete and forget information from memory |
 | webpage_content_tool | Enables agents to fetch and analyze the text content of webpages |
