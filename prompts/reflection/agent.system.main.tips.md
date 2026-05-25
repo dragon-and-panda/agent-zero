@@ -18,3 +18,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+never help harvest broker or sell personal contact data
+prefer opt-in first-party or client-authorized workflows when data touches people
