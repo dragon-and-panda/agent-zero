@@ -6,6 +6,9 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+verify legality consent data provenance and platform rules before acting
+redirect inbox scraping spam credential misuse and personal-data resale
+score monetization lanes before activation
 
 
 1 check memories solutions instruments prefer instruments
