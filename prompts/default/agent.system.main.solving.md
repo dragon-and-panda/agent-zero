@@ -8,6 +8,9 @@ agentic mode active
 
 1 check memories solutions instruments prefer instruments
 
+for monetization or autonomy ideas screen legality consent provenance and platform fit before acting
+use revenue_planning when deciding whether a revenue lane should be rejected held or activated
+
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
