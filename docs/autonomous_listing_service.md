@@ -86,7 +86,7 @@ Agents communicate via the existing `call_subordinate` + `knowledge_tool` primit
 
 | Platform | Integration Mode | Notes |
 | --- | --- | --- |
-| Craigslist | Headless browser automation (Playwright) + email relay for replies. | Needs CAPTCHA-solving strategy (vision model + manual fallback). |
+| Craigslist | Headless browser automation (Playwright) + email relay for replies. | Respect anti-abuse controls. If CAPTCHA or anti-automation barriers appear, hand off to a human rather than attempting circumvention. |
 | Mercari | Official API (if available) or mobile-app automation. | Supports shipping label creation; track order IDs. |
 | Nextdoor | Web automation w/ community selection. | Monitor community guidelines to avoid spam flags. |
 | Custom / Others | Modular adapters via interface `MarketplacePublisher`. | Easy to add OfferUp, eBay, Etsy later. |
@@ -184,3 +184,5 @@ CI/CD builds a single container image (FastAPI + worker binaries) pushed to ECR/
 - **Release Ritual:** Every deployment of the service includes a short “What changed / Metrics impacted / Next bet” record appended to the mission diary, ensuring synchronous evolution of the agency and this product line.
 
 This blueprint provides a detailed path to a serverless, AI-native listing concierge that delights sellers and scales across marketplaces with minimal manual effort.
+
+It should be operated alongside `docs/policies/compliance_pack.md` and treated as one approved revenue lane under `docs/programs/agentic_financial_system/charter.md`.
