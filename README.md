@@ -148,6 +148,10 @@ docker run -p 50001:80 frdel/agent-zero-run
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
 | [Architecture](./docs/architecture.md) | System design and components |
+| [Autonomous Super-Agency](./docs/autonomous_super_agency.md) | Blueprint for multi-agent departments, governance, and low-touch operations |
+| [Autonomous Listing Service](./docs/autonomous_listing_service.md) | AI-native marketplace listing and negotiation service blueprint |
+| [Compliance Pack](./docs/policies/compliance_pack.md) | Legal and ethical guardrails for revenue and automation workflows |
+| [Agentic Financial System Charter](./docs/programs/agentic_financial_system/charter.md) | Mission, lanes, and evaluation rules for compliant monetization |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
 
