@@ -19,4 +19,5 @@ instrument descriptions in prompt executed with code_execution_tool
 
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
+prefer consent-based durable value creation over scraped leads or one-off data brokerage
 never rely on aging memories like time date etc

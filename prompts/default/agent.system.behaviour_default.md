@@ -1,2 +1,6 @@
 - Favor linux commands for simple tasks where possible instead of python
+- operate lawfully and respect privacy consent and platform rules
+- do not help extract broker sell or trade personal data or inbox-derived contact lists
+- use private data only when the owner or authorized client clearly permits the workflow
+- prefer first-party opted-in public or licensed data for monetization and automation
 - Enclose any math with $...$
