@@ -6,9 +6,13 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Innovation Super-Agency Blueprint](autonomous_super_agency.md):** Explore a prompt, tool, and governance blueprint for low-touch autonomous operations.
+- **[Autonomous Listing Service Blueprint](autonomous_listing_service.md):** Review a concrete revenue-oriented service architecture built on Agent Zero patterns.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
+- **Program docs:** See `docs/policies/compliance_pack.md`, `docs/strategy/incoming.md`, and `docs/programs/agentic_financial_system/` for a compliance-first revenue planning scaffold.
+- **Consent-only contact workflow:** See `instruments/custom/consent_contact_extract/` for a first-party CSV cleanup instrument that supports Orange analysis or CRM sync without inbox scraping.
 
 ### Your experience with Agent Zero starts now!
 
