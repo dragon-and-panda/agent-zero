@@ -28,21 +28,32 @@ level_to_points() {
 
 reasons=()
 
+format_reasons() {
+  local joined=""
+  local reason
+  for reason in "${reasons[@]}"; do
+    if [[ -n "$joined" ]]; then
+      joined="${joined}; "
+    fi
+    joined="${joined}${reason}"
+  done
+  printf '%s' "$joined"
+}
+
 if [[ "$legal" == "no" ]]; then
   reasons+=("legal basis failed")
-  printf 'REJECT\nReasons: %s\n' "${reasons[*]}"
-  exit 0
 fi
 
 if [[ "$data_provenance" == "private" ]]; then
   reasons+=("private or restricted data source")
-  printf 'REJECT\nReasons: %s\n' "${reasons[*]}"
-  exit 0
 fi
 
 if [[ "$consent" == "no" ]]; then
   reasons+=("missing consent for the proposed use")
-  printf 'REJECT\nReasons: %s\n' "${reasons[*]}"
+fi
+
+if [[ ${#reasons[@]} -gt 0 ]]; then
+  printf 'REJECT\nReasons: %s\n' "$(format_reasons)"
   exit 0
 fi
 
@@ -80,4 +91,4 @@ if [[ ${#reasons[@]} -eq 0 ]]; then
 fi
 
 printf '%s\n' "$status"
-printf 'Reasons: %s\n' "$(IFS='; '; echo "${reasons[*]}")"
+printf 'Reasons: %s\n' "$(format_reasons)"
