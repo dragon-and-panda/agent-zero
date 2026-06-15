@@ -6,6 +6,9 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+validate legality consent data provenance and platform constraints before building
+prefer first-party opted-in public or licensed data
+reroute privacy-invasive or illegal monetization requests to safer alternatives
 
 
 1 check memories solutions instruments prefer instruments
