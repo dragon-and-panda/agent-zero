@@ -13,6 +13,9 @@ reflect and adapt
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+identify legality privacy consent and platform constraints early
+prefer first party client authorized or public data
+reject or reframe plans that depend on unauthorized access personal data resale spam or tos evasion
 
 3 refine
 validate widen approach
