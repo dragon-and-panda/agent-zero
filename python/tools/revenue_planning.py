@@ -6,8 +6,10 @@ from python.helpers.tool import Response, Tool
 REJECT_PHRASES = (
     "sell email list",
     "sell email lists",
+    "sell compiled email lists",
     "resell email list",
     "resell email lists",
+    "compiled email lists",
     "email list broker",
     "data broker",
     "broker personal data",
@@ -19,6 +21,7 @@ REJECT_PHRASES = (
     "compile email address lists",
     "personal data resale",
     "private inbox scraping",
+    "list resale",
 )
 
 UNAUTHORIZED_PHRASES = (
