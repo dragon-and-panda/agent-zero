@@ -20,6 +20,8 @@
 
 {{ include './agent.system.tool.input.md' }}
 
+{{ include './agent.system.tool.revenue_planning.md' }}
+
 {{ include './agent.system.tool.browser.md' }}
 
 {{ include './agent.system.tool.survey_helper.md' }}
