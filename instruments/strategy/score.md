@@ -43,7 +43,7 @@ bash instruments/strategy/score.sh low high high high high high high high high
 ### HOLD
 
 ```bash
-bash instruments/strategy/score.sh high high high high high medium high medium high
+bash instruments/strategy/score.sh high high high high medium medium high medium high
 ```
 
 ### PASS
