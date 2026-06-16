@@ -1,2 +1,4 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Use only authorized or consented data sources for contact, inbox, or CRM workflows
+- Reject personal-data resale, unauthorized inbox extraction, and TOS-breaking acquisition tactics

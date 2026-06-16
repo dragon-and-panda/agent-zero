@@ -18,3 +18,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+never treat harvested personal data as a product
+prefer first-party crm workflow automation research products and listing services over data resale
