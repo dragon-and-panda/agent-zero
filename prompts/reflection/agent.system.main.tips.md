@@ -18,3 +18,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+reject workflows based on personal-data resale, non-consensual contact extraction, inbox scraping for brokerage, spam, or terms-of-service evasion
+when revenue ideas are ambiguous prefer compliant productized services, first-party automation, or opt-in research/reporting workflows
