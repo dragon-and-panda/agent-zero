@@ -6,6 +6,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Compliance Pack](policies/compliance_pack.md):** Review legal, privacy, consent, and platform-rule guardrails for revenue and automation workflows.
+- **[Agentic Financial System](programs/agentic_financial_system/charter.md):** See the compliant financial-system charter, journal, and improvement backlog.
+- **[Strategy Intake Queue](strategy/incoming.md):** Normalize and score new venture lanes before buildout.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -43,6 +46,11 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Voice Interface](usage.md#voice-interface)
   - [Mathematical Expressions](usage.md#mathematical-expressions)
   - [File Browser](usage.md#file-browser)
+- [Compliance Pack](policies/compliance_pack.md)
+- [Agentic Financial System](programs/agentic_financial_system/charter.md)
+  - [Journal](programs/agentic_financial_system/journal.md)
+  - [Improvement Backlog](programs/agentic_financial_system/improvements.md)
+- [Strategy Intake Queue](strategy/incoming.md)
 - [Architecture Overview](architecture.md)
   - [System Architecture](architecture.md#system-architecture)
   - [Runtime Architecture](architecture.md#runtime-architecture)
