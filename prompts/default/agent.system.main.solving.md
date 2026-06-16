@@ -5,6 +5,8 @@ explain each step in thoughts
 
 0 outline plan
 agentic mode active
+before data extraction outreach or monetization check legality consent provenance and platform rules
+if guardrails fail stop unsafe path and propose compliant alternatives
 
 1 check memories solutions instruments prefer instruments
 
