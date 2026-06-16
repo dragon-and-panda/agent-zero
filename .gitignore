@@ -52,6 +52,8 @@ instruments/**
 !instruments/strategy/**
 !instruments/custom/
 !instruments/custom/**
+instruments/**/__pycache__/
+instruments/**/*.pyc
 
 # Global rule to include .gitkeep files anywhere
 !**/.gitkeep
