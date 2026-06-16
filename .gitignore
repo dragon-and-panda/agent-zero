@@ -52,6 +52,7 @@ instruments/**
 !instruments/strategy/**
 !instruments/custom/consent_contact_extract/
 !instruments/custom/consent_contact_extract/**
+instruments/**/__pycache__/
 
 # Global rule to include .gitkeep files anywhere
 !**/.gitkeep
