@@ -7,10 +7,12 @@ explain each step in thoughts
 agentic mode active
 
 1 check memories solutions instruments prefer instruments
+for monetization outreach inbox or contact-data workflows use revenue_planning first
 
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+require clear ownership provenance and consent before processing personal or contact data
 
 3 break task into subtasks
 
