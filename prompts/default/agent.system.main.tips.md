@@ -19,4 +19,6 @@ instrument descriptions in prompt executed with code_execution_tool
 
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
+prefer durable first-party businesses over short-term policy-risk tactics
+document consent provenance and platform constraints before using inbox or contact data
 never rely on aging memories like time date etc
