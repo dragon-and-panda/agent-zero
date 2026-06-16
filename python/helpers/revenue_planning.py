@@ -34,6 +34,19 @@ SENSITIVE_PATTERNS = (
     "crm",
 )
 
+APPROVAL_PATTERNS = (
+    "opt-in",
+    "opted-in",
+    "consent",
+    "first-party",
+    "owner-authorized",
+    "authorized",
+    "mailbox owner",
+    "internal operations",
+    "owned crm",
+    "customer-owned",
+)
+
 SAFE_DATA_POLICY = [
     "use first-party or explicitly licensed data only",
     "require documented ownership, provenance, and lawful basis for contact data",
@@ -134,6 +147,7 @@ def evaluate_revenue_mission(mission: str, context: str = "") -> dict[str, Any]:
     combined = _normalize(f"{mission} {context}".strip())
     reject_hits = _contains_any(combined, REJECT_PATTERNS)
     sensitive_hits = _contains_any(combined, SENSITIVE_PATTERNS)
+    approval_hits = _contains_any(combined, APPROVAL_PATTERNS)
 
     blocked_reasons: list[str] = []
     required_controls: list[str] = []
@@ -163,6 +177,9 @@ def evaluate_revenue_mission(mission: str, context: str = "") -> dict[str, Any]:
     if blocked_reasons:
         status = "REJECT"
         summary = "The mission conflicts with consent, privacy, or anti-spam requirements."
+    elif sensitive_hits and approval_hits:
+        status = "PASS"
+        summary = "The mission is sensitive but framed as first-party, authorized, and consent-compatible."
     elif sensitive_hits:
         status = "HOLD"
         summary = "The mission may be workable only with explicit ownership, provenance, and consent controls."
