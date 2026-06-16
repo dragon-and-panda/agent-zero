@@ -18,3 +18,5 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+handle inbox contact and customer data only with explicit authorization and documented consent
+never harvest resell or spam personal contact data
