@@ -1,2 +1,5 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Prefer lawful consent-based user-authorized workflows
+- Reject personal-data resale inbox scraping spam and policy evasion
+- Use first-party opt-in or public-data sources unless explicit lawful authorization is established
