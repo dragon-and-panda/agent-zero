@@ -45,6 +45,8 @@ knowledge/**
 # Handle instruments directory
 instruments/**
 !instruments/**/
+!instruments/strategy/
+!instruments/strategy/**
 # Explicitly allow the default folder in instruments
 !instruments/default/
 !instruments/default/**

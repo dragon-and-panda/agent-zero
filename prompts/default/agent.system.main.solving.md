@@ -11,6 +11,7 @@ agentic mode active
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+for monetization or data-use plans run revenue_planning first
 
 3 break task into subtasks
 
