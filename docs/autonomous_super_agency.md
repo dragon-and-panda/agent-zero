@@ -10,6 +10,7 @@ This document describes how to configure the Agent Zero framework to run a fully
 - **Evidence over opinion:** All major decisions require citations via the knowledge tool, instrumentation logs, or code artifacts.
 - **Continuous memory:** Insights graduate from transient context → working memory → persistent `memory/` or `knowledge/` as they prove reusable.
 - **Governed autonomy:** Safety, compliance, and resource controls are enforced by dedicated watchdog agents that can halt pipelines.
+- **Consent-first monetization:** Growth systems must rely on first-party, licensed, or clearly public data, never on hidden extraction or resale of personal contact data.
 
 ---
 
@@ -52,7 +53,8 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 ### 3.5 Growth, Ventures & Partnerships
 - **Ecosystem Cartographers:** Map ecosystems, scout potential partners, and maintain opportunity graphs in knowledge base.
 - **Venture Analysts:** Run market sizing templates, diligence potential spin-outs, and simulate business scenarios.
-- **Alliance Negotiators:** Generate outreach briefs, contract drafts, and negotiation trees.
+- **Alliance Negotiators:** Generate outreach briefs, contract drafts, and negotiation trees for opted-in, warm, or clearly compliant business development workflows.
+- **Demand Engine Operators:** Run inbound growth loops, newsletters, lead magnets, and referral programs using the rules in `docs/policies/commercial_data_ethics.md`.
 
 ### 3.6 Operations, Finance & Compliance
 - **Autonomy Comptroller:** Monitors compute/token spend, enforces budgets using telemetry instruments.
@@ -109,6 +111,14 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
+### 5.7 Ethical Revenue Acquisition Protocol
+1. Score opportunities using public demand signals, first-party telemetry, or licensed datasets.
+2. Convert the best opportunities into productized services, research products, or opt-in lead magnets.
+3. Capture permission explicitly before storing contacts in CRM or launching nurture workflows.
+4. Use RAG over inboxes only for first-party operations such as support, invoicing, or customer insight extraction.
+5. Route every outbound or monetization workflow through the commercial data ethics policy before execution.
+6. Prefer recurring revenue from subscriptions, retainers, referrals, and anonymized benchmarks over data brokerage.
+
 ---
 
 ## 6. Implementation Roadmap Inside Agent Zero
@@ -121,6 +131,8 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 3. **Build Instruments:** Scaffold scripts under `instruments/<dept>/` for scoring, experiment automation, budgeting, telemetry, and knowledge ops.
 4. **Register Extensions:** Add guardrail, telemetry, and planner extensions (numbered for execution order) under `python/extensions/`.
 5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, and SOPs.
+   - Include `docs/policies/commercial_data_ethics.md` for any growth or monetization mission.
+   - Use `docs/strategy/ethical_autonomous_revenue_system.md` as the baseline commercialization playbook.
 6. **Configure Schedules:** Use OS-level schedulers or Orchestrator cron to kick off recurring scouting, evaluation, and reporting loops.
 7. **Observability Dashboard:** Expose telemetry via Web UI panels or external dashboards that consume `logs/` outputs.
 
