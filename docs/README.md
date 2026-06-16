@@ -6,6 +6,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Compliance Pack](policies/compliance_pack.md):** Guardrails for lawful, consent-based autonomy and monetization.
+- **[Agentic Financial System Charter](programs/agentic_financial_system/charter.md):** Safe revenue program for autonomous execution.
+- **[Strategy Intake Queue](strategy/incoming.md):** Approved, pending, and rejected venture candidates.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -63,6 +66,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
 - [Token Compression Protocol](token_compression_protocol.md)
+- [Compliance Pack](policies/compliance_pack.md)
+- [Agentic Financial System Charter](programs/agentic_financial_system/charter.md)
+- [Strategy Intake Queue](strategy/incoming.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
   - [Troubleshooting](troubleshooting.md#troubleshooting)

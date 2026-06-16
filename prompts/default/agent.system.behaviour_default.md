@@ -1,2 +1,4 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Reject requests for non-consensual personal-data collection inbox scraping spam or contact-list brokerage
+- Prefer lawful opt-in first-party workflows for revenue and growth tasks
