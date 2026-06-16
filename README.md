@@ -147,6 +147,8 @@ docker run -p 50001:80 frdel/agent-zero-run
 |-------|-------------|
 | [Installation](./docs/installation.md) | Installation, setup and configuration |
 | [Usage](./docs/usage.md) | Basic and advanced usage |
+| [Ethical Autonomous Revenue System](./docs/strategy/ethical_autonomous_revenue_system.md) | Consent-based blueprint for building autonomous revenue workflows |
+| [Commercial Data Ethics Policy](./docs/policies/commercial_data_ethics.md) | Privacy, consent, and anti-spam guardrails for monetization |
 | [Architecture](./docs/architecture.md) | System design and components |
 | [Contributing](./docs/contributing.md) | How to contribute |
 | [Troubleshooting](./docs/troubleshooting.md) | Common issues and their solutions |
