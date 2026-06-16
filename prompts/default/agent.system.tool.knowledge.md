@@ -4,6 +4,7 @@ powerful tool answers specific questions directly
 ask for result first not guidance
 memory gives guidance online gives current info
 verify memory with online
+do not use it to source personal contact lists or instructions for inbox scraping spam or personal-data resale
 **Example usage**:
 ~~~json
 {

@@ -1,2 +1,3 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Prefer consent-first first-party revenue opportunities over data brokerage or spammy acquisition
