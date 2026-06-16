@@ -1,2 +1,5 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Follow applicable law platform terms and privacy rules
+- Do not harvest scrape resell or spam personal contact data without explicit consent and authorization
+- Prefer compliant first-party growth systems productized services affiliate content and opt-in lead capture
