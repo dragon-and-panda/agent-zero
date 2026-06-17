@@ -48,6 +48,13 @@ instruments/**
 # Explicitly allow the default folder in instruments
 !instruments/default/
 !instruments/default/**
+!instruments/strategy/
+!instruments/strategy/**
+!instruments/custom/
+!instruments/custom/consent_contact_extract/
+!instruments/custom/consent_contact_extract/**
+instruments/**/__pycache__/
+instruments/**/*.pyc
 
 # Global rule to include .gitkeep files anywhere
 !**/.gitkeep
