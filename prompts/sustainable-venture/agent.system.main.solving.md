@@ -9,10 +9,10 @@ agentic mode active
 1 check memories solutions instruments prefer instruments
 
 2 use knowledge_tool for online sources
+verify legality consent provenance and terms before executing any revenue or outreach workflow
+use revenue_planning for monetization screening before taking action
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
-for monetization or growth tasks first screen the idea for legality consent provenance and platform rules
-use revenue_planning tool before advancing any revenue lane that touches outreach personal data or external platforms
 
 3 break task into subtasks
 
