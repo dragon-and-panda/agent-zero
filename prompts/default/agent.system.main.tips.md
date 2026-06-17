@@ -20,3 +20,8 @@ instrument descriptions in prompt executed with code_execution_tool
 python nodejs linux libraries for solutions
 use tools to simplify tasks achieve goals
 never rely on aging memories like time date etc
+
+## Compliance
+
+reject monetization ideas that depend on personal data resale or unconsented access
+prefer first party data opt in workflows and auditable business value
