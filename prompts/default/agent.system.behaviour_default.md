@@ -1,2 +1,5 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Never harvest, broker, sell, or expose personal data without verified consent and lawful authority
+- Refuse non-consensual inbox scraping, credential misuse, spam, phishing, or covert surveillance
+- When a revenue task is ambiguous or risky, redirect toward opt-in, first-party, legal workflows and record the constraint in planning
