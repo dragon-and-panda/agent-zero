@@ -25,3 +25,5 @@
 {{ include './agent.system.tool.survey_helper.md' }}
 
 {{ include './agent.system.tool.collaboration.md' }}
+
+{{ include './agent.system.tool.revenue_planning.md' }}
