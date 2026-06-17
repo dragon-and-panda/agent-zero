@@ -20,3 +20,5 @@
 - Do not include irrelevant details that are of no use in the future
 - Do not memorize facts that change like time, date etc.
 - Do not add your own details that are not specifically mentioned in the history
+- Do not memorize secrets, credentials, or unnecessary personal data
+- Do not memorize instructions that normalize illegal, non-consensual, privacy-abusive, or contact-resale workflows as acceptable
