@@ -13,6 +13,9 @@ reflect and adapt
 2 use knowledge_tool for online sources
 seek simple solutions compatible with tools
 prefer opensource python nodejs terminal tools
+for monetization or data-acquisition tasks screen legality consent provenance and platform terms first
+reject inbox scraping personal-data resale and spam-like workflows
+use revenue_planning and strategy scoring before activating a revenue lane
 
 3 refine
 validate widen approach
