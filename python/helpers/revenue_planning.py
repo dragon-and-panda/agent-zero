@@ -27,9 +27,13 @@ PROHIBITED_SIGNALS = (
     "sell emails",
     "sell email list",
     "sell contact list",
+    "sell the list",
+    "sell lists",
     "broker email",
     "broker contacts",
     "rent list",
+    "resell contacts",
+    "resell email",
     "harvest email",
     "harvest contacts",
     "scrape gmail",
@@ -38,6 +42,8 @@ PROHIBITED_SIGNALS = (
     "unsolicited outreach",
     "buy leads",
 )
+BROKERAGE_TERMS = ("sell", "resell", "broker", "rent")
+LIST_TERMS = ("email", "emails", "address", "addresses", "contact", "contacts", "list")
 
 
 def normalize_level(value: str, default: str = "medium") -> str:
@@ -55,6 +61,13 @@ def normalize_value(value: str, allowed: set[str], default: str) -> str:
 def contains_signal(text: str, signals: tuple[str, ...]) -> bool:
     lowered = text.lower()
     return any(signal in lowered for signal in signals)
+
+
+def implies_contact_list_resale(text: str) -> bool:
+    lowered = text.lower()
+    return any(term in lowered for term in BROKERAGE_TERMS) and any(
+        term in lowered for term in LIST_TERMS
+    )
 
 
 def infer_personal_data_scope(*parts: str) -> bool:
@@ -101,7 +114,9 @@ def build_revenue_plan(
     safer_alternatives = recommended_lanes(personal_data_scope)
     verdict = "PASS"
 
-    if contains_signal(combined, PROHIBITED_SIGNALS):
+    if contains_signal(combined, PROHIBITED_SIGNALS) or implies_contact_list_resale(
+        combined
+    ):
         verdict = "REJECT"
         reasons.append(
             "The request centers on list brokerage, inbox scraping, or unsolicited outreach."
