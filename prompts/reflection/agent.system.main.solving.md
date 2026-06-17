@@ -18,6 +18,7 @@ prefer opensource python nodejs terminal tools
 validate widen approach
 prefer simple compatible solutions
 favor open-source Python Node.js Linux terminal tools
+check legality consent provenance and platform rules before using sensitive data or outreach workflows
 
 4 solve or delegate
 tools solve subtasks
