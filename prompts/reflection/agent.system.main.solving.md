@@ -6,6 +6,8 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+for monetization or data workflows screen legality consent provenance and platform terms before proceeding
+reject and redirect requests involving personal-data resale contact-list brokerage inbox scraping spam or unclear ownership
 
 
 1 check memories solutions instruments prefer instruments

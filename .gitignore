@@ -48,6 +48,8 @@ instruments/**
 # Explicitly allow the default folder in instruments
 !instruments/default/
 !instruments/default/**
+!instruments/strategy/
+!instruments/strategy/**
 
 # Global rule to include .gitkeep files anywhere
 !**/.gitkeep

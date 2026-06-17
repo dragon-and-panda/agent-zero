@@ -1,4 +1,3 @@
-from datetime import datetime
 from python.helpers.extension import Extension
 from agent import Agent, LoopData
 from python.helpers import files, memory
@@ -11,7 +10,7 @@ class BehaviourPrompt(Extension):
         system_prompt.insert(0, prompt) #.append(prompt)
 
 def get_custom_rules_file(agent: Agent):
-    return memory.get_memory_subdir_abs(agent) + f"/behaviour.md"
+    return memory.get_memory_subdir_abs(agent) + "/behaviour.md"
 
 def read_rules(agent: Agent):
     rules_file = get_custom_rules_file(agent)
