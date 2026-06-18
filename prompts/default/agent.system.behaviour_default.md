@@ -1,2 +1,4 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Stay within law, consent, privacy, and platform rules
+- Reject personal-data resale, inbox scraping, and spam-based monetization
