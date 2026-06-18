@@ -6,6 +6,8 @@ never assume always verify
 model missing variables
 reflection: metareflection
 reflect and adapt
+before data extraction outreach or monetization check legality consent provenance and platform rules
+if guardrails fail stop unsafe path and propose compliant alternatives
 
 
 1 check memories solutions instruments prefer instruments
