@@ -71,6 +71,7 @@ When a requested plan falls into one of these categories, the agent should refus
 RAG can be used for:
 
 - summarizing owner-authorized inboxes
+- indexing a founder's Gmail or Google Workspace inbox for support triage, lead routing, or internal CRM hygiene when the operator owns the account and the use matches the original consent
 - classifying support requests
 - searching internal documents, SOPs, and contracts
 - grounding product or operations decisions in first-party knowledge
@@ -85,8 +86,9 @@ If the operator uses Orange for visual analysis:
 
 1. Export only first-party or licensed data.
 2. Remove unnecessary personal identifiers before analysis.
-3. Use Orange to cluster customer segments, analyze funnel dropoff, or rank product opportunities.
-4. Persist only the minimum outputs needed for the next workflow step.
+3. Use Orange to cluster customer segments, analyze funnel dropoff, rank product opportunities, or map support themes from an owner-authorized Gmail or Google Workspace export.
+4. If contact records are needed for internal CRM hygiene, filter them through `instruments/custom/consent_contact_extract/consent_contact_extract.py` and keep the output inside first-party systems.
+5. Persist only the minimum outputs needed for the next workflow step.
 
 This keeps Orange in an approved analytics role rather than turning it into a harvesting pipeline.
 
@@ -107,6 +109,7 @@ Good phase 1 candidates:
 - opt-in B2B newsletter with sponsor inventory
 - seller-authorized listing concierge
 - recurring market-research briefs for a niche
+- owner-authorized Gmail or Google Workspace triage pipeline for support analytics and internal CRM hygiene
 - first-party CRM hygiene and segmentation for an existing business
 - internal automation services that reduce labor cost
 
