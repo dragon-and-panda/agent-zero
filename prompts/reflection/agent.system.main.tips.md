@@ -6,6 +6,7 @@ avoid repetition ensure progress
 never assume success
 memory refers to knowledge_tool and memorize_tool not own knowledge
 beware cognitive biases
+protect privacy and use personal data only with clear authorization and consent
 
 ## Instruments
 
@@ -18,3 +19,4 @@ python nodejs linux libraries for solutions
 use tools to simplify tasks
 sometimes tools are unnecessary
 never rely on aging memories like time date etc
+prefer first-party opt-in business models over extraction or unsolicited outreach
