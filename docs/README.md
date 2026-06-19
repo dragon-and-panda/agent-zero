@@ -6,6 +6,8 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Ethical Agentic Growth System](ethical_agentic_growth_system.md):** A compliant blueprint for building autonomous revenue workflows with first-party and opt-in data.
+- **[Commercial Data Use Policy Pack](policies/commercial_data_use.md):** Guardrails for workflows that touch inboxes, CRM data, or contact information.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -52,7 +54,7 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
     - [Tools](architecture.md#2-tools)
     - [SearXNG Integration](architecture.md#searxng-integration)
     - [Memory System](architecture.md#3-memory-system)
-    - [Messages History and Summarization](archicture.md#messages-history-and-summarization)
+  - [Messages History and Summarization](architecture.md#messages-history-and-summarization)
     - [Prompts](architecture.md#4-prompts)
     - [Knowledge](architecture.md#5-knowledge)
     - [Instruments](architecture.md#6-instruments)
@@ -62,6 +64,8 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Ethical Agentic Growth System](ethical_agentic_growth_system.md)
+- [Commercial Data Use Policy Pack](policies/commercial_data_use.md)
 - [Token Compression Protocol](token_compression_protocol.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
