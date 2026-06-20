@@ -8,6 +8,8 @@
 
 {{ include './agent.system.tool.knowledge.md' }}
 
+{{ include './agent.system.tool.revenue_planning.md' }}
+
 {{ include './agent.system.tool.memory.md' }}
 
 {{ include './agent.system.tool.profile.md' }}
