@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 
 RISK_LEVELS = {"low", "medium", "high"}
 KNOWN_CONSENT = {"explicit", "contractual", "internal", "unknown", "none"}
@@ -71,18 +73,17 @@ def normalize_value(value: str, allowed: set[str], default: str) -> str:
 def contains_signal(text: str, signals: tuple[str, ...]) -> bool:
     lowered = text.lower()
     for signal in signals:
-        start = lowered.find(signal)
-        while start != -1:
-            prefix_window = lowered[max(0, start - 24) : start]
+        pattern = re.compile(rf"(?<!\\w){re.escape(signal)}(?!\\w)")
+        for match in pattern.finditer(lowered):
+            prefix_window = lowered[max(0, match.start() - 24) : match.start()]
             if not any(prefix_window.endswith(prefix) for prefix in NEGATION_PREFIXES):
                 return True
-            start = lowered.find(signal, start + 1)
     return False
 
 
 def implies_contact_list_resale(text: str) -> bool:
     lowered = text.lower()
-    return any(term in lowered for term in BROKERAGE_TERMS) and any(
+    return contains_signal(lowered, BROKERAGE_TERMS) and any(
         term in lowered for term in LIST_TERMS
     )
 
