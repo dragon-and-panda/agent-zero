@@ -52,7 +52,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 ### 3.5 Growth, Ventures & Partnerships
 - **Ecosystem Cartographers:** Map ecosystems, scout potential partners, and maintain opportunity graphs in knowledge base.
 - **Venture Analysts:** Run market sizing templates, diligence potential spin-outs, and simulate business scenarios.
-- **Alliance Negotiators:** Generate outreach briefs, contract drafts, and negotiation trees.
+- **Alliance Negotiators:** Generate consent-based outreach briefs, contract drafts, and negotiation trees. They do not build or sell contact databases.
 
 ### 3.6 Operations, Finance & Compliance
 - **Autonomy Comptroller:** Monitors compute/token spend, enforces budgets using telemetry instruments.
@@ -107,6 +107,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
 - **Watchdog Extensions:** `_40_watchdog.py` evaluates tool outputs, halting loops on anomaly scores.
 - **Budget Fuses:** Autonomy Comptroller reads telemetry instruments and updates behavior rules if spend > thresholds.
 - **Compliance Hooks:** Policies stored in `docs/policies/` are injected into prompts for any workflow touching regulated domains.
+- **Commercialization Safety Rule:** Revenue workflows must follow `docs/policies/commercialization_compliance_pack.md`, including the ban on harvesting or selling email lists.
 - **Escalation Matrix:** Only Apex Orchestrator pings the human sponsor, and only when blockers exceed pre-defined severity.
 
 ---
@@ -120,7 +121,7 @@ Each archetype maps to a reusable prompt persona stored under `prompts/super-age
    - Required tools/instruments list
 3. **Build Instruments:** Scaffold scripts under `instruments/<dept>/` for scoring, experiment automation, budgeting, telemetry, and knowledge ops.
 4. **Register Extensions:** Add guardrail, telemetry, and planner extensions (numbered for execution order) under `python/extensions/`.
-5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, and SOPs.
+5. **Seed Knowledge:** Populate `knowledge/custom/main` with policy docs, partner intel, research taxonomies, SOPs, and approved commercialization playbooks.
 6. **Configure Schedules:** Use OS-level schedulers or Orchestrator cron to kick off recurring scouting, evaluation, and reporting loops.
 7. **Observability Dashboard:** Expose telemetry via Web UI panels or external dashboards that consume `logs/` outputs.
 

@@ -6,6 +6,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
 - **[Swarm + Tailnet Deployment](swarm-tailnet-deployment.md):** Deploy Agent Zero on Docker Swarm and expose it on your Tailscale tailnet.
 - **[Usage Guide](usage.md):** Explore GUI features and usage scenarios.
 - **[Architecture Overview](architecture.md):** Understand the internal workings of the framework.
+- **[Autonomous Super-Agency Blueprint](autonomous_super_agency.md):** Configure Agent Zero as a low-touch multi-agent operating system.
+- **[Ethical Revenue System Blueprint](strategy/ethical_revenue_system.md):** Turn the super-agency pattern into a compliant monetization engine.
+- **[Commercialization Compliance Pack](policies/commercialization_compliance_pack.md):** Guardrails for inbox RAG, outreach, and revenue workflows.
 - **[Token Compression Protocol](token_compression_protocol.md):** Run the TCP service and integrate it with clients (including browser extensions).
 - **[Contributing](contribution.md):** Learn how to contribute to the Agent Zero project.
 - **[Troubleshooting and FAQ](troubleshooting.md):** Find answers to common issues and questions.
@@ -62,6 +65,9 @@ To begin with Agent Zero, follow the links below for detailed guides on various 
   - [Making Changes](contribution.md#making-changes)
   - [Submitting a Pull Request](contribution.md#submitting-a-pull-request)
   - [Documentation Stack](contribution.md#documentation-stack)
+- [Autonomous Super-Agency Blueprint](autonomous_super_agency.md)
+- [Ethical Revenue System Blueprint](strategy/ethical_revenue_system.md)
+- [Commercialization Compliance Pack](policies/commercialization_compliance_pack.md)
 - [Token Compression Protocol](token_compression_protocol.md)
 - [Troubleshooting and FAQ](troubleshooting.md)
   - [Frequently Asked Questions](troubleshooting.md#frequently-asked-questions)
