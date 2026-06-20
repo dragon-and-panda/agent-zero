@@ -22,6 +22,16 @@ PERSONAL_DATA_TERMS = (
     "newsletter",
     "mailing list",
 )
+NEGATION_PREFIXES = (
+    "no ",
+    "not ",
+    "without ",
+    "avoid ",
+    "avoiding ",
+    "never ",
+    "do not ",
+    "don't ",
+)
 PROHIBITED_SIGNALS = (
     "sell email",
     "sell emails",
@@ -60,7 +70,14 @@ def normalize_value(value: str, allowed: set[str], default: str) -> str:
 
 def contains_signal(text: str, signals: tuple[str, ...]) -> bool:
     lowered = text.lower()
-    return any(signal in lowered for signal in signals)
+    for signal in signals:
+        start = lowered.find(signal)
+        while start != -1:
+            prefix_window = lowered[max(0, start - 24) : start]
+            if not any(prefix_window.endswith(prefix) for prefix in NEGATION_PREFIXES):
+                return True
+            start = lowered.find(signal, start + 1)
+    return False
 
 
 def implies_contact_list_resale(text: str) -> bool:
