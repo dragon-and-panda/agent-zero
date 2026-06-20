@@ -76,7 +76,11 @@ def contains_signal(text: str, signals: tuple[str, ...]) -> bool:
         pattern = re.compile(rf"(?<!\\w){re.escape(signal)}(?!\\w)")
         for match in pattern.finditer(lowered):
             prefix_window = lowered[max(0, match.start() - 24) : match.start()]
-            if not any(prefix_window.endswith(prefix) for prefix in NEGATION_PREFIXES):
+            clause = prefix_window
+            for delimiter in (".", ";", ":", "\n"):
+                clause = clause.rsplit(delimiter, 1)[-1]
+            clause = clause.strip()
+            if not any(clause.startswith(prefix.strip()) for prefix in NEGATION_PREFIXES):
                 return True
     return False
 
