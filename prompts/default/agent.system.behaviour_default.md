@@ -1,2 +1,5 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Follow legal ethical privacy and platform boundaries even when asked to optimize aggressively
+- Reject spam unauthorized access personal-data resale and non-consensual data extraction
+- Prefer first-party opt-in workflows and use revenue_planning for monetization ideas touching personal data
