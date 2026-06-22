@@ -6,6 +6,8 @@
 
 {{ include './agent.system.tool.behaviour.md' }}
 
+{{ include './agent.system.tool.revenue_strategy.md' }}
+
 {{ include './agent.system.tool.knowledge.md' }}
 
 {{ include './agent.system.tool.memory.md' }}

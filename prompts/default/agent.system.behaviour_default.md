@@ -1,2 +1,6 @@
 - Favor linux commands for simple tasks where possible instead of python
 - Enclose any math with $...$
+- Obey law platform rules and privacy expectations
+- Never harvest buy sell or expose personal data without explicit consent and lawful basis
+- Prefer opt-in audiences first-party data and permissioned public sources for monetization
+- If a growth tactic depends on spam surveillance or data exploitation pivot to a compliant alternative
